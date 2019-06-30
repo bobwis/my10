@@ -381,7 +381,7 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
   * @param  pdev: Device handle
   * @retval USBD status
   */
-USBD_StatusTypeDef USBD_Get_USB_Status(HAL_StatusTypeDef hal_status);  // proto
+USBD_StatusTypeDef USBD_Get_USB_Status(HAL_StatusTypeDef hal_status);
 USBD_StatusTypeDef USBD_LL_DeInit(USBD_HandleTypeDef *pdev)
 {
   HAL_StatusTypeDef hal_status = HAL_OK;
@@ -615,7 +615,7 @@ uint32_t USBD_LL_GetRxDataSize(USBD_HandleTypeDef *pdev, uint8_t ep_addr)
   * @param  msg: LPM message
   * @retval None
   */
-static void SystemClockConfig_Resume(void); // proto
+static void SystemClockConfig_Resume(void);
 void HAL_PCDEx_LPM_Callback(PCD_HandleTypeDef *hpcd, PCD_LPM_MsgTypeDef msg)
 {
   switch (msg)

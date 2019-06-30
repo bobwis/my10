@@ -6,6 +6,9 @@ SPLAT board version
 Target BSP STM32F767ZI  STM Nucleo-144 
 Samples ADC at approx 2.68Msps and streams ADC readings and GPS to LAN using IPv4 UDP for downstream analysis
 
+Unlike my9 project this has a daughter board:-
+Uses experimental daughterboard "Splat1" to filter/amplify/attenuate input signal and assist with experimental breadboard design
+
 #### Hardware configuration, GPS pinout etc
 
 - GPS: Neo7M, uses async serial port

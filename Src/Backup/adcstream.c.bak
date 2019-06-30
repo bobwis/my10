@@ -9,6 +9,7 @@
 #include <math.h>
 #include "stm32f7xx_hal.h"
 #include "adcstream.h"
+#include "main.h"
 #include "mydebug.h"
 #include "FreeRTOS.h"
 #include "task.h"
