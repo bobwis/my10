@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Page68" displayName="Network interface configuration" className="IfxGroupBox" controlId="1323412325781">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_ipconfig" displayName="IP configuration" className="EnumerationType" paramName="app/eth004/0/eth004_ipconfig:IP configuration" controlId="1323420484468">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group79" displayName="Manual Configuration" className="IfxGroupBox" controlId="1318847240453">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_ip" displayName="IP Address" className="StringType" constraint="if(CM.getParamValue(&quot;app/eth004/0/eth004_ipconfig/0&quot;) == &quot;0&quot;) {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;}else {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}" paramName="app/eth004/0/eth004_ip:IP Address" controlId="1318847255625">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_gateway" displayName="Gateway Address" className="StringType" constraint="if(CM.getParamValue(&quot;app/eth004/0/eth004_ipconfig/0&quot;) == &quot;0&quot;) {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;}else {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}" paramName="app/eth004/0/eth004_gateway:Gateway Address" controlId="1318847258875">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_netmask" displayName="NetMask Address" className="StringType" constraint="if(CM.getParamValue(&quot;app/eth004/0/eth004_ipconfig/0&quot;) == &quot;0&quot;) {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;}else {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}" paramName="app/eth004/0/eth004_netmask:NetMask Address" controlId="1318847261875">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group29" displayName="Network interfaces options" className="IfxGroupBox" controlId="1322819277625">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_lwip_netif_hostname" displayName="Enable netif hostname" labelRequired="false" className="EnumerationType" paramName="app/eth004/0/eth004_lwip_netif_hostname:Enable netif hostname" controlId="1325754222406">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_lwip_netif_link_callback" displayName="Enable netif link callback " labelRequired="false" className="EnumerationType" paramName="app/eth004/0/eth004_lwip_netif_link_callback:Enable netif link callback " controlId="1325754264328">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_lwip_netif_status_callback" displayName="Enable netif status callback" labelRequired="false" className="EnumerationType" paramName="app/eth004/0/eth004_lwip_netif_status_callback:Enable netif status callback" controlId="1326116658875">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_checksum_byhardware" displayName="Checksum generation" className="EnumerationType" paramName="app/eth004/0/eth004_checksum_byhardware:Checksum generation" controlId="1323419502453">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Page80" displayName="Internet/Transport configuration" className="IfxGroupBox" controlId="1323413162875">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group35" displayName="ICMP /IGMP /TCP /UDP/DNS options" className="IfxGroupBox" controlId="1322818230921">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_lwip_icmp" displayName="Enable ICMP" labelRequired="false" className="EnumerationType" paramName="app/eth004/0/eth004_lwip_icmp:Enable ICMP" controlId="1326801974578">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_igmp_enable" displayName="Enable IGMP" labelRequired="false" className="EnumerationType" paramName="app/eth004/0/eth004_igmp_enable:Enable IGMP" controlId="1326801978953">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_lwip_multicast_ping" displayName="Multicast Ping" labelRequired="false" className="EnumerationType" paramName="app/eth004/0/eth004_lwip_multicast_ping:Multicast Ping" controlId="1326801994875">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_lwip_broadcast_ping" displayName="Broadcast Ping" labelRequired="false" className="EnumerationType" paramName="app/eth004/0/eth004_lwip_broadcast_ping:Broadcast Ping" controlId="1326802003718">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_lwip_tcp" displayName="TCP options" labelRequired="false" className="EnumerationType" paramName="app/eth004/0/eth004_lwip_tcp:TCP options" controlId="1323346026984">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_lwip_udp" displayName="Enable UDP" labelRequired="false" className="EnumerationType" paramName="app/eth004/0/eth004_lwip_udp:Enable UDP" controlId="1326891517421">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_lwip_udplite" displayName="Enable UDPLITE" readonly="true" labelRequired="false" className="EnumerationType" paramName="app/eth004/0/eth004_lwip_udplite:Enable UDPLITE" controlId="1326891520078">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_dns_enable" displayName="Enable DNS" labelRequired="false" className="EnumerationType" paramName="app/eth004/0/eth004_dns_enable:Enable DNS" controlId="1347953725859">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group46" displayName="IP options" className="IfxGroupBox" controlId="1322810681484">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_ip_default_ttl" displayName="IP default ttl" className="IntegerType" paramName="app/eth004/0/eth004_ip_default_ttl:IP default ttl" controlId="1322811317890">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group3" displayName="Memory options" className="IfxGroupBox" controlId="1322809667890">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalSpan="2"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_mem_size" displayName="Heap memory size" className="IntegerType" paramName="app/eth004/0/eth004_mem_size:Heap memory size" controlId="1322809764765">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+        <conversionType>dec</conversionType>
+        <conversionType>hex</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Page75" displayName="DNS Configuration" className="IfxGroupBox" controlId="1347953756343">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group51" displayName="DNS Configuration" className="IfxGroupBox" controlId="1347954012343">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_dns" displayName="DNS Server Address" className="StringType" constraint="if(CM.getParamValue(&quot;app/eth004/0/eth004_dns_enable/0&quot;) == &quot;1&quot;) {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;}else {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}" paramName="app/eth004/0/eth004_dns:DNS Server Address" controlId="1347955158171">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_dns_table_size" displayName="DNS Table Size" className="IntegerType" constraint="if(CM.getParamValue(&quot;app/eth004/0/eth004_dns_enable/0&quot;) == &quot;1&quot;) {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;}else {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}" paramName="app/eth004/0/eth004_dns_table_size:DNS table size" controlId="1347955168859">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth004/0/eth004_dns_max_servers" displayName="DNS Max Servers" className="IntegerType" constraint="if(CM.getParamValue(&quot;app/eth004/0/eth004_dns_enable/0&quot;) == &quot;1&quot;) {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;}else {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}" paramName="app/eth004/0/eth004_dns_max_servers:DNS max servers" controlId="1347955188781">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

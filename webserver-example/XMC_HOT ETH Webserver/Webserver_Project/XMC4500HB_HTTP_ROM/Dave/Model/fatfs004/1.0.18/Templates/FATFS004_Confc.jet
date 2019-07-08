@@ -1,0 +1,163 @@
+<%@ jet package="CodeGenerator" class="fatfs004_confc_template"
+imports="com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+
+/*CODE_BLOCK_BEGIN[FATFS004_Conf.c] */
+
+/*******************************************************************************
+ Copyright (c) 2011, Infineon Technologies AG                                 **
+ All rights reserved.                                                         **
+                                                                              **
+ Redistribution and use in source and binary forms, with or without           **
+ modification,are permitted provided that the following conditions are met:   **
+                                                                              **
+ *Redistributions of source code must retain the above copyright notice,      **
+ this list of conditions and the following disclaimer.                        **
+ *Redistributions in binary form must reproduce the above copyright notice,   **
+ this list of conditions and the following disclaimer in the documentation    **
+ and/or other materials provided with the distribution.                       **
+ *Neither the name of the copyright holders nor the names of its contributors **
+ may be used to endorse or promote products derived from this software without** 
+ specific prior written permission.                                           **
+                                                                              **
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+ ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+ LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+ SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+ CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+ POSSIBILITY OF SUCH DAMAGE.                                                  **
+                                                                              **
+ To improve the quality of the software, users are encouraged to share        **
+ modifications, enhancements or bug fixes with Infineon Technologies AG       **
+ dave@infineon.com).                                                          **
+                                                                              **
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon XMC4000 Series                                         **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR : App Developer                                                     **
+**                                                                            **
+** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+**                                                                            **
+** MODIFICATION DATE : July 31, 2012                                           **
+**                                                                            **
+*******************************************************************************/
+
+/*******************************************************************************
+**                       Author(s) Identity                                   **
+********************************************************************************
+**                                                                            **
+** Initials    Name                                                           **
+** ---------------------------------------------------------------------------**
+** SK          App Developer                                                  **
+*******************************************************************************/
+
+
+<% String AppBaseuri = "app/fatfs004/"; %>
+
+/**
+ * @file FATFS004_Conf.c
+ *
+ * @App Version FATFS004 <<%=app.getAppVersion(AppBaseuri) %>>
+ *
+ * @brief This file contains the configurations of FATFS004 App based on the UI 
+ * settings. 
+ *
+ */
+ 
+<% int appInst = 0; %>
+<% int SdmmcFlag = app.getIntegerValue(AppBaseuri + appInst + "/fatfs004_devices_available/0" );
+   int UsbFlag = app.getIntegerValue(AppBaseuri + appInst + "/fatfs004_usbdevice_available/0" );
+   int RTOS = app.getIntegerValue(AppBaseuri + appInst + "/fatfs004_rtos_present");
+   String  Module_Name = "FATFS004";
+   String  Sub_Module_Name = "SDMMC001";
+%>
+
+<% 
+  if (RTOS == 1)
+  {
+  	 Module_Name = "FATFS005";
+ 	 Sub_Module_Name = "SDMMC002";
+  }
+  else
+  {
+    Module_Name = "FATFS004";
+    Sub_Module_Name = "SDMMC001";
+  }
+%>
+
+
+#ifndef <%= Module_Name%>_CONF_C_
+#define <%= Module_Name%>_CONF_C_
+
+#include <DAVE3.h>
+
+/**
+ * The number of element in array are equal to number of physical
+ * devices supported.
+ */
+<% if ( (SdmmcFlag == 1) && (UsbFlag == 1))
+   {%> 
+   const <%= Module_Name%>_DeviceFuncType <%= Module_Name%>_DeviceFunc[] =
+                                                {
+                                                    {
+                                                      <%= Sub_Module_Name%>_Initialize,
+                                                      <%= Sub_Module_Name%>_GetStatus,
+                                                      <%= Sub_Module_Name%>_ReadBlock,
+                                                      <%= Sub_Module_Name%>_WriteBlock,
+                                                      <%= Sub_Module_Name%>_Ioctl
+                                                    },
+                                                    {
+                                                      USBBL001_Initialize,
+                                                      USBBL001_GetStatus,
+                                                      USBBL001_ReadBlock,
+                                                      USBBL001_WriteBlock,
+                                                      USBBL001_Ioctl
+                                                    }
+                                                 };
+<% } 
+   else if (SdmmcFlag == 1)	
+   {%>
+   const <%= Module_Name%>_DeviceFuncType <%= Module_Name%>_DeviceFunc[] =
+	                                                {
+	                                                    {
+	                                                      <%= Sub_Module_Name%>_Initialize,
+	                                                      <%= Sub_Module_Name%>_GetStatus,
+	                                                      <%= Sub_Module_Name%>_ReadBlock,
+	                                                      <%= Sub_Module_Name%>_WriteBlock,
+	                                                      <%= Sub_Module_Name%>_Ioctl
+	                                                    }
+                                                   };
+
+<% }
+    else if (UsbFlag  == 1)
+    {%>
+    const <%= Module_Name%>_DeviceFuncType <%= Module_Name%>_DeviceFunc[] =
+	                                                {
+	                                                  {
+	                                                    USBBL001_Initialize,
+                                                          USBBL001_GetStatus,
+                                                          USBBL001_ReadBlock,
+                                                          USBBL001_WriteBlock,
+                                                          USBBL001_Ioctl
+	                                                  }
+                                                   };
+<% }
+	else
+	{ %>
+	const <%= Module_Name%>_DeviceFuncType <%= Module_Name%>_DeviceFunc[1]	= {NULL};		  
+<%  } %>
+
+#endif
+		
+/*CODE_BLOCK_END*/
+
+

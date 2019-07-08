@@ -30,6 +30,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "netif.h"
 #include "adcstream.h"
 #include "neo7m.h"
@@ -44,7 +45,7 @@
 #include "dhcp.h"
 //#define netif_dhcp_data(netif) ((struct dhcp*)netif_get_client_data(netif, LWIP_NETIF_CLIENT_DATA_INDEX_DHCP))
 /* USER CODE END Includes */
-
+uint32_t pressure, pressfrac, temperature, tempfrac;
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 
@@ -1692,12 +1693,14 @@ void StartDefaultTask(void const * argument) {
 #define SPLAT1
 #ifdef SPLAT1
 		{
-			const uint16_t pattern[] = { LED_D1_Pin, LED_D1_Pin | LED_D2_Pin,
+			const uint16_t pattern[] = { LED_D1_Pin,
+			LED_D1_Pin | LED_D2_Pin,
 			LED_D1_Pin | LED_D2_Pin | LED_D3_Pin,
 			LED_D1_Pin | LED_D2_Pin | LED_D3_Pin | LED_D4_Pin,
 			LED_D1_Pin | LED_D2_Pin | LED_D3_Pin | LED_D4_Pin | LED_D5_Pin };
 			const uint16_t spicmdchan[] = { 0x4100 };	// set chan reg 0
-			const uint16_t spicmdgain[] = { 0x4006 };	// set gain 8
+			const uint16_t spicmdgain[] = { 0x4001 };	// set gain 8
+			int k;
 
 			for (i = 0; i < 5; i++) {
 				HAL_GPIO_WritePin(GPIOD, pattern[i], GPIO_PIN_RESET);
@@ -1753,7 +1756,7 @@ void StartDefaultTask(void const * argument) {
 			{
 				const uint8_t muxdat[] = { 0x01 };
 
-				for (;;) {
+				for (k = 0; k < 5; k++) {
 //HAL_I2C_Master_Transmit(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 
 					if (HAL_I2C_Master_Transmit(&hi2c1, 0x44 << 1, &muxdat[0], 1, 1000) != HAL_OK) {// RF dual MUX
@@ -1775,263 +1778,263 @@ void StartDefaultTask(void const * argument) {
 
 					{
 						uint8_t data[8], dataout[8];
-						uint32_t press, pressfrac;
+
 
 						while (1) {
 							data[0] = 0x55;
 							if (HAL_I2C_Mem_Read(&hi2c1, 0x60 << 1, 0, 1, data, 1, 1000) != HAL_OK) {	// rd status reg pressure sense
 								printf("I2C HAL returned error 5\n\r");
 							} else
-		//						printf("Read status = %0x\n", data[0]);
+							//						printf("Read status = %0x\n", data[0]);
 							if (data[0] & 0x08) {
 								for (i = 1; i < 6; i++) {
 									if (HAL_I2C_Mem_Read(&hi2c1, 0x60 << 1, i, 1, data, 1, 1000) != HAL_OK) {	// rd status reg pressure sense
 										printf("I2C HAL returned error 6+\n\r");
 									}
 									dataout[i - 1] = data[0];
-									printf("[0x%02x] ",data[0]);
+									printf("[0x%02x] ", data[0]);
 								}  // end for
-								press = dataout[0] << 10 | dataout[1] << 2 | (dataout[2] & 0xC0) >> 6;
+								pressure = dataout[0] << 10 | dataout[1] << 2 | (dataout[2] & 0xC0) >> 6;
 								pressfrac = ((dataout[2] & 0x30) >> 4) * 25;
 
-								printf("\npressure = %d.%d  ", press, pressfrac);
-								printf("temp = %d.%d\n", dataout[3], ((dataout[4] >> 4) * 625) / 1000);
+								printf("\npressure = %d.%d  ", pressure, pressfrac);
+								temperature = dataout[3];
+								tempfrac = ((dataout[4] >> 4) * 625) / 1000;
+								printf("temp = %d.%d\n", temperature, tempfrac);
 								break;
 							} else
 								continue;
 						}
-						} // end var
-						osDelay(500);
-					} // end for
-				} // end const
-				for (i = 0; i < 5; i++) {
-					HAL_GPIO_WritePin(GPIOD, pattern[i], GPIO_PIN_RESET);
-					osDelay(150);
-				}
-
+					} // end var
+					osDelay(500);
+				} // end for k
+			} // end const
+			for (i = 0; i < 5; i++) {
+				HAL_GPIO_WritePin(GPIOD, pattern[i], GPIO_PIN_RESET);
+				osDelay(150);
 			}
+		}
 #endif
 
-			HAL_TIM_Base_Start_IT(&htim6);		// basic packet timestamp 32 bits
+		HAL_TIM_Base_Start_IT(&htim6);		// basic packet timestamp 32 bits
 //		HAL_TIM_Base_Start_IT(&htim3);		// test timebase 1Hz pulse output
 //		HAL_TIM_OC_Start_IT(&htim3, TIM_CHANNEL_2);		// 1mS
 
-			TIM_CCxChannelCmd(htim2.Instance, TIM_CHANNEL_1, TIM_CCx_DISABLE);		// precision uS timer
-			TIM_CCxChannelCmd(htim2.Instance, TIM_CHANNEL_2, TIM_CCx_DISABLE);		// precision uS timer
-			TIM_CCxChannelCmd(htim2.Instance, TIM_CHANNEL_4, TIM_CCx_DISABLE);		// precision uS timer
+		TIM_CCxChannelCmd(htim2.Instance, TIM_CHANNEL_1, TIM_CCx_DISABLE);		// precision uS timer
+		TIM_CCxChannelCmd(htim2.Instance, TIM_CHANNEL_2, TIM_CCx_DISABLE);		// precision uS timer
+		TIM_CCxChannelCmd(htim2.Instance, TIM_CHANNEL_4, TIM_CCx_DISABLE);		// precision uS timer
 
-			HAL_TIM_IC_Stop_DMA(&htim2, TIM_CHANNEL_1);		// precision uS timer
-			HAL_TIM_IC_Stop_DMA(&htim2, TIM_CHANNEL_2);		// precision uS timer
-			HAL_TIM_IC_Stop_DMA(&htim2, TIM_CHANNEL_4);		// precision uS timer
+		HAL_TIM_IC_Stop_DMA(&htim2, TIM_CHANNEL_1);		// precision uS timer
+		HAL_TIM_IC_Stop_DMA(&htim2, TIM_CHANNEL_2);		// precision uS timer
+		HAL_TIM_IC_Stop_DMA(&htim2, TIM_CHANNEL_4);		// precision uS timer
 
-			//HAL_TIM_IC_Init and HAL_TIM_IC_ConfigChannel
-			//  (++) Input Capture :  HAL_TIM_IC_Start(), HAL_TIM_IC_Start_DMA(), HAL_TIM_IC_Start_IT()
+		//HAL_TIM_IC_Init and HAL_TIM_IC_ConfigChannel
+		//  (++) Input Capture :  HAL_TIM_IC_Start(), HAL_TIM_IC_Start_DMA(), HAL_TIM_IC_Start_IT()
 
-			// capture on PB10 input
-			if ((err = HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_3, t2cap, (sizeof(t2cap) / 4)))
-					!= HAL_OK) {
-				printf("TIM_Base_Start_DMA err %i", err);
-				Error_Handler();
-			}
+		// capture on PB10 input
+		if ((err = HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_3, t2cap, (sizeof(t2cap) / 4))) != HAL_OK) {
+			printf("TIM_Base_Start_DMA err %i", err);
+			Error_Handler();
+		}
 
-			TIM_CCxChannelCmd(htim2.Instance, TIM_CHANNEL_3, TIM_CCx_ENABLE);		// capture precision timer
+		TIM_CCxChannelCmd(htim2.Instance, TIM_CHANNEL_3, TIM_CCx_ENABLE);		// capture precision timer
 
-			i = 0;
-			dhcp = netif_dhcp_data(netif);		// do not call this too early
-			while ((dhcp->state != DHCP_STATE_BOUND) && (i < 10)) {
-				printf("Waiting %d for DHCP...\n", i);
-				osDelay(2000);
-				i++;
-			}
-			if (i > 10) {
-				printf("*****************************************\n");
-				printf("************* DHCP ABORTED **************\n");
-				printf("*****************************************\n");
-				// reboot would be good
-			} else {
-				dhcpok = 1;
-			}
+		i = 0;
+		dhcp = netif_dhcp_data(netif);		// do not call this too early
+		while ((dhcp->state != DHCP_STATE_BOUND) && (i < 10)) {
+			printf("Waiting %d for DHCP...\n", i);
+			osDelay(2000);
+			i++;
+		}
+		if (i > 10) {
+			printf("*****************************************\n");
+			printf("************* DHCP ABORTED **************\n");
+			printf("*****************************************\n");
+			// reboot would be good
+		} else {
+			dhcpok = 1;
+		}
 // tim7 drives DAC
 #if 1
-			for (i = 0; i < sizeof(dacdata) >> 1; i++) {
-				dacdata[i] = i * 4096 / (sizeof(dacdata) >> 1);
+		for (i = 0; i < sizeof(dacdata) >> 1; i++) {
+			dacdata[i] = i * 4096 / (sizeof(dacdata) >> 1);
 //			dacdata[i] = 2048;
-			}
+		}
 
-			HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, dacdata, sizeof(dacdata) >> 1,
-			DAC_ALIGN_12B_R);
-			HAL_TIM_Base_Start(&htim7);		// fast interval timer
+		HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, dacdata, sizeof(dacdata) >> 1,
+		DAC_ALIGN_12B_R);
+		HAL_TIM_Base_Start(&htim7);		// fast interval timer
 #endif
 
-			setupnotify();
-			startadc();
+		setupnotify();
+		startadc();
 
 //		while(1)
 //			osDelay(1);
-			while (dhcpok) {
-				startudp();		// never returns?
-			}
+		while (dhcpok) {
+			startudp();		// never returns?
 		}
-		/* USER CODE END 5 */
+	}
+	/* USER CODE END 5 */
+}
+
+/* USER CODE BEGIN Header_StarLPTask */
+/**
+ * @brief Function implementing the LPTask thread.
+ * @param argument: Not used
+ * @retval None
+ */
+/* USER CODE END Header_StarLPTask */
+void StarLPTask(void const * argument) {
+	/* USER CODE BEGIN StarLPTask */
+	static uint32_t trigs = 0;
+	static uint16_t beeptimeout = 0;
+	uint32_t reqtimer = 8000;
+	uint32_t debugtimer = 0;
+	int counter = 0;
+	char stmuid[64] = { 0 };
+
+	statuspkt.adcudpover = 0;		// debug use count overruns
+	statuspkt.trigcount = 0;		// debug use adc trigger count
+	statuspkt.udpsent = 0;	// debug use adc udp sample packet sent count
+	osDelay(13000);
+
+	printf("starting httpd\n");
+	httpd_init();		// start the www server
+	init_httpd_ssi();	// set up the embedded tag handler
+	sprintf(stmuid, "api/Device/%lx%lx%lx", STM32_UUID[0], STM32_UUID[1],
+	STM32_UUID[2]);
+
+	for (;;) {
+		tcp_tmr();
+		reqtimer++;
+		debugtimer++;
+		osDelay(1);
+		if (statuspkt.trigcount > (3600 + trigs))	// spamming: 3600 packets sent in 2 Sec (out of approx 7.2K packets)
+				{
+			jabber = 2000;		// 2 seconds pause
+			statuspkt.jabcnt++;
+		} else {
+			if (jabber)
+				jabber--;		// de-arm count
+		}
+
+		if (trigs != statuspkt.trigcount) {
+			HAL_TIM_Base_Start(&htim7);		// fast interval timer
+			beeptimeout = 200;
+		} else {
+			if (beeptimeout) {
+				beeptimeout--;
+			} else
+				HAL_TIM_Base_Stop(&htim7);		// fast interval timer
+		}
+		trigs = statuspkt.trigcount;
+
+		if (statuspkt.uid == MY_UID)		// not yet found new S/N from server
+		{
+			if (reqtimer > 10000) {
+				reqtimer = 0;
+				printf("Try to get new S/N using http client. Try=%d\n", ++counter);
+				httpclient(stmuid);		// zzz testing
+				//stats_display() ; // this needs stats in LwIP enabling to do anything
+			}
+
+		}
+		if (debugtimer > 30000) {
+			debugtimer = 0;
+			stats_display();
+			printf("triggers=%04d  ------------------------------------------- %s", trigs,
+					ctime(&epochtime));
+		}
+
+	}
+	/* USER CODE END StarLPTask */
+}
+
+/* Callback01 function */
+void Callback01(void const * argument) {
+	/* USER CODE BEGIN Callback01 */
+	printf("Callback01\n");
+	/* USER CODE END Callback01 */
+}
+
+/**
+ * @brief  Period elapsed callback in non blocking mode
+ * @note   This function is called  when TIM12 interrupt took place, inside
+ * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+ * a global variable "uwTick" used as application time base.
+ * @param  htim : TIM handle
+ * @retval None
+ */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+	/* USER CODE BEGIN Callback 0 */
+	if (htim->Instance == TIM2) {
+		printf("T2P PeriodElapsedCallback %lu %lu\n", t2cap[0], statuspkt.clktrim);
+		return;
+	}
+	if (htim->Instance == TIM3) {
+		printf("T3 PeriodElapsedCallback\n");
+		return;
 	}
 
-	/* USER CODE BEGIN Header_StarLPTask */
-	/**
-	 * @brief Function implementing the LPTask thread.
-	 * @param argument: Not used
-	 * @retval None
-	 */
-	/* USER CODE END Header_StarLPTask */
-	void StarLPTask(void const * argument) {
-		/* USER CODE BEGIN StarLPTask */
-		static uint32_t trigs = 0;
-		static uint16_t beeptimeout = 0;
-		uint32_t reqtimer = 8000;
-		uint32_t debugtimer = 0;
-		int counter = 0;
-		char stmuid[64] = { 0 };
-
-		statuspkt.adcudpover = 0;		// debug use count overruns
-		statuspkt.trigcount = 0;		// debug use adc trigger count
-		statuspkt.udpsent = 0;	// debug use adc udp sample packet sent count
-		osDelay(13000);
-
-		printf("starting httpd\n");
-		httpd_init();		// start the www server
-// zzz	init_httpd_ssi();	// set up the embedded tag handler
-		sprintf(stmuid, "api/Device/%lx%lx%lx", STM32_UUID[0], STM32_UUID[1],
-		STM32_UUID[2]);
-
-		for (;;) {
-			tcp_tmr();
-			reqtimer++;
-			debugtimer++;
-			osDelay(1);
-			if (statuspkt.trigcount > (3600 + trigs))	// spamming: 3600 packets sent in 2 Sec (out of approx 7.2K packets)
-					{
-				jabber = 2000;		// 2 seconds pause
-				statuspkt.jabcnt++;
-			} else {
-				if (jabber)
-					jabber--;		// de-arm count
-			}
-
-			if (trigs != statuspkt.trigcount) {
-				HAL_TIM_Base_Start(&htim7);		// fast interval timer
-				beeptimeout = 200;
-			} else {
-				if (beeptimeout) {
-					beeptimeout--;
-				} else
-					HAL_TIM_Base_Stop(&htim7);		// fast interval timer
-			}
-			trigs = statuspkt.trigcount;
-
-			if (statuspkt.uid == MY_UID)		// not yet found new S/N from server
-			{
-				if (reqtimer > 10000) {
-					reqtimer = 0;
-					printf("Try to get new S/N using http client. Try=%d\n", ++counter);
-					httpclient(stmuid);		// zzz testing
-					//stats_display() ; // this needs stats in LwIP enabling to do anything
-				}
-
-			}
-			if (debugtimer > 30000) {
-				debugtimer = 0;
-				stats_display();
-				printf("triggers=%04d  ------------------------------------------- %s", trigs,
-						ctime(&epochtime));
-			}
-
-		}
-		/* USER CODE END StarLPTask */
-	}
-
-	/* Callback01 function */
-	void Callback01(void const * argument) {
-		/* USER CODE BEGIN Callback01 */
-		printf("Callback01\n");
-		/* USER CODE END Callback01 */
-	}
-
-	/**
-	 * @brief  Period elapsed callback in non blocking mode
-	 * @note   This function is called  when TIM12 interrupt took place, inside
-	 * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
-	 * a global variable "uwTick" used as application time base.
-	 * @param  htim : TIM handle
-	 * @retval None
-	 */
-	void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-		/* USER CODE BEGIN Callback 0 */
-		if (htim->Instance == TIM2) {
-			printf("T2P PeriodElapsedCallback %lu %lu\n", t2cap[0], statuspkt.clktrim);
-			return;
-		}
-		if (htim->Instance == TIM3) {
-			printf("T3 PeriodElapsedCallback\n");
-			return;
-		}
-
-		if (htim->Instance == TIM6) { // 1 second (internally timed, not compensated by GPS)
+	if (htim->Instance == TIM6) { // 1 second (internally timed, not compensated by GPS)
 //		printf("T6 PeriodElapsedCallback %u SR=%u\n", myfullcomplete, TIM6->SR);
-			t1sec++;
-			statuspkt.sysuptime++;
-			if (netup)
-				statuspkt.netuptime++;
-			if (gpslocked) {
-				statuspkt.gpsuptime++;
-				if (epochvalid == 0) {
-					statuspkt.epochsecs = calcepoch();
-					epochvalid = 1;
-				}
-			} else {
-				statuspkt.gpsuptime = 0;	// gps uptime is zero
-				statuspkt.epochsecs = 0;	// make epoch time obviously wrong
-				epochvalid = 0;
+		t1sec++;
+		statuspkt.sysuptime++;
+		if (netup)
+			statuspkt.netuptime++;
+		if (gpslocked) {
+			statuspkt.gpsuptime++;
+			if (epochvalid == 0) {
+				statuspkt.epochsecs = calcepoch();
+				epochvalid = 1;
 			}
-			return;
+		} else {
+			statuspkt.gpsuptime = 0;	// gps uptime is zero
+			statuspkt.epochsecs = 0;	// make epoch time obviously wrong
+			epochvalid = 0;
 		}
-
-		/* USER CODE END Callback 0 */
-		if (htim->Instance == TIM12) {
-			HAL_IncTick();
-		}
-		/* USER CODE BEGIN Callback 1 */
-		else {
-			printf("Unknown Timer Period Elapsed callback\n");
-		}
-		/* USER CODE END Callback 1 */
+		return;
 	}
 
-	/**
-	 * @brief  This function is executed in case of error occurrence.
-	 * @retval None
-	 */
-	void Error_Handler(void) {
-		/* USER CODE BEGIN Error_Handler_Debug */
-		/* User can add his own implementation to report the HAL error return state */
-		while (1) {
-			printf("HAL error\n");
-		}
-		/* USER CODE END Error_Handler_Debug */
+	/* USER CODE END Callback 0 */
+	if (htim->Instance == TIM12) {
+		HAL_IncTick();
 	}
+	/* USER CODE BEGIN Callback 1 */
+	else {
+		printf("Unknown Timer Period Elapsed callback\n");
+	}
+	/* USER CODE END Callback 1 */
+}
+
+/**
+ * @brief  This function is executed in case of error occurrence.
+ * @retval None
+ */
+void Error_Handler(void) {
+	/* USER CODE BEGIN Error_Handler_Debug */
+	/* User can add his own implementation to report the HAL error return state */
+	while (1) {
+		printf("HAL error\n");
+	}
+	/* USER CODE END Error_Handler_Debug */
+}
 
 #ifdef  USE_FULL_ASSERT
-	/**
-	 * @brief  Reports the name of the source file and the source line number
-	 *         where the assert_param error has occurred.
-	 * @param  file: pointer to the source file name
-	 * @param  line: assert_param error line source number
-	 * @retval None
-	 */
-	void assert_failed(uint8_t *file, uint32_t line) {
-		/* USER CODE BEGIN 6 */
-		/* User can add his own implementation to report the file name and line number,
-		 tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-		/* USER CODE END 6 */
-	}
+/**
+ * @brief  Reports the name of the source file and the source line number
+ *         where the assert_param error has occurred.
+ * @param  file: pointer to the source file name
+ * @param  line: assert_param error line source number
+ * @retval None
+ */
+void assert_failed(uint8_t *file, uint32_t line) {
+	/* USER CODE BEGIN 6 */
+	/* User can add his own implementation to report the file name and line number,
+	 tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+	/* USER CODE END 6 */
+}
 #endif /* USE_FULL_ASSERT */
 
-	/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

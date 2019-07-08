@@ -1,0 +1,112 @@
+<%@ jet package="CodeGenerator" class="eth004_confc_template"
+imports="java.util.* com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+
+/*CODE_BLOCK_BEGIN[ETH004_Conf.c]*/
+
+/* =========================================================================== * 
+ * Copyright (c) 2011, Infineon Technologies AG                                *
+ * All rights reserved.                                                        * 
+ *                                                                             *
+ * Redistribution and use in source and binary forms, with or without          *
+ * modification, are permitted provided that the following conditions are met: *
+ * Redistributions of source code must retain the above copyright notice, this *
+ * list of conditions and the following disclaimer. Redistributions in binary  *
+ * form must reproduce the above copyright notice, this list of conditions and *
+ * the following disclaimer in the documentation and/or other materials        *
+ * provided with the distribution. Neither the name of the copyright holders   * 
+ * nor the names of its contributors may be used to endorse or promote         *
+ * products derived from this software without specific prior written          * 
+ * permission.                                                                 *
+ *                                                                             *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" *
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,       *
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR      *
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR           *
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,       *
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,         * 
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; *
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,    *
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR     *
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF      *
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                                  *
+ * To improve the quality of the software, users are encouraged to share       *
+ * modifications, enhancements or bug fixes with                               *
+ * Infineon Technologies AG (dave@infineon.com).                               *
+ *                                                                             *
+ ******************************************************************************
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon XMC4000 Series                                         **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR : DAVE App Developer                                                **
+**                                                                            **
+** MAY BE CHANGED BY USER [Yes/No]: Yes                                       **
+**                                                                            **
+** MODIFICATION DATE : Oct 06, 2012                                           **
+**                                                                            **
+*******************************************************************************/
+/*******************************************************************************
+**                       Author(s) Identity                                   **
+********************************************************************************
+**                                                                            **
+** Initials     Name                                                          **
+** ---------------------------------------------------------------------------**
+** JRP          DAVE App Developer                                            **
+********************************************************************************
+<% String AppBaseuri1 = "app/eth004/";%>
+ * @file   ETH004_Conf.c
+ *
+ * @App Version ETH004 <<%=app.getAppVersion(AppBaseuri1) %>>
+ *
+ * @brief  Configuration file generated based on UI settings 
+ *         of ETH004 App
+ *
+ */ 
+ #ifndef ETH004_C_
+ #define ETH004_C_ 
+ #include <DAVE3.h> 
+ <% String AppBaseuri = "app/eth004/0";%>
+<% int LWIP_DHCP = app.getIntegerValue(AppBaseuri + "/eth004_ipconfig/" + 0); %>   
+<% if (LWIP_DHCP == 0) { %>  
+ /** For setting IP manually */
+<% String IP = app.getStringValue(AppBaseuri + "/eth004_ip");   
+  String[] SplitIP = IP.split("\\.");
+  int IPpos1  = Integer.parseInt(SplitIP[0]);
+  	int IPpos2  = Integer.parseInt(SplitIP[1]);
+  	int IPpos3  = Integer.parseInt(SplitIP[2]);
+  	int IPpos4  = Integer.parseInt(SplitIP[3]);  
+ 	String NetMask = app.getStringValue(AppBaseuri + "/eth004_netmask");  
+ 	String SplitNet[] = NetMask.split("\\.");
+ 	int Netpos1 = Integer.parseInt(SplitNet[0]); 
+   	int Netpos2 = Integer.parseInt(SplitNet[1]);  
+  	int Netpos3 = Integer.parseInt(SplitNet[2]); 
+   	int Netpos4 = Integer.parseInt(SplitNet[3]);   
+   	String Gateway = app.getStringValue(AppBaseuri + "/eth004_gateway");   
+   	String SplitGW[] = Gateway.split("\\.");  
+   	int GWpos1 = Integer.parseInt(SplitGW[0]);  
+   	int GWpos2 = Integer.parseInt(SplitGW[1]);  
+   	int GWpos3 = Integer.parseInt(SplitGW[2]); 
+   	int GWpos4 = Integer.parseInt(SplitGW[3]);%>   
+  uint16_t IPpos1 = <%=IPpos1%>;
+  uint16_t IPpos2 = <%=IPpos2%>;
+  uint16_t IPpos3 = <%=IPpos3%>;
+  uint16_t IPpos4 = <%=IPpos4%>;
+    
+  uint16_t Netpos1 = <%=Netpos1%>;
+  uint16_t Netpos2 = <%=Netpos2%>;
+  uint16_t Netpos3 = <%=Netpos3%>;
+  uint16_t Netpos4 = <%=Netpos4%>;
+
+  uint16_t GWpos1 = <%=GWpos1%>;
+  uint16_t GWpos2 = <%=GWpos2%>;
+  uint16_t GWpos3 = <%=GWpos3%>;
+  uint16_t GWpos4 = <%=GWpos4%>; 
+ <%} %> 	
+ 
+ #endif /* ETH004_C_ */  
+/*CODE_BLOCK_END*/
+

@@ -1,0 +1,189 @@
+<%@ jet package="CodeGenerator" class="eth004_confh_template"
+imports="java.util.* com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+/*CODE_BLOCK_BEGIN[ETH004_Conf.h]*/
+ /******************************************************************************
+ *
+ * Copyright (C) 2011 Infineon Technologies AG. All rights reserved.
+ *
+ * Infineon Technologies AG (Infineon) is supplying this software for use with 
+ * Infineon's microcontrollers.  
+ * This file can be freely distributed within development tools that are 
+ * supporting such microcontrollers. 
+ *
+ * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+ * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+ * INFINEON SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, 
+ * OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+ *
+********************************************************************************
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon XMC4000 Series                                         **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR : DAVE App Developer                                                **
+**                                                                            **
+** MAY BE CHANGED BY USER [Yes/No]: Yes                                       **
+**                                                                            **
+** MODIFICATION DATE : Sep 18, 2012                                           **
+**                                                                            **
+*******************************************************************************/
+/*******************************************************************************
+**                       Author(s) Identity                                   **
+********************************************************************************
+**                                                                            **
+** Initials     Name                                                          **
+** ---------------------------------------------------------------------------**
+** JJ           DAVE App Developer                                            **
+********************************************************************************
+<% String AppBaseuri1 = "app/eth004/";%>
+ * @file   ETH004_Conf.h
+ *
+ * @App Version ETH004 <<%=app.getAppVersion(AppBaseuri1) %>>
+ *
+ * @brief  Configuration file generated based on UI settings 
+ *         of ETH004 App
+ *
+ */ 
+ 
+ #ifndef ETH004_H_
+ #define ETH004_H_
+ 
+ #define NO_SYS                         1
+ #define LWIP_NETCONN                   0
+ #define LWIP_SOCKET                    0
+ 
+<% String AppBaseuri = "app/eth004/0";%>
+  <% int Dhcp = app.getIntegerValue(AppBaseuri + "/eth004_ipconfig/" + 0); %>   
+  <% if (Dhcp == 1) {%>  
+  /** For enabling DHCP  */
+ #ifndef LWIP_DHCP
+ #define LWIP_DHCP                      1
+ #endif
+  <%}
+  else if (Dhcp == 0)
+ {%> 
+ #ifndef LWIP_DHCP
+ #define LWIP_DHCP                      0
+ #endif
+ <%} %>
+ #ifndef MEM_SIZE
+ #define MEM_SIZE                       <%=app.getIntegerValue(AppBaseuri  + "/eth004_mem_size")%>
+ #endif
+
+ #ifndef IP_DEFAULT_TTL
+ #define IP_DEFAULT_TTL                 <%=app.getIntegerValue(AppBaseuri  + "/eth004_ip_default_ttl")%>
+ #endif
+
+ #ifndef LWIP_ICMP
+ #define LWIP_ICMP                      <%=app.getIntegerValue(AppBaseuri  + "/eth004_lwip_icmp/" + 0)%>
+ #endif
+   
+ #ifndef LWIP_BROADCAST_PING
+ #define LWIP_BROADCAST_PING            <%=app.getIntegerValue(AppBaseuri  + "/eth004_lwip_broadcast_ping/" + 0)%>
+ #endif
+ 
+ #ifndef LWIP_MULTICAST_PING	
+ #define LWIP_MULTICAST_PING            <%=app.getIntegerValue(AppBaseuri  + "/eth004_lwip_multicast_ping/" + 0)%>
+ #endif
+  
+ #ifndef LWIP_UDP
+ #define LWIP_UDP                       <%=app.getIntegerValue(AppBaseuri  + "/eth004_lwip_udp/" + 0)%>
+ #endif
+  
+ #ifndef LWIP_TCP
+ #define LWIP_TCP                       <%=app.getIntegerValue(AppBaseuri  + "/eth004_lwip_tcp/" + 0)%>
+ #endif
+ 
+ #ifndef LWIP_DNS
+ #define LWIP_DNS                       <%=app.getIntegerValue(AppBaseuri  + "/eth004_dns_enable/" + 0)%>
+ #endif
+ 
+ #ifndef DNS_TABLE_SIZE
+ #define DNS_TABLE_SIZE                 <%=app.getIntegerValue(AppBaseuri  + "/eth004_dns_table_size")%>
+ #endif
+
+ #ifndef DNS_MAX_SERVERS
+ #define DNS_MAX_SERVERS                <%=app.getIntegerValue(AppBaseuri  + "/eth004_dns_max_servers")%>
+ #endif
+
+ #ifndef DNS_SERVER_ADDRESS             
+ #define DNS_SERVER_ADDRESS             inet_addr("<%=app.getStringValue(AppBaseuri  + "/eth004_dns")%>") 
+ #endif 
+
+ #ifndef LWIP_NETIF_HOSTNAME
+ #define LWIP_NETIF_HOSTNAME            <%=app.getIntegerValue(AppBaseuri  + "/eth004_lwip_netif_hostname/" + 0)%>
+ #endif
+
+ #ifndef LWIP_NETIF_STATUS_CALLBACK
+ #define LWIP_NETIF_STATUS_CALLBACK     <%=app.getIntegerValue(AppBaseuri  + "/eth004_lwip_netif_status_callback/" + 0)%>
+ #endif
+
+ #ifndef LWIP_NETIF_LINK_CALLBACK
+ #define LWIP_NETIF_LINK_CALLBACK       <%=app.getIntegerValue(AppBaseuri  + "/eth004_lwip_netif_link_callback/" + 0)%>
+ #endif
+
+ #ifndef LWIP_IGMP
+ #define LWIP_IGMP                      <%=app.getIntegerValue(AppBaseuri  + "/eth004_igmp_enable/" + 0)%> 
+ #endif
+ 
+ #ifndef LWIP_CHECKSUM_BY_HARDWARE
+ #define LWIP_CHECKSUM_BY_HARDWARE      <%=app.getIntegerValue(AppBaseuri  + "/eth004_checksum_byhardware/" + 0)%>   
+ #endif 
+ 
+ <% int Snmp_ppp = app.getIntegerValue(AppBaseuri  + "/eth004_dummy_snmp_ppp");%> 
+ <% if (Snmp_ppp == 0) {%>
+ /* For Enabling SNMP by SNMP-APP*/
+ #ifndef LWIP_SNMP
+ #define LWIP_SNMP                     0 
+ #endif
+ 
+ /*For Enabling PPP by PPP-APP*/ 
+ #ifndef PPP_SUPPORT
+ #define PPP_SUPPORT                   0
+ #endif
+ 
+ /*For Enabling PPP over Ethernet Support by PPP-APP*/
+ #ifndef PPPOE_SUPPORT
+ #define PPPOE_SUPPORT                 0
+ #endif
+ <% }else if(Snmp_ppp ==1) {%>
+ /* For Enabling SNMP by SNMP-APP*/
+ #ifndef LWIP_SNMP
+ #define LWIP_SNMP                     1 
+ #endif
+ 
+ /*For Enabling PPP by PPP-APP*/ 
+ #ifndef PPP_SUPPORT
+ #define PPP_SUPPORT                   0
+ #endif
+ 
+ /*For Enabling PPP over Ethernet Support by PPP-APP*/
+ #ifndef PPPOE_SUPPORT
+ #define PPPOE_SUPPORT                 0
+ #endif
+ <% }else if(Snmp_ppp ==2) {%>
+ /* For Enabling SNMP by SNMP-APP*/
+ #ifndef LWIP_SNMP
+ #define LWIP_SNMP                     0 
+ #endif
+ 
+ /*For Enabling PPP by PPP-APP*/ 
+ #ifndef PPP_SUPPORT
+ #define PPP_SUPPORT                   1
+ #endif
+ 
+ /*For Enabling PPP over Ethernet Support by PPP-APP*/
+ #ifndef PPPOE_SUPPORT
+ #define PPPOE_SUPPORT                 1
+ #endif
+ <% }%>
+ 
+ #endif /* ETH004_H_ */  
+/*CODE_BLOCK_END*/
+
+

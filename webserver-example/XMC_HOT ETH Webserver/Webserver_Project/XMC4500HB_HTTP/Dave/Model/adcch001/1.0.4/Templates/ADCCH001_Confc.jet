@@ -1,0 +1,352 @@
+<%@ jet package="CodeGenerator" class="adcch001_confc_template"
+imports="java.util.* com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+
+/*CODE_BLOCK_BEGIN[ADCCH001_Conf.c]*/
+/*******************************************************************************
+ Copyright (c) 2011, Infineon Technologies AG                                 **
+ All rights reserved.                                                         **
+                                                                              **
+ Redistribution and use in source and binary forms, with or without           **
+ modification,are permitted provided that the following conditions are met:   **
+                                                                              **
+ *Redistributions of source code must retain the above copyright notice,      **
+ this list of conditions and the following disclaimer.                        **
+ *Redistributions in binary form must reproduce the above copyright notice,   **
+ this list of conditions and the following disclaimer in the documentation    **
+ and/or other materials provided with the distribution.                       **
+ *Neither the name of the copyright holders nor the names of its contributors **
+ may be used to endorse or promote products derived from this software without**
+ specific prior written permission.                                           **
+                                                                              **
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+ ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+ LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+ SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+ CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+ POSSIBILITY OF SUCH DAMAGE.                                                  **
+                                                                              **
+ To improve the quality of the software, users are encouraged to share        **
+ modifications, enhancements or bug fixes with Infineon Technologies AG       **
+ dave@infineon.com).                                                          **
+                                                                              **
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon XMC4500 Series                                         **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR   : DAVE App Developer                                              **
+**                                                                            **
+** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+**                                                                            **
+** MODIFICATION DATE :  31 July 2012                                        **
+**                                                                            **
+*******************************************************************************/
+
+/*******************************************************************************
+**                       Author(s) Identity                                   **
+********************************************************************************
+**                                                                            **
+** Initials     Name                                                          **
+** ---------------------------------------------------------------------------**
+** PM           DAVE App Developer                                            **
+*******************************************************************************/
+
+/**
+ * @file ADCCH001_Conf.c
+ *
+ * @brief This file contains the configuration parameters for all instances of the
+ * ADCCH001 App
+ */
+
+#include <DAVE3.h>
+
+<% String AppBaseuri = "app/ADCCH001/"; %>
+<% String Periuri = "http://www.infineon.com/45.0.2/peripheral/vadc/0/group/"; %>
+<% String appInst  = null; %>
+<% String ChannelUri = null; %>
+<% String ChannelNo = null; %>
+<% String GroupNo = null; %>
+<% String StartResultUri = null; %>
+<% String EndResultUri = null; %>
+<% String StartResultNo = null; %>
+<% String EndResultNo = null; %>
+
+<% ArrayList<String> appsList = (ArrayList<String>)(app.getApps("app/ADCCH001/"));
+for (String appIns : appsList ) {
+  appInst = appIns.substring(appIns.lastIndexOf("/")+1);%>
+  <% ChannelUri = app.getMappedUri(AppBaseuri + appInst +"/adcch"); %>
+  <% if ((ChannelUri != null) && (ChannelUri.trim() != "")) { %>
+    <% GroupNo = ChannelUri.substring(Periuri.length(),ChannelUri.indexOf("/ch/")); %>
+    <% ChannelNo = ChannelUri.substring(ChannelUri.length() -1); %>
+    
+    <% StartResultUri = app.getMappedUri(AppBaseuri + appInst +"/result_a"); %>
+    <% if ((StartResultUri != null) && (StartResultUri.trim() != "")) { %>
+      <% StartResultNo = StartResultUri.substring(StartResultUri.length() - 2); %>
+      <%if(StartResultNo.startsWith("/") == true){
+        StartResultNo = StartResultNo.substring(StartResultNo.length() - 1);
+       }%>
+      <%int fifo_no = app.getIntegerValue(AppBaseuri + appInst + "/adcch001_irwfifono");%>
+       <%if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwfifo/0")) == 0){%>
+          <% EndResultUri = app.getMappedUri(AppBaseuri + appInst +"/result_a"); %>
+          <% if ((EndResultUri != null) && (EndResultUri.trim() != "")) { %>
+            <% EndResultNo = EndResultUri.substring(EndResultUri.length() -2); %>
+            <%if(EndResultNo.startsWith("/") == true){
+                EndResultNo = EndResultNo.substring(EndResultNo.length() - 1);
+              }%> <%}%> 
+        <%}%>
+        <%else if(fifo_no == 2){%>
+           <% EndResultUri = app.getMappedUri(AppBaseuri + appInst +"/result_b"); %>
+           <% if ((EndResultUri != null) && (EndResultUri.trim() != "")) { %>
+             <% EndResultNo = EndResultUri.substring(EndResultUri.length() -2); %>
+             <%if(EndResultNo.startsWith("/") == true){
+                 EndResultNo = EndResultNo.substring(EndResultNo.length() - 1);
+               }%> <%}%> 
+         <%}%>
+         <%else if(fifo_no == 3){%>
+            <% EndResultUri = app.getMappedUri(AppBaseuri + appInst +"/result_c"); %>
+            <% if ((EndResultUri != null) && (EndResultUri.trim() != "")) { %>
+              <% EndResultNo = EndResultUri.substring(EndResultUri.length() -2); %>
+              <%if(EndResultNo.startsWith("/") == true){
+                  EndResultNo = EndResultNo.substring(EndResultNo.length() - 1);
+                }%> <%}%> 
+          <%}%>
+          <%else if(fifo_no == 4){%>
+             <% EndResultUri = app.getMappedUri(AppBaseuri + appInst +"/result_d"); %>
+             <% if ((EndResultUri != null) && (EndResultUri.trim() != "")) { %>
+               <% EndResultNo = EndResultUri.substring(EndResultUri.length() -2); %>
+               <%if(EndResultNo.startsWith("/") == true){
+                   EndResultNo = EndResultNo.substring(EndResultNo.length() - 1);
+                 }%> <%}%> 
+           <%}%>
+           <%else if(fifo_no == 5){%>
+              <% EndResultUri = app.getMappedUri(AppBaseuri + appInst +"/result_e"); %>
+              <% if ((EndResultUri != null) && (EndResultUri.trim() != "")) { %>
+                <% EndResultNo = EndResultUri.substring(EndResultUri.length() -2); %>
+                <%if(EndResultNo.startsWith("/") == true){
+                    EndResultNo = EndResultNo.substring(EndResultNo.length() - 1);
+                  }%> <%}%> 
+            <%}%>
+            <%else if(fifo_no == 6){%>
+               <% EndResultUri = app.getMappedUri(AppBaseuri + appInst +"/result_f"); %>
+               <% if ((EndResultUri != null) && (EndResultUri.trim() != "")) { %>
+                 <% EndResultNo = EndResultUri.substring(EndResultUri.length() -2); %>
+                 <%if(EndResultNo.startsWith("/") == true){
+                     EndResultNo = EndResultNo.substring(EndResultNo.length() - 1);
+                   }%> <%}%> 
+             <%}%>
+             <%else if(fifo_no == 7){%>
+                <% EndResultUri = app.getMappedUri(AppBaseuri + appInst +"/result_g"); %>
+                <% if ((EndResultUri != null) && (EndResultUri.trim() != "")) { %>
+                  <% EndResultNo = EndResultUri.substring(EndResultUri.length() -2); %>
+                  <%if(EndResultNo.startsWith("/") == true){
+                      EndResultNo = EndResultNo.substring(EndResultNo.length() - 1);
+                    }%> <%}%> 
+             <%}%>
+             <%else if(fifo_no == 8){%>
+                 <% EndResultUri = app.getMappedUri(AppBaseuri + appInst +"/result_h"); %>
+                 <% if ((EndResultUri != null) && (EndResultUri.trim() != "")) { %>
+                   <% EndResultNo = EndResultUri.substring(EndResultUri.length() -2); %>
+                   <%if(EndResultNo.startsWith("/") == true){
+                       EndResultNo = EndResultNo.substring(EndResultNo.length() - 1);
+                     }%> <%}%> 
+             <%}%>
+               <%else if(fifo_no == 9){%>
+                  <% EndResultUri = app.getMappedUri(AppBaseuri + appInst +"/result_i"); %>
+                  <% if ((EndResultUri != null) && (EndResultUri.trim() != "")) { %>
+                    <% EndResultNo = EndResultUri.substring(EndResultUri.length() -2); %>
+                    <%if(EndResultNo.startsWith("/") == true){
+                        EndResultNo = EndResultNo.substring(EndResultNo.length() - 1);
+                      }%> <%}%> 
+                <%}%>
+                <%else if(fifo_no == 10){%>
+                   <% EndResultUri = app.getMappedUri(AppBaseuri + appInst +"/result_j"); %>
+                   <% if ((EndResultUri != null) && (EndResultUri.trim() != "")) { %>
+                     <% EndResultNo = EndResultUri.substring(EndResultUri.length() -2); %>
+                     <%if(EndResultNo.startsWith("/") == true){
+                         EndResultNo = EndResultNo.substring(EndResultNo.length() - 1);
+                       }%> <%}%> 
+                 <%}%>
+                 <%else if(fifo_no == 11){%>
+                    <% EndResultUri = app.getMappedUri(AppBaseuri + appInst +"/result_k"); %>
+                    <% if ((EndResultUri != null) && (EndResultUri.trim() != "")) { %>
+                      <% EndResultNo = EndResultUri.substring(EndResultUri.length() -2); %>
+                      <%if(EndResultNo.startsWith("/") == true){
+                          EndResultNo = EndResultNo.substring(EndResultNo.length() - 1);
+                        }%> <%}%> 
+                  <%}%>
+                  <%else if(fifo_no == 12){%>
+                     <% EndResultUri = app.getMappedUri(AppBaseuri + appInst +"/result_l"); %>
+                     <% if ((EndResultUri != null) && (EndResultUri.trim() != "")) { %>
+                       <% EndResultNo = EndResultUri.substring(EndResultUri.length() -2); %>
+                       <%if(EndResultNo.startsWith("/") == true){
+                           EndResultNo = EndResultNo.substring(EndResultNo.length() - 1);
+                         }%> <%}%> 
+                   <%}%>
+                   <%else if(fifo_no == 13){%>
+                      <% EndResultUri = app.getMappedUri(AppBaseuri + appInst +"/result_m"); %>
+                      <% if ((EndResultUri != null) && (EndResultUri.trim() != "")) { %>
+                        <% EndResultNo = EndResultUri.substring(EndResultUri.length() -2); %>
+                        <%if(EndResultNo.startsWith("/") == true){
+                            EndResultNo = EndResultNo.substring(EndResultNo.length() - 1);
+                          }%> <%}%> 
+                    <%}%>
+                    <%else if(fifo_no == 14){%>
+                       <% EndResultUri = app.getMappedUri(AppBaseuri + appInst +"/result_n"); %>
+                       <% if ((EndResultUri != null) && (EndResultUri.trim() != "")) { %>
+                         <% EndResultNo = EndResultUri.substring(EndResultUri.length() -2); %>
+                         <%if(EndResultNo.startsWith("/") == true){
+                             EndResultNo = EndResultNo.substring(EndResultNo.length() - 1);
+                           }%> <%}%> 
+                     <%}%>
+                     <%else if(fifo_no == 15){%>
+                        <% EndResultUri = app.getMappedUri(AppBaseuri + appInst +"/result_o"); %>
+                        <% if ((EndResultUri != null) && (EndResultUri.trim() != "")) { %>
+                          <% EndResultNo = EndResultUri.substring(EndResultUri.length() -2); %>
+                          <%if(EndResultNo.startsWith("/") == true){
+                              EndResultNo = EndResultNo.substring(EndResultNo.length() - 1);
+                            }%> <%}%> 
+                      <%}%>
+                      <%else if(fifo_no == 16){%>
+                         <% EndResultUri = app.getMappedUri(AppBaseuri + appInst +"/result_p"); %>
+                         <% if ((EndResultUri != null) && (EndResultUri.trim() != "")) { %>
+                           <% EndResultNo = EndResultUri.substring(EndResultUri.length() -2); %>
+                           <%if(EndResultNo.startsWith("/") == true){
+                               EndResultNo = EndResultNo.substring(EndResultNo.length() - 1);
+                             }%> <%}%> 
+                       <%}%>
+
+<%
+int upper_boundary = 0;
+int lower_boundary = 0; 
+ if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwubselect/0") == 1))
+     {upper_boundary = 0;}
+ else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwubselect/1") == 1)) 
+    {upper_boundary = 1; }
+ else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwubselect/2") == 1)) 
+    {upper_boundary = 2; }
+ else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwubselect/3") == 1)) 
+    {upper_boundary = 3; }
+if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwlbselect/0") == 1))
+    {lower_boundary = 0;}
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwlbselect/1") == 1)) 
+   {lower_boundary = 1; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwlbselect/2") == 1)) 
+   {lower_boundary = 2; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwlbselect/3") == 1)) 
+   {lower_boundary = 3; }
+int boundary = (upper_boundary << 2) |  lower_boundary;
+
+int res_write = 0;
+int res_align = 0;
+if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwwaitforread/0") == 1))
+    {res_write = 0;}
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwwaitforread/1") == 1)) 
+   {res_write = 1; }
+if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwresultpos/0") == 1))
+    {res_align = 0;}
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwresultpos/1") == 1)) 
+   {res_align = 1; }
+
+int dmm = 0;
+int drctr = 0;
+if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/0") == 1))
+   {dmm = 0; drctr = 0; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/1") == 1)) 
+   {dmm = 0; drctr = 1; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/2") == 1)) 
+   {dmm = 0; drctr = 2; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/3") == 1)) 
+   {dmm = 0; drctr = 3; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/4") == 1)) 
+   {dmm = 2; drctr = 0; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/5") == 1)) 
+   {dmm = 1; drctr = 0; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/6") == 1)) 
+   {dmm = 1; drctr = 1; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/7") == 1)) 
+   {dmm = 1; drctr = 2; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/8") == 1)) 
+   {dmm = 1; drctr = 3; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/9") == 1)) 
+   {dmm = 1; drctr = 4; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/10") == 1)) 
+   {dmm = 1; drctr = 5; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/11") == 1)) 
+   {dmm = 1; drctr = 6; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/12") == 1)) 
+   {dmm = 1; drctr = 7; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/13") == 1)) 
+   {dmm = 1; drctr = 8; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/14") == 1)) 
+   {dmm = 1; drctr = 9; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/15") == 1)) 
+   {dmm = 1; drctr = 10; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/16") == 1)) 
+   {dmm = 1; drctr = 11; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/17") == 1)) 
+   {dmm = 1; drctr = 12; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/18") == 1)) 
+   {dmm = 1; drctr = 13; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/19") == 1)) 
+   {dmm = 1; drctr = 14; }
+else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwdatamodf/20") == 1)) 
+   {dmm = 1; drctr = 15; }
+%>
+
+
+ADCCH001_DynamicHandleType ADCCH001_DynamicHandle<%=appInst%> = 
+{
+  .Result = (uint16_t)0,
+  .FastCompResult = (uint8_t)0,
+  .State = ADCCH001_UNINITIALIZED,
+};
+
+const ADCCH001_HandleType ADCCH001_Handle<%=appInst%> = 
+{
+  .ADCGrPtr = (VADC_G_TypeDef*)(void*)VADC_G<%= GroupNo%>,
+  .DynamicHandlePtr = &ADCCH001_DynamicHandle<%=appInst%> ,
+  .kPrioChannel = (uint8_t)<%= app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwprioch/0")%>,
+  .kIpClassSel = <% if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwinputclass/0") == 1)){%>(uint8_t)ADCCH001_GROUP0<%}
+    else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwinputclass/1") == 1)) {%> (uint8_t)ADCCH001_GROUP1 <%}
+    else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwinputclass/2") == 1)) {%> (uint8_t)ADCCH001_GLOBAL0 <%}
+    else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwinputclass/3") == 1)) {%> (uint8_t)ADCCH001_GLOBAL1 <%}%>,
+  .kBoundarySel = (uint8_t)0x<%= Integer.toHexString(boundary)%>,
+  .kChEvtmode = <% if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwchevtmode/0") == 1)){%>(uint8_t)ADCCH001_DISABLE<%}
+      else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwchevtmode/1") == 1)) {%> (uint8_t)ADCCH001_INSIDE <%}
+      else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwchevtmode/2") == 1)) {%> (uint8_t)ADCCH001_OUTSIDE <%}
+      else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwchevtmode/3") == 1)) {%> (uint8_t)ADCCH001_ALWAYS <%}%>,
+  .kRefInput = (uint8_t)<% if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwrefinput/0") == 1)){%> 0 <%}
+      else if((app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwrefinput/1") == 1)) {%> 1 <%}%>,
+  .kResultControl = (uint8_t)<%= res_align%>,
+  .kDataModification = (uint8_t)0x<%= Integer.toHexString((dmm << 4) | drctr) %> ,
+  .kWaitForRead= (uint8_t)<%= res_write%>,
+  .kFIFOEnable = (uint8_t)<%= app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwfifo/0")%>,
+  .kResultEvtEnable= (uint8_t)<%= app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwenableresevt/0")%>,  
+  .kBoundaryFlagEnable = (uint8_t)<%= app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwenableboundaryflag/0")%>,
+  .kStartResultRegNo = (uint8_t)<%=StartResultNo%>,
+  .kEndResultRegNo = (uint8_t)<%=EndResultNo%>,
+  .kExtMuxControl = (uint8_t)<%= app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwmuxcontrol/0")%>,
+  .kChannelNo = (uint8_t)<%=ChannelNo %>,
+  .kCompareMode = (uint8_t)<%= app.getIntegerValue(AppBaseuri + appInst + "/adcch001_erwcomparator/0")%>,
+  .kResultCompVal = (uint16_t)<%= app.getIntegerValue(AppBaseuri + appInst + "/adcch001_irwcompvalue") << 2%>,
+};
+
+<%} else {%>
+//Result register is not mapped
+<%}%>
+
+<%} else {%>
+//ADC Channel is not mapped
+<%}%>
+<%}%>
+
+
+

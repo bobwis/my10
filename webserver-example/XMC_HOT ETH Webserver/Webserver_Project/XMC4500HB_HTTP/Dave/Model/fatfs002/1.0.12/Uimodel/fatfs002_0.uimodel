@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="DefaultPage61" displayName="FAT FS Configurations" className="IfxGroupBox" controlId="1321351028539">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group59" displayName="Function and Buffer Configurations Tab" className="IfxGroupBox" controlId="1322475771321">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" grabExcessHorizontalSpace="true" grabExcessVerticalSpace="true" horizontalSpan="3"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/FATFS002/0/fatfs002_tiny_fs" displayName="Tiny FS Configuration" description="" className="EnumerationType" constraint="&#xD;&#xA;" paramName="app/FATFS002/0/fatfs002_tiny_fs:Tiny FS Configuration" controlId="1322489919352">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/FATFS002/0/fatfs002_fs_readonly" displayName="FS ReadOnly Configuration" className="EnumerationType" constraint="if( (CM.getParamValue(&quot;app/FATFS002/0/fatfs002_use_mkfs&quot;) == &quot;1&quot;) ||&#xD;&#xA;     (CM.getParamValue(&quot;app/FATFS002/0/fatfs002_multi_partition&quot;) == &quot;1&quot;)&#xD;&#xA;  )&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(false);&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(true);&#xD;&#xA;}" paramName="app/FATFS002/0/fatfs002_fs_readonly:FS ReadOnly Configuration" controlId="1322489924086">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/FATFS002/0/fatfs002_fs_minimize" displayName="FS Minimize Configuration" className="EnumerationType" constraint="" paramName="app/FATFS002/0/fatfs002_fs_minimize:FS Minimize Configuration" controlId="1322490076407">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/FATFS002/0/fatfs002_use_strfunc" displayName="String Func Configuration" className="EnumerationType" constraint="" paramName="app/FATFS002/0/fatfs002_use_strfunc:String Func Configuration" controlId="1322490088312">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/FATFS002/0/fatfs002_use_mkfs" displayName="Use MKFS Configuration" className="EnumerationType" constraint="if( CM.getParamValue(&quot;app/fatfs002/0/fatfs002_multi_partition&quot;) == &quot;1&quot;)&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(false);&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(true);&#xD;&#xA;}" paramName="app/FATFS002/0/fatfs002_use_mkfs:Use MKFS Configuration" controlId="1322490184557">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/FATFS002/0/fatfs002_use_forward" displayName="Use Forward Configuration" className="EnumerationType" constraint="" paramName="app/FATFS002/0/fatfs002_use_forward:Use Forward Configuration" controlId="1322490198447">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/FATFS002/0/fatfs002_fast_seek" displayName="Fast Seek Configuration" className="EnumerationType" constraint="" paramName="app/FATFS002/0/fatfs002_fast_seek:Fast Seek Configuration" controlId="1322490222540">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group16" displayName="Locale and Namespace Configurations" className="IfxGroupBox" controlId="1322476063483">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" grabExcessHorizontalSpace="true" grabExcessVerticalSpace="true" horizontalSpan="2"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/FATFS002/0/fatfs002_code_page" displayName="Code Page Configuration" className="EnumerationType" constraint="" paramName="app/FATFS002/0/fatfs002_code_page:Code Page Configuration" controlId="1322490253601">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/FATFS002/0/fatfs002_relative_path" displayName="Relative Path Configuration" className="EnumerationType" constraint="" paramName="app/FATFS002/0/fatfs002_relative_path:Relative Path Configuration" controlId="1322490294862">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group87" displayName="Physical Drive Configurations TAB" className="IfxGroupBox" controlId="1322476162237">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" grabExcessHorizontalSpace="true" grabExcessVerticalSpace="true" horizontalSpan="2"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/FATFS002/0/fatfs002_volumes" displayName="Volumes Configuration " className="IntegerType" constraint="" paramName="app/FATFS002/0/fatfs002_volumes:Volumes Configuration " controlId="1322490315501">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/FATFS002/0/fatfs002_max_ss" displayName="Maximum Sector Size" className="EnumerationType" constraint="" paramName="app/FATFS002/0/fatfs002_max_ss:Maximum Sector Size" controlId="1322490323203">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/FATFS002/0/fatfs002_multi_partition" displayName="Multi Partition Configuration" className="EnumerationType" constraint="" paramName="app/FATFS002/0/fatfs002_multi_partition:Multi Partition Configuration" controlId="1322490330625">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/FATFS002/0/fatfs002_erase" displayName="Erase Configuration" className="EnumerationType" constraint="" paramName="app/FATFS002/0/fatfs002_erase:Erase Configuration" controlId="1322490341530">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group30" displayName="System Configurations Tab" className="IfxGroupBox" controlId="1322476207435">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" grabExcessHorizontalSpace="true" grabExcessVerticalSpace="true" horizontalSpan="2"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/FATFS002/0/fatfs002_word_access" displayName="Word Access Configuration" className="EnumerationType" constraint="" paramName="app/FATFS002/0/fatfs002_word_access:Word Access Configuration" controlId="1322490370714">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/fatfs002/0/fatfs002_fs_share" displayName="File Sharing Configuration " className="IntegerType" constraint="" paramName="app/fatfs002/0/fatfs002_fs_share:File Sharing Configuration " controlId="1322490434536">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+  </controls>
+  <controls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/FATFS002/0/fatfs002_lfn" displayName="LFN Configuration" className="EnumerationType" constraint="" paramName="app/FATFS002/0/fatfs002_lfn:LFN Configuration" controlId="1322490269146">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+  </controls>
+  <controls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/FATFS002/0/fatfs002_max_lfn" displayName="Max LFN Configuration " className="IntegerType" constraint="" paramName="app/FATFS002/0/fatfs002_max_lfn:Max LFN Configuration " controlId="1322490275661">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <conversionType>dec</conversionType>
+  </controls>
+  <controls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/FATFS002/0/fatfs002_lfn_unicode" displayName="LFN Unicode Configuration" className="EnumerationType" constraint="" paramName="app/FATFS002/0/fatfs002_lfn_unicode:LFN Unicode Configuration" controlId="1322490283254">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+  </controls>
+  <controls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/fatfs002/0/fatfs002_fs_reentrant" displayName="File Reentrancy Configuration " className="IntegerType" paramName="app/fatfs002/0/fatfs002_fs_reentrant:File Reentrancy Configuration " controlId="1334567372101">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <conversionType>dec</conversionType>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

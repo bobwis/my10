@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="DefaultPage" displayName="DefaultPage" className="IfxGroupBox" controlId="1317894158141">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="CENTER" verticalAlignment="RIGHT" verticalSpan="2"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group63" displayName="Interrupt Configuration" className="IfxGroupBox" controlId="1323419671120">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group0" displayName="Interrupt Priority" className="IfxGroupBox" controlId="1323419872905">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/sdmmc003/0/sdmmc003_irwInterruptPriority" displayName="Premption Priority" className="IntegerType" paramName="app/sdmmc003/0/sdmmc003_irwInterruptPriority:Premption Priority" controlId="1323419701508">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>dec</conversionType>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/sdmmc003/0/sdmmc003_irwInterruptSubPriority" displayName="Sub Priority" className="IntegerType" paramName="app/sdmmc003/0/sdmmc003_irwInterruptSubPriority:Sub Priority" controlId="1323419704399">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>dec</conversionType>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group13" displayName="Functional Signals Configuration" className="IfxGroupBox" controlId="1324476349731">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/sdmmc003/0/sdmmc003_write_protect" displayName="Card Write Protect Signal" className="EnumerationType" paramName="app/sdmmc003/0/sdmmc003_write_protect:Card Write Protect Signal" controlId="1324476333217">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/sdmmc003/0/sdmmc003_card_detection" displayName="Card Detection Signal" className="EnumerationType" paramName="app/sdmmc003/0/sdmmc003_card_detection:Card Detection Signal" controlId="1324476375870">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/sdmmc003/0/sdmmc003_led" displayName="LED Signal" className="EnumerationType" paramName="app/sdmmc003/0/sdmmc003_led:LED Signal" controlId="1324476381182">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/sdmmc003/0/sdmmc003_bus_power" displayName="SDMMC Bus Power Configuration" className="EnumerationType" paramName="app/sdmmc003/0/sdmmc003_bus_power:SDMMC Bus Power Configuration" controlId="1326694622981">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/sdmmc003/0/sdmmc003_use_4_data_lines" displayName="Data Lines Configuration" className="EnumerationType" paramName="app/sdmmc003/0/sdmmc003_use_4_data_lines:Data Lines Configuration" controlId="1326973003096">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/sdmmc003/0/sdmmc003_reset" displayName="SDMMC Reset Configuration" className="EnumerationType" paramName="app/sdmmc003/0/sdmmc003_reset:SDMMC Reset Configuration" controlId="1327655067322">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

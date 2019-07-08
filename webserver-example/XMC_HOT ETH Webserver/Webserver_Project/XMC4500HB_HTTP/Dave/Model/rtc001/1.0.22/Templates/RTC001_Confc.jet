@@ -1,0 +1,149 @@
+<%@ jet package="CodeGenerator" class="rtc001_confc_template"
+imports="java.util.* com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+
+
+/*CODE_BLOCK_BEGIN[RTC001_Conf.c]*/
+/*******************************************************************************
+ Copyright (c) 2011, Infineon Technologies AG                                 **
+ All rights reserved.                                                         **
+                                                                              **
+ Redistribution and use in source and binary forms, with or without           **
+ modification,are permitted provided that the following conditions are met:   **
+                                                                              **
+ *Redistributions of source code must retain the above copyright notice,      **
+ this list of conditions and the following disclaimer.                        **
+ *Redistributions in binary form must reproduce the above copyright notice,   **
+ this list of conditions and the following disclaimer in the documentation    **
+ and/or other materials provided with the distribution.                       **
+ *Neither the name of the copyright holders nor the names of its contributors **
+ may be used to endorse or promote products derived from this software without**
+ specific prior written permission.                                           **
+                                                                              **
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+ ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+ LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+ SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+ CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+ POSSIBILITY OF SUCH DAMAGE.                                                  **
+                                                                              **
+ To improve the quality of the software, users are encouraged to share        **
+ modifications, enhancements or bug fixes with Infineon Technologies AG       **
+ dave@infineon.com).                                                          **
+                                                                              **
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon XMC4000/XMC1000 Series                                 **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR : $Author: Auto Generated                                           **
+**                                                                            **
+** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+**                                                                            **
+**                                                                            **
+*******************************************************************************/
+<% String AppBaseuri = "app/RTC001/0";%>
+/**
+ ****************************************************************************************
+ *
+ * @file RTC001_Conf.c
+ *
+ * @App Version RTC001 <<%=app.getAppVersion(AppBaseuri) %>>
+ *
+ * @brief Handle definitions based on UI configuration for rtc001 App 
+ *        Instances.
+*/
+
+/*******************************************************************************
+ ** INCLUDE FILES                                                             **
+ ******************************************************************************/
+#include <DAVE3.h>
+
+<% int clksel= 0; %>
+
+const RTC001_HandleType RTC001_Handle  = 
+{<% if ((app.getIntegerValue(AppBaseuri + "/RTC001_erwSoftwareTimer/0") == 1)) {%>					
+   .SoftwareTimerSel = <%= app.getIntegerValue(AppBaseuri + "/RTC001_erwSoftwareTimer/0") %>,// Software timer
+   <% } else {
+    }%>
+   .RTCInitOnce =  <%= app.getIntegerValue(AppBaseuri + "/RTC001_erwTimeInitialisation/0") %>U,
+   .DividerValue = 0x<%= app.getHexValue(AppBaseuri + "/rtc/ctr/div") %>U,/*DividerValue*/
+     
+};
+
+/* User Set Calendar Date manually */
+   RTC001_TimeHandle timeptr1 =
+  { 
+  <%String Date = app.getStringValue(AppBaseuri + "/RTC001_srwDateValue");   
+   	String[] SplitDate = Date.split("\\/"); %>
+   	
+ <%int Datemm  = Integer.parseInt(SplitDate[0]); 
+   int Datedd  = Integer.parseInt(SplitDate[1]); 
+   int Dateyyyy  = Integer.parseInt(SplitDate[2]); %>
+   
+  /* User Set Time manually */
+  <% String Time = app.getStringValue(AppBaseuri + "/RTC001_srwTimeValue");   
+   	String[] SplitTime = Time.split("\\:"); %>
+  
+  <%int Timehh  = Integer.parseInt(SplitTime[0]);
+  	int Timemm  = Integer.parseInt(SplitTime[1]);
+  	int Timess  = Integer.parseInt(SplitTime[2]); %>
+
+    /* Second provided in GUI */
+    .Sec = <%=Timess%>U,
+    /* Minute provided in GUI */
+    .Min = <%=Timemm%>U,    
+  	/* Hour provided in GUI */
+    .Hours = <%=Timehh%>U,    
+    /* Day provided in GUI */
+    .Days = <%=Datedd%>U,
+    /* Month provided in GUI */
+    .Month = <%=Datemm%>U,
+    /* Year provided in GUI */
+    .Year = <%=Dateyyyy%>U,   
+  };
+  
+  <% if (app.getIntegerValue(AppBaseuri + "/RTC001_erwAlarmIntrptEna/0") == 1) { %>
+  /* User Set Alarm Configurations */
+  /* Alarm Date configuration */
+  RTC001_TimeHandle Alarmptr1 = 
+  {  
+  <%String AlarmDate = app.getStringValue(AppBaseuri + "/RTC001_srwAlarmDate");   
+   	String[] SplitAlarmDate = AlarmDate.split("\\/"); %>
+   	
+ <%int Alarmmm1  = Integer.parseInt(SplitAlarmDate[0]);  
+   int Alarmdd  = Integer.parseInt(SplitAlarmDate[1]); 
+   int Alarmyyyy  = Integer.parseInt(SplitAlarmDate[2]); %> 
+  
+  /* Alarm time configuration */ 
+  <% String AlarmTime = app.getStringValue(AppBaseuri + "/RTC001_srwAlarmTime");   
+   	String[] SplitAlarmTime = AlarmTime.split("\\:"); %>
+  
+  <%int Alarmhh  = Integer.parseInt(SplitAlarmTime[0]);
+  	int Alarmmm2  = Integer.parseInt(SplitAlarmTime[1]);
+  	int Alarmss  = Integer.parseInt(SplitAlarmTime[2]); %>
+       
+    /* Alarm seconds provided in GUI */
+    .Sec = <%=Alarmss%>U,
+    /* Alarm minutes provided in GUI */
+    .Min = <%=Alarmmm2%>U,
+    /* Alarm hours provided in GUI */
+    .Hours = <%=Alarmhh%>U,
+    /* Alarm day provided in GUI */
+    .Days = <%=Alarmdd%>U,
+    /* Alarm month provided in GUI */
+    .Month = <%=Alarmmm1%>U,
+    /* Alarm year provided in GUI */
+    .Year = <%=Alarmyyyy%>U,
+    };
+  <% } %>    
+ 
+  
+/*CODE_BLOCK_END*/ 

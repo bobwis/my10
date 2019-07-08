@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="DefaultPage" displayName="LLD Configuration" className="IfxGroupBox" controlId="1318832206953">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth001/0/eth001_gmacconfiguration" displayName="GMAC Configuration" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/eth001/0/eth001_hidden&quot;) == &quot;0&quot;) {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;}else {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}" paramName="app/eth001/0/eth001_gmacconfiguration:GMAC Configuration" controlId="1321957821906">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group31" displayName="Interrupt configuration" className="IfxGroupBox" controlId="1323261045843">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth001/0/eth001_interrupt_priority" displayName="Interrupt Preemption Priority" className="IntegerType" paramName="app/eth001/0/eth001_interrupt_priority:Interrupt Preemption Priority" controlId="1323261121296">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth001/0/eth001_interrupt_subpriority" displayName="Interrupt Sub Priority" className="IntegerType" paramName="app/eth001/0/eth001_interrupt_subpriority:Interrupt Sub Priority" controlId="1323261126968">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth001/0/eth001_macinterfacesel" displayName="Mac Interface Selection" className="EnumerationType" paramName="app/eth001/0/eth001_macinterfacesel:Mac Interface Selection" controlId="1326092238968">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group60" displayName="MAC Address" className="IfxGroupBox" controlId="1326102370203">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth001/0/eth001_macadd" displayName="MAC Address" labelRequired="false" className="StringType" paramName="app/eth001/0/eth001_macadd:MAC Address" controlId="1326102386718">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="LEFT"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth001/0/eth001_multicastfilter" displayName="Multicast filter" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/eth001/0/eth001_promiscuous&quot;) == &quot;1&quot;) {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}else {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;}" paramName="app/eth001/0/eth001_multicastfilter:Multicast filter" controlId="1330325658375">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth001/0/eth001_promiscuous" displayName="Promiscuous Mode" className="EnumerationType" paramName="app/eth001/0/eth001_promiscuous:Promiscuous Mode" controlId="1348632147500">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group3" displayName="Pad Drive Modes" className="IfxGroupBox" controlId="1348632238171">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth001/0/eth001_paddrivermodetxd0" displayName="TxD0 Pin Drive Mode" className="EnumerationType" paramName="app/eth001/0/eth001_paddrivermodetxd0:TxD0 Pin Drive Mode" controlId="1348632259296">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth001/0/eth001_paddrivermodetxd1" displayName="TxD1 Pin Drive Mode" className="EnumerationType" paramName="app/eth001/0/eth001_paddrivermodetxd1:TxD1 Pin Drive Mode" controlId="1348632262765">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth001/0/eth001_paddrivermodetxen" displayName="TxEn Pin Drive Mode" className="EnumerationType" paramName="app/eth001/0/eth001_paddrivermodetxen:TxEn Pin Drive Mode" controlId="1348632267375">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

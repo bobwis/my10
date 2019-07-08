@@ -102,6 +102,8 @@ extern uint32_t calcepoch();
 extern struct tm now;		// gps time updated every second
 extern time_t epochtime;	// gps time updated every second
 
+
+
 #endif /* NEO7M_H_ */
 
 

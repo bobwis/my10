@@ -56,18 +56,18 @@
 
 /** Set this to 1 to support CGI (new style) */
 #if !defined LWIP_HTTPD_CGI_SSI || defined __DOXYGEN__
-#define LWIP_HTTPD_CGI_SSI        0
+#define LWIP_HTTPD_CGI_SSI        1
 #endif
 
 /** Set this to 1 to support SSI (Server-Side-Includes) */
 #if !defined LWIP_HTTPD_SSI || defined __DOXYGEN__
-#define LWIP_HTTPD_SSI            0
+#define LWIP_HTTPD_SSI            1
 #endif
 
 /** Set this to 1 to implement an SSI tag handler callback that gets a const char*
  * to the tag (instead of an index into a pre-registered array of known tags) */
 #if !defined LWIP_HTTPD_SSI_RAW || defined __DOXYGEN__
-#define LWIP_HTTPD_SSI_RAW        0
+#define LWIP_HTTPD_SSI_RAW        1
 #endif
 
 /** Set this to 1 to support HTTP POST */
@@ -225,7 +225,7 @@
 /** Set this to 0 to not send the SSI tag (default is on, so the tag will
  * be sent in the HTML page */
 #if !defined LWIP_HTTPD_SSI_INCLUDE_TAG || defined __DOXYGEN__
-#define LWIP_HTTPD_SSI_INCLUDE_TAG           1
+#define LWIP_HTTPD_SSI_INCLUDE_TAG           0
 #endif
 
 /** Set this to 1 to call tcp_abort when tcp_close fails with memory error.
