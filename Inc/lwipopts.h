@@ -30,12 +30,13 @@
 
 /* Within 'USER CODE' section, code will be kept by default at each generation */
 /* USER CODE BEGIN 0 */
-#define LWIP_DEBUG 0
-#define LWIP_STATS 0
+
 
 #define LWIP_PLATFORM_DIAG(x) do {printf x;} while(0)
 
-
+#if 0
+#define LWIP_DEBUG 0
+#define LWIP_STATS 0
 #define LWIP_DBG_TRACE
 
 
@@ -44,6 +45,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+
 
 #define LINK_STATS                      0
 #define ETHARP_STATS                    1
@@ -63,6 +65,7 @@
 #define MLD6_STATS                      0
 #define ND6_STATS                       0
 #define MIB2_STATS                      0
+#endif
 
 /* USER CODE END 0 */
 
@@ -153,7 +156,7 @@
 /*----- Default Value for LWIP_HTTPD_SSI: 0 ---*/
 #define LWIP_HTTPD_SSI 1
 /*----- Default Value for LWIP_HTTPD_SSI_RAW: 0 ---*/
-#define LWIP_HTTPD_SSI_RAW 0
+#define LWIP_HTTPD_SSI_RAW 1
 /*----- Default Value for LWIP_HTTPD_SUPPORT_POST: 0 ---*/
 #define LWIP_HTTPD_SUPPORT_POST 1
 /*----- Default Value for LWIP_HTTPD_SUPPORT_EXTSTATUS: 0 ---*/
@@ -162,6 +165,8 @@
 #define LWIP_HTTPD_SUPPORT_11_KEEPALIVE 1
 /*----- Default Value for LWIP_HTTPD_ABORT_ON_CLOSE_MEM_ERROR: 0 ---*/
 #define LWIP_HTTPD_ABORT_ON_CLOSE_MEM_ERROR 1
+/*----- Value in opt.h for HTTPD_USE_CUSTOM_FSDATA: 0 -----*/
+#define HTTPD_USE_CUSTOM_FSDATA 1
 /*----- Value in opt.h for LWIP_STATS: 1 -----*/
 #define LWIP_STATS 0
 /*----- Value in opt.h for CHECKSUM_GEN_IP: 1 -----*/
@@ -184,6 +189,10 @@
 #define CHECKSUM_CHECK_ICMP 0
 /*----- Value in opt.h for CHECKSUM_CHECK_ICMP6: 1 -----*/
 #define CHECKSUM_CHECK_ICMP6 0
+/*----- Default Value for LWIP_DBG_MIN_LEVEL: LWIP_DBG_LEVEL_ALL ---*/
+#define LWIP_DBG_MIN_LEVEL LWIP_DBG_LEVEL_WARNING
+/*----- Default Value for LWIP_DBG_TYPES_ON: LWIP_DBG_ON ---*/
+#define LWIP_DBG_TYPES_ON LWIP_DBG_OFF
 /*-----------------------------------------------------------------------------*/
 /* USER CODE BEGIN 1 */
 #define MEMP_OVERFLOW_CHECK 2

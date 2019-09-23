@@ -230,9 +230,11 @@ static void low_level_init(struct netif *netif)
   heth.Init.MediaInterface = ETH_MEDIA_INTERFACE_RMII;
 
   /* USER CODE BEGIN MACADDRESS */
-  #define STM32_UUID ((uint32_t *)0x1FF0F420)
-  MACAddr[5] = STM32_UUID[2] & 0xFF;		// fiddle mac address; eventually use EEPROM stored value? TODO
-  MACAddr[4] = STM32_UUID[2] >> 8 & 0xFF;		// fiddle mac address; eventually use EEPROM stored value? TODO
+
+
+  #define STM32_UUID ((uint32_t *)0x1FF0F420)			// 96 bit UUID
+  heth.Init.MACAddr[5] = (STM32_UUID[0] ^ STM32_UUID[1] ^ STM32_UUID[2]) & 0xFF;
+  heth.Init.MACAddr[4] = (STM32_UUID[0] ^ STM32_UUID[1] ^ STM32_UUID[2]) & 0xFF00 >> 8;		// fiddle mac address; eventually use EEPROM stored value? TODO
   /* USER CODE END MACADDRESS */
 
   hal_eth_init_status = HAL_ETH_Init(&heth);
@@ -274,7 +276,7 @@ static void low_level_init(struct netif *netif)
   
 /* create a binary semaphore used for informing ethernetif of frame reception */
   osSemaphoreDef(SEM);
-  s_xSemaphore = osSemaphoreCreate(osSemaphore(SEM) , 1 );
+  s_xSemaphore = osSemaphoreCreate(osSemaphore(SEM), 1);
 
 /* create the task that handles the ETH_MAC */
   osThreadDef(EthIf, ethernetif_input, osPriorityRealtime, 0, INTERFACE_THREAD_STACK_SIZE);
@@ -497,14 +499,14 @@ static struct pbuf * low_level_input(struct netif *netif)
  *
  * @param netif the lwip network interface structure for this ethernetif
  */
-void ethernetif_input( void const * argument ) 
+void ethernetif_input(void const * argument)
 {
   struct pbuf *p;
   struct netif *netif = (struct netif *) argument;
   
   for( ;; )
   {
-    if (osSemaphoreWait( s_xSemaphore, TIME_WAITING_FOR_INPUT)==osOK)
+    if (osSemaphoreWait(s_xSemaphore, TIME_WAITING_FOR_INPUT) == osOK)
     {
       do
       {   

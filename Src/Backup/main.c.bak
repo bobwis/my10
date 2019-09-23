@@ -1,21 +1,21 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file           : main.c
+ * @brief          : Main program body
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under Ultimate Liberty license
+ * SLA0044, the "License"; You may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at:
+ *                             www.st.com/SLA0044
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -30,6 +30,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "netif.h"
 #include "adcstream.h"
 #include "neo7m.h"
@@ -43,6 +44,8 @@
 #include "www.h"
 #include "dhcp.h"
 //#define netif_dhcp_data(netif) ((struct dhcp*)netif_get_client_data(netif, LWIP_NETIF_CLIENT_DATA_INDEX_DHCP))
+
+uint32_t pressure, pressfrac, temperature, tempfrac;
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -154,13 +157,11 @@ static void MX_NVIC_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-int _write(int file, char *ptr, int len)
-{
+int _write(int file, char *ptr, int len) {
 	int DataIdx;
 
-	for (DataIdx = 0; DataIdx < len; DataIdx++)
-	{
-	   __io_putchar( *ptr++ );
+	for (DataIdx = 0; DataIdx < len; DataIdx++) {
+		__io_putchar(*ptr++);
 	}
 	return len;
 }
@@ -1125,6 +1126,7 @@ static void MX_TIM4_Init(void)
 
   /* USER CODE END TIM4_Init 0 */
 
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
   TIM_MasterConfigTypeDef sMasterConfig = {0};
   TIM_OC_InitTypeDef sConfigOC = {0};
 
@@ -1135,20 +1137,29 @@ static void MX_TIM4_Init(void)
   htim4.Init.Prescaler = 0;
   htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim4.Init.Period = 0;
-  htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV2;
+  htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  if (HAL_TIM_Base_Init(&htim4) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim4, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
   if (HAL_TIM_PWM_Init(&htim4) != HAL_OK)
   {
     Error_Handler();
   }
-  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_ENABLE;
   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
   if (HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig) != HAL_OK)
   {
     Error_Handler();
   }
   sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.Pulse = 0;
+  sConfigOC.Pulse = 32768;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
   if (HAL_TIM_PWM_ConfigChannel(&htim4, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
@@ -1455,6 +1466,7 @@ static void MX_USART6_UART_Init(void)
   */
 static void MX_DMA_Init(void) 
 {
+
   /* DMA controller clock enable */
   __HAL_RCC_DMA1_CLK_ENABLE();
   __HAL_RCC_DMA2_CLK_ENABLE();
@@ -1625,13 +1637,12 @@ static void MX_GPIO_Init(void)
 void netif_status_callbk_fn(struct netif *netif) {
 
 	printf("netif_status changed\n");
-	printf(
-			"netif: IP address of '%c%c' set to %"U16_F".%"U16_F".%"U16_F".%"U16_F"\n",
-			netif->name[0], netif->name[1], ip4_addr1_16(netif_ip4_addr(netif)),
-			ip4_addr2_16(netif_ip4_addr(netif)),
-			ip4_addr3_16(netif_ip4_addr(netif)),
-			ip4_addr4_16(netif_ip4_addr(netif)));
-	/*	printf("netif: Gateway %"U16_F".%"U16_F".%"U16_F".%"U16_F"\n",
+/*	printf("netif: IP address of '%c%c' set to %"U16_F".%"U16_F".%"U16_F".%"U16_F"\n", netif->name[0],
+			netif->name[1], ip4_addr1_16(netif_ip4_addr(netif)), ip4_addr2_16(netif_ip4_addr(netif)),
+			ip4_addr3_16(netif_ip4_addr(netif)), ip4_addr4_16(netif_ip4_addr(netif)));
+*/
+
+/*	printf("netif: Gateway %"U16_F".%"U16_F".%"U16_F".%"U16_F"\n",
 	 ip4_addr1_16(netif_ip4_gw(netif)),
 	 ip4_addr2_16(netif_ip4_gw(netif)),
 	 ip4_addr3_16(netif_ip4_gw(netif)),
@@ -1656,8 +1667,7 @@ void netif_link_callbk_fn(struct netif *netif) {
 }
 
 uint32_t movavg(uint32_t new) {
-	static uint32_t data[16] =
-			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	static uint32_t data[16] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	int i;
 	uint32_t sum = 0;
 
@@ -1682,11 +1692,11 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) { // every second 1 pps
 //		statuspkt.epochsecs++;
 //		neotime();
 #if 0		// clktrim with non-resetting pps counter
-		if (lastcap > t2cap[0]) {		// counter wrapped
-			diff = 4000000000 /*UINT_MAX*/- lastcap + t2cap[0];
-		} else {
-			diff = t2cap[0] - lastcap;
-		}
+				if (lastcap > t2cap[0]) {		// counter wrapped
+					diff = 4000000000 /*UINT_MAX*/- lastcap + t2cap[0];
+				} else {
+					diff = t2cap[0] - lastcap;
+				}
 #else
 		diff = lastcap;
 #endif
@@ -1714,14 +1724,16 @@ void setupnotify() {
 
 /* USER CODE BEGIN Header_StartDefaultTask */
 /**
-  * @brief  Function implementing the defaultTask thread.
-  * @param  argument: Not used 
-  * @retval None
-  */
+ * @brief  Function implementing the defaultTask thread.
+ * @param  argument: Not used
+ * @retval None
+ */
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void const * argument)
 {
-	int i, j;
+    
+    
+                 
   /* init code for USB_DEVICE */
   MX_USB_DEVICE_Init();
 
@@ -1729,8 +1741,9 @@ void StartDefaultTask(void const * argument)
   /* Up to user to call mbedtls_net_init() function in MBEDTLS initialization step */
 
   /* Up to user define the empty MX_MBEDTLS_Init() function located in mbedtls.c file */
-  MX_MBEDTLS_Init();
-
+           
+          
+                 
   /* init code for FATFS */
   MX_FATFS_Init();
 
@@ -1764,7 +1777,8 @@ void StartDefaultTask(void const * argument)
 
 		printf("\n\n--------------------------\nDetector S/N=%d\n", MY_UID);
 
-		printf("STM_UUID=%lx %lx %lx\n", STM32_UUID[0], STM32_UUID[1],STM32_UUID[2]);
+		printf("STM_UUID=%lx %lx %lx\n", STM32_UUID[0], STM32_UUID[1],
+		STM32_UUID[2]);
 
 #ifdef TESTING
 		printf("*** TESTING BUILD USED ***\n");
@@ -1775,56 +1789,137 @@ void StartDefaultTask(void const * argument)
 #define SPLAT1
 #ifdef SPLAT1
 		{
-			const uint16_t pattern[]  = {LED_D1_Pin, LED_D1_Pin|LED_D2_Pin, LED_D1_Pin|LED_D2_Pin|LED_D3_Pin,
-						  LED_D1_Pin|LED_D2_Pin|LED_D3_Pin|LED_D4_Pin, LED_D1_Pin|LED_D2_Pin|LED_D3_Pin|LED_D4_Pin|LED_D5_Pin};
-			const uint16_t spicmdchan[] = {0x6100};	// set chan reg 0
-			const uint16_t spicmdgain[] = {0x6004};	// set gain 8
+			const uint16_t pattern[] = { LED_D1_Pin,
+			LED_D1_Pin | LED_D2_Pin,
+			LED_D1_Pin | LED_D2_Pin | LED_D3_Pin,
+			LED_D1_Pin | LED_D2_Pin | LED_D3_Pin | LED_D4_Pin,
+			LED_D1_Pin | LED_D2_Pin | LED_D3_Pin | LED_D4_Pin | LED_D5_Pin };
+			const uint16_t spicmdchan[] = { 0x4100 };	// set chan reg 0
+			const uint16_t spicmdgain[] = { 0x4001 };	// set gain 8
+			int j, k;
 
-		for (i=0; i<5; i++) {
-			HAL_GPIO_WritePin(GPIOD, pattern[i], GPIO_PIN_RESET);
-			osDelay(150);
-		}
-		osDelay(600);
-			for (i=0; i<5; i++) {
+			for (i = 0; i < 5; i++) {
+				HAL_GPIO_WritePin(GPIOD, pattern[i], GPIO_PIN_RESET);
+				osDelay(150);
+			}
+			osDelay(600);
+			for (i = 0; i < 5; i++) {
 				HAL_GPIO_WritePin(GPIOD, pattern[i], GPIO_PIN_SET);
 				osDelay(150);
 			}
 
 //inin spi based songle ended PG Amp
-		HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);			// deselect the PGA
-		HAL_GPIO_WritePin(GPIOE, LP_FILT_Pin, GPIO_PIN_RESET);		// select RF Switches to LP filter (normal route)
+			HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);	// deselect the PGA
+			HAL_GPIO_WritePin(GPIOE, LP_FILT_Pin, GPIO_PIN_RESET);// select RF Switches to LP filter (normal route)
 
-		HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_RESET);		// reset the PGA seq
-		osDelay(50);
-		HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);			// deselect the PG
-		osDelay(50);
+			HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_RESET);	// reset the PGA seq
+			osDelay(50);
+			HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);	// deselect the PG
+			osDelay(50);
 
-HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_RESET);		// select the PGA
-HAL_SPI_Transmit(&hspi2,(uint16_t[]) { 0 }, 1 , 1000);			// nop cmd
-HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);			// deselect the PG
-osDelay(50);
+			HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_RESET);	// select the PGA
+			HAL_SPI_Transmit(&hspi2, (uint16_t[] ) { 0 }, 1, 1000);	// nop cmd
+			{
+				volatile int dly;
+				for (dly = 0; dly < 50; dly++)
+					;
+			}
+			HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);	// deselect the PG
+			osDelay(50);
 
-HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_RESET);		// select the PGA
-osDelay(50);
-HAL_SPI_Transmit(&hspi2,&spicmdchan[0],2,1000);
-osDelay(50);
-HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);			// deselect the PG
-osDelay(50);
+			HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_RESET);	// select the PGA
+//osDelay(5);
+			HAL_SPI_Transmit(&hspi2, &spicmdchan[0], 1, 1000);	// set the channel
+			{
+				volatile int dly;
+				for (dly = 0; dly < 50; dly++)
+					;
+			}
+//osDelay(5);
+			HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);	// deselect the PGA
+//osDelay(5);
 
-HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);			// deselect the PG
-osDelay(50);
-HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_RESET);		// select the PGA
-HAL_SPI_Transmit(&hspi2,&spicmdchan[0],2,1000);
-osDelay(50);
-HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);			// deselect the PG
-osDelay(50);
+			HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_RESET);	// select the PGA
+//osDelay(5);
+			HAL_SPI_Transmit(&hspi2, &spicmdgain[0], 1, 1000);	// select gain
+			{
+				volatile int dly;
+				for (dly = 0; dly < 50; dly++)
+					;
+			}
+			HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);	// deselect the PGA
 
-			for (i=0; i<5; i++) {
+			{
+				muxdat[0] = 1;		// sw1A (AMPout -> ADC)
+
+				for (k = 0; k < 2; k++) {
+//HAL_I2C_Master_Transmit(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout)
+
+					if (HAL_I2C_Master_Transmit(&hi2c1, 0x44 << 1, &muxdat[0], 1, 1000) != HAL_OK) {	// RF dual MUX
+						printf("I2C HAL returned error 1\n\r");
+					}
+
+					if (HAL_I2C_Master_Transmit(&hi2c1, 0x60 << 1, (uint8_t[] ) { 0x26, 0x38 }, 2, 1000)
+							!= HAL_OK) {		// set pressure mode OSR=128 pressure sense
+						printf("I2C HAL returned error 2\n\r");
+					}
+					if (HAL_I2C_Master_Transmit(&hi2c1, 0x60 << 1, (uint8_t[] ) { 0x13, 0x07 }, 2, 1000)
+							!= HAL_OK) {	// enbl data flags pressure sense
+						printf("I2C HAL returned error 3\n\r");
+					}
+					if (HAL_I2C_Master_Transmit(&hi2c1, 0x60 << 1, (uint8_t[] ) { 0x26, 0x39 }, 2, 1000)
+							!= HAL_OK) {		// set active pressure sense
+						printf("I2C HAL returned error 4\n\r");
+					}
+
+					{
+						uint8_t data[8], dataout[8];
+
+						j = 0;
+						while (1) {
+							data[0] = 0x55;
+							if (HAL_I2C_Mem_Read(&hi2c1, 0x60 << 1, 0, 1, &data[0], 1, 1000) != HAL_OK) {	// rd status reg pressure sense
+								printf("I2C HAL returned error 5\n\r");
+							} else {
+								printf("Press stat: 0x%0x\n", data[0]);
+								if (data[0] & 0x08) {		// data ready
+									for (i = 1; i < 6; i++) {
+										if (HAL_I2C_Mem_Read(&hi2c1, 0x60 << 1, i, 1, &data[0], 1, 1000) != HAL_OK) {	// rd status reg pressure sense
+											printf("I2C HAL returned error 6+\n\r");
+										}
+										dataout[i - 1] = data[0];
+										printf("[0x%02x] ", data[0]);
+									}  // end for
+									pressure = dataout[0] << 10 | dataout[1] << 2 | (dataout[2] & 0xC0) >> 6;
+									pressfrac = ((dataout[2] & 0x30) >> 4) * 25;
+
+									printf("\npressure = %d.%d  ", pressure, pressfrac);
+									temperature = dataout[3];
+									tempfrac = ((dataout[4] >> 4) * 625) / 1000;
+									printf("temp = %d.%d\n", temperature, tempfrac);
+									break;
+								}
+							}  // data read okay
+
+							j++;
+							{
+								volatile int dly;
+								for (dly = 0; dly < 5000000; dly++)
+									;
+							}
+							if (j > 10) {
+								printf("Error: Abandoning I2C temp/press\n");
+								break;
+							}
+						}  // while
+					} // end block var
+					osDelay(500);
+				} // end for k
+			} // end const
+			for (i = 0; i < 5; i++) {
 				HAL_GPIO_WritePin(GPIOD, pattern[i], GPIO_PIN_RESET);
 				osDelay(150);
 			}
-
-
 		}
 #endif
 
@@ -1832,9 +1927,9 @@ osDelay(50);
 //		HAL_TIM_Base_Start_IT(&htim3);		// test timebase 1Hz pulse output
 //		HAL_TIM_OC_Start_IT(&htim3, TIM_CHANNEL_2);		// 1mS
 
-		TIM_CCxChannelCmd(htim2.Instance, TIM_CHANNEL_1, TIM_CCx_DISABLE);// precision uS timer
-		TIM_CCxChannelCmd(htim2.Instance, TIM_CHANNEL_2, TIM_CCx_DISABLE);// precision uS timer
-		TIM_CCxChannelCmd(htim2.Instance, TIM_CHANNEL_4, TIM_CCx_DISABLE);// precision uS timer
+		TIM_CCxChannelCmd(htim2.Instance, TIM_CHANNEL_1, TIM_CCx_DISABLE);		// precision uS timer
+		TIM_CCxChannelCmd(htim2.Instance, TIM_CHANNEL_2, TIM_CCx_DISABLE);		// precision uS timer
+		TIM_CCxChannelCmd(htim2.Instance, TIM_CHANNEL_4, TIM_CCx_DISABLE);		// precision uS timer
 
 		HAL_TIM_IC_Stop_DMA(&htim2, TIM_CHANNEL_1);		// precision uS timer
 		HAL_TIM_IC_Stop_DMA(&htim2, TIM_CHANNEL_2);		// precision uS timer
@@ -1844,29 +1939,41 @@ osDelay(50);
 		//  (++) Input Capture :  HAL_TIM_IC_Start(), HAL_TIM_IC_Start_DMA(), HAL_TIM_IC_Start_IT()
 
 		// capture on PB10 input
-		if ((err = HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_3, t2cap,
-				(sizeof(t2cap) / 4))) != HAL_OK) {
+		if ((err = HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_3, t2cap, (sizeof(t2cap) / 4))) != HAL_OK) {
 			printf("TIM_Base_Start_DMA err %i", err);
 			Error_Handler();
 		}
 
-		TIM_CCxChannelCmd(htim2.Instance, TIM_CHANNEL_3, TIM_CCx_ENABLE);// capture precision timer
+		TIM_CCxChannelCmd(htim2.Instance, TIM_CHANNEL_3, TIM_CCx_ENABLE);		// capture precision timer
 
 		i = 0;
 		dhcp = netif_dhcp_data(netif);		// do not call this too early
+		printf("DHCP in progress..\n");
 		while ((dhcp->state != DHCP_STATE_BOUND) && (i < 10)) {
 			printf("Waiting %d for DHCP...\n", i);
 			osDelay(2000);
 			i++;
-		}
-		if (i > 10) {
-			printf("*****************************************\n");
-			printf("************* DHCP ABORTED **************\n");
-			printf("*****************************************\n");
-			// reboot would be good
-		} else {
-			dhcpok = 1;
-		}
+
+			if (i > 10) {
+				printf("*****************************************\n");
+				printf("************* DHCP ABORTED **************\n");
+				printf("*****************************************\n");
+				osDelay(2000);
+				__NVIC_SystemReset();   // reboot
+			} // end if
+		} // end while
+
+		ip_addr_t ip = { 0 };
+		uint32_t myip;
+		dhcpok = 1;
+
+		ip = dhcp->offered_ip_addr;
+		myip = ip.addr;
+		printf("*****************************************\n");
+		printf("This unit's IP address is %d:%d:%d:%d\n", myip & 0xFF, (myip & 0xFF00) >> 8,
+				(myip & 0xFF0000) >> 16, (myip & 0xFF000000) >> 24);
+		printf("*****************************************\n");
+
 // tim7 drives DAC
 #if 1
 		for (i = 0; i < sizeof(dacdata) >> 1; i++) {
@@ -1874,7 +1981,8 @@ osDelay(50);
 //			dacdata[i] = 2048;
 		}
 
-		HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, dacdata, sizeof(dacdata) >> 1, DAC_ALIGN_12B_R);
+		HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, dacdata, sizeof(dacdata) >> 1,
+		DAC_ALIGN_12B_R);
 		HAL_TIM_Base_Start(&htim7);		// fast interval timer
 #endif
 
@@ -1892,10 +2000,10 @@ osDelay(50);
 
 /* USER CODE BEGIN Header_StarLPTask */
 /**
-* @brief Function implementing the LPTask thread.
-* @param argument: Not used
-* @retval None
-*/
+ * @brief Function implementing the LPTask thread.
+ * @param argument: Not used
+ * @retval None
+ */
 /* USER CODE END Header_StarLPTask */
 void StarLPTask(void const * argument)
 {
@@ -1907,23 +2015,23 @@ void StarLPTask(void const * argument)
 	int counter = 0;
 	char stmuid[64] = { 0 };
 
+
 	statuspkt.adcudpover = 0;		// debug use count overruns
 	statuspkt.trigcount = 0;		// debug use adc trigger count
 	statuspkt.udpsent = 0;	// debug use adc udp sample packet sent count
 	osDelay(13000);
 
-
 	printf("starting httpd\n");
 	httpd_init();		// start the www server
-// zzz	init_httpd_ssi();	// set up the embedded tag handler
-	sprintf(stmuid, "api/Device/%lx%lx%lx", STM32_UUID[0], STM32_UUID[1],STM32_UUID[2]);
+	init_httpd_ssi();	// set up the embedded tag handler
+	sprintf(stmuid, "api/Device/%lx%lx%lx", STM32_UUID[0], STM32_UUID[1],	STM32_UUID[2]);
 
 	for (;;) {
 		tcp_tmr();
 		reqtimer++;
 		debugtimer++;
 		osDelay(1);
-		if (statuspkt.trigcount > (3600 + trigs))// spamming: 3600 packets sent in 2 Sec (out of approx 7.2K packets)
+		if (statuspkt.trigcount > (3600 + trigs))	// spamming: 3600 packets sent in 2 Sec (out of approx 7.2K packets)
 				{
 			jabber = 2000;		// 2 seconds pause
 			statuspkt.jabcnt++;
@@ -1932,9 +2040,9 @@ void StarLPTask(void const * argument)
 				jabber--;		// de-arm count
 		}
 
-		if (trigs != statuspkt.trigcount ) {
+		if (trigs != statuspkt.trigcount) {
 			HAL_TIM_Base_Start(&htim7);		// fast interval timer
-			beeptimeout  = 200;
+			beeptimeout = 200;
 		} else {
 			if (beeptimeout) {
 				beeptimeout--;
@@ -1942,7 +2050,6 @@ void StarLPTask(void const * argument)
 				HAL_TIM_Base_Stop(&htim7);		// fast interval timer
 		}
 		trigs = statuspkt.trigcount;
-
 
 		if (statuspkt.uid == MY_UID)		// not yet found new S/N from server
 		{
@@ -1954,12 +2061,12 @@ void StarLPTask(void const * argument)
 			}
 
 		}
-	if (debugtimer > 30000)
-	{
-		debugtimer = 0;
-		stats_display();
-		printf("triggers=%04d  ------------------------------------------- %s",trigs,ctime(&epochtime));
-	}
+		if (debugtimer > 30000) {
+			debugtimer = 0;
+			stats_display();
+			printf("triggers=%04d  ------------------------------------------- %s", trigs,
+					ctime(&epochtime));
+		}
 
 	}
   /* USER CODE END StarLPTask */
@@ -1985,8 +2092,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* USER CODE BEGIN Callback 0 */
 	if (htim->Instance == TIM2) {
-		printf("T2P PeriodElapsedCallback %lu %lu\n", t2cap[0],
-				statuspkt.clktrim);
+		printf("T2P PeriodElapsedCallback %lu %lu\n", t2cap[0], statuspkt.clktrim);
 		return;
 	}
 	if (htim->Instance == TIM3) {
