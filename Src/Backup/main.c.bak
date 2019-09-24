@@ -1751,9 +1751,11 @@ void StartDefaultTask(void const * argument)
 	{
 
 		HAL_StatusTypeDef err;
-		struct dhcp *dhcp;
+		struct  dhcp  *dhcp;
 		int i, dhcpok = 0;
 		uint16_t dacdata[64];
+
+		MX_LWIP_Init();
 
 		netif = netif_default;
 		netif_set_link_callback(netif, netif_link_callbk_fn);
