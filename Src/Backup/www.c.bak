@@ -116,7 +116,7 @@ tSSIHandler tag_callback(int index, char *newstring, int maxlen) {
 			sprintf(newstring, "%d.%d", pressure, pressfrac);
 			break;
 		case 2:
-#if 0
+#if 1
 		{
 			char timestr[32];
 			strcpy(timestr, ctime(&epochtime));

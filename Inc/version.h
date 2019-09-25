@@ -16,6 +16,11 @@
 #define TESTING
 #endif
 
+// piggy back splat board ver 1 present
+#if 1
+#define SPLAT1
+#endif
+
 #ifdef TESTING
 #define MY_UID 1052	// 16 bits  "serial number" of the lightning detector
 #else

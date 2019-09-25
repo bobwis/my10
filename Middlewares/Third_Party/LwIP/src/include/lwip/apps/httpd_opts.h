@@ -104,8 +104,7 @@
 
 /** This string is passed in the HTTP header as "Server: " */
 #if !defined HTTPD_SERVER_AGENT || defined __DOXYGEN__
-// #define HTTPD_SERVER_AGENT "lwIP" LWIP_VERSION_STRING " (http://savannah.nongnu.org/projects/lwip)"
-#define HTTPD_SERVER_AGENT "lwIP"
+#define HTTPD_SERVER_AGENT "lwIP/" LWIP_VERSION_STRING " (http://savannah.nongnu.org/projects/lwip)"
 #endif
 
 /** Set this to 1 if you want to include code that creates HTTP headers

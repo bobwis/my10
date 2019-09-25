@@ -33,8 +33,6 @@ uint8_t adcbatchid = 0;	// adc sequence number of a batch of 1..n consecutive tr
 uint8_t sendendstatus = 0; 	// flag to send end of capture status
 int jabber = 0;			// timeout for spamming trigger
 
-extern uint8_t muxdat[] = {0};
-
 /* Stores the handle of the task that will be notified when the
  transmission is complete. */
 volatile TaskHandle_t xTaskToNotify = NULL;

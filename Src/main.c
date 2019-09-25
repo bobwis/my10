@@ -43,9 +43,10 @@
 #include "version.h"
 #include "www.h"
 #include "dhcp.h"
+#include "splat1.h"
 //#define netif_dhcp_data(netif) ((struct dhcp*)netif_get_client_data(netif, LWIP_NETIF_CLIENT_DATA_INDEX_DHCP))
 
-uint32_t pressure, pressfrac, temperature, tempfrac;
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -1731,9 +1732,7 @@ void setupnotify() {
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void const * argument)
 {
-    
-    
-                 
+
   /* init code for USB_DEVICE */
   MX_USB_DEVICE_Init();
 
@@ -1741,9 +1740,7 @@ void StartDefaultTask(void const * argument)
   /* Up to user to call mbedtls_net_init() function in MBEDTLS initialization step */
 
   /* Up to user define the empty MX_MBEDTLS_Init() function located in mbedtls.c file */
-           
-          
-                 
+
   /* init code for FATFS */
   MX_FATFS_Init();
 
@@ -1788,141 +1785,9 @@ void StartDefaultTask(void const * argument)
 #endif
 		setupneo();
 		printf("Neo7 setup returned\n\r");
-#define SPLAT1
+
 #ifdef SPLAT1
-		{
-			const uint16_t pattern[] = { LED_D1_Pin,
-			LED_D1_Pin | LED_D2_Pin,
-			LED_D1_Pin | LED_D2_Pin | LED_D3_Pin,
-			LED_D1_Pin | LED_D2_Pin | LED_D3_Pin | LED_D4_Pin,
-			LED_D1_Pin | LED_D2_Pin | LED_D3_Pin | LED_D4_Pin | LED_D5_Pin };
-			const uint16_t spicmdchan[] = { 0x4100 };	// set chan reg 0
-			const uint16_t spicmdgain[] = { 0x4001 };	// set gain 8
-			int j, k;
-
-			for (i = 0; i < 5; i++) {
-				HAL_GPIO_WritePin(GPIOD, pattern[i], GPIO_PIN_RESET);
-				osDelay(150);
-			}
-			osDelay(600);
-			for (i = 0; i < 5; i++) {
-				HAL_GPIO_WritePin(GPIOD, pattern[i], GPIO_PIN_SET);
-				osDelay(150);
-			}
-
-//inin spi based songle ended PG Amp
-			HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);	// deselect the PGA
-			HAL_GPIO_WritePin(GPIOE, LP_FILT_Pin, GPIO_PIN_RESET);// select RF Switches to LP filter (normal route)
-
-			HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_RESET);	// reset the PGA seq
-			osDelay(50);
-			HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);	// deselect the PG
-			osDelay(50);
-
-			HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_RESET);	// select the PGA
-			HAL_SPI_Transmit(&hspi2, (uint16_t[] ) { 0 }, 1, 1000);	// nop cmd
-			{
-				volatile int dly;
-				for (dly = 0; dly < 50; dly++)
-					;
-			}
-			HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);	// deselect the PG
-			osDelay(50);
-
-			HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_RESET);	// select the PGA
-//osDelay(5);
-			HAL_SPI_Transmit(&hspi2, &spicmdchan[0], 1, 1000);	// set the channel
-			{
-				volatile int dly;
-				for (dly = 0; dly < 50; dly++)
-					;
-			}
-//osDelay(5);
-			HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);	// deselect the PGA
-//osDelay(5);
-
-			HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_RESET);	// select the PGA
-//osDelay(5);
-			HAL_SPI_Transmit(&hspi2, &spicmdgain[0], 1, 1000);	// select gain
-			{
-				volatile int dly;
-				for (dly = 0; dly < 50; dly++)
-					;
-			}
-			HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);	// deselect the PGA
-
-			{
-				muxdat[0] = 1;		// sw1A (AMPout -> ADC)
-
-				for (k = 0; k < 2; k++) {
-//HAL_I2C_Master_Transmit(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout)
-
-					if (HAL_I2C_Master_Transmit(&hi2c1, 0x44 << 1, &muxdat[0], 1, 1000) != HAL_OK) {	// RF dual MUX
-						printf("I2C HAL returned error 1\n\r");
-					}
-
-					if (HAL_I2C_Master_Transmit(&hi2c1, 0x60 << 1, (uint8_t[] ) { 0x26, 0x38 }, 2, 1000)
-							!= HAL_OK) {		// set pressure mode OSR=128 pressure sense
-						printf("I2C HAL returned error 2\n\r");
-					}
-					if (HAL_I2C_Master_Transmit(&hi2c1, 0x60 << 1, (uint8_t[] ) { 0x13, 0x07 }, 2, 1000)
-							!= HAL_OK) {	// enbl data flags pressure sense
-						printf("I2C HAL returned error 3\n\r");
-					}
-					if (HAL_I2C_Master_Transmit(&hi2c1, 0x60 << 1, (uint8_t[] ) { 0x26, 0x39 }, 2, 1000)
-							!= HAL_OK) {		// set active pressure sense
-						printf("I2C HAL returned error 4\n\r");
-					}
-
-					{
-						uint8_t data[8], dataout[8];
-
-						j = 0;
-						while (1) {
-							data[0] = 0x55;
-							if (HAL_I2C_Mem_Read(&hi2c1, 0x60 << 1, 0, 1, &data[0], 1, 1000) != HAL_OK) {	// rd status reg pressure sense
-								printf("I2C HAL returned error 5\n\r");
-							} else {
-								printf("Press stat: 0x%0x\n", data[0]);
-								if (data[0] & 0x08) {		// data ready
-									for (i = 1; i < 6; i++) {
-										if (HAL_I2C_Mem_Read(&hi2c1, 0x60 << 1, i, 1, &data[0], 1, 1000) != HAL_OK) {	// rd status reg pressure sense
-											printf("I2C HAL returned error 6+\n\r");
-										}
-										dataout[i - 1] = data[0];
-										printf("[0x%02x] ", data[0]);
-									}  // end for
-									pressure = dataout[0] << 10 | dataout[1] << 2 | (dataout[2] & 0xC0) >> 6;
-									pressfrac = ((dataout[2] & 0x30) >> 4) * 25;
-
-									printf("\npressure = %d.%d  ", pressure, pressfrac);
-									temperature = dataout[3];
-									tempfrac = ((dataout[4] >> 4) * 625) / 1000;
-									printf("temp = %d.%d\n", temperature, tempfrac);
-									break;
-								}
-							}  // data read okay
-
-							j++;
-							{
-								volatile int dly;
-								for (dly = 0; dly < 5000000; dly++)
-									;
-							}
-							if (j > 10) {
-								printf("Error: Abandoning I2C temp/press\n");
-								break;
-							}
-						}  // while
-					} // end block var
-					osDelay(500);
-				} // end for k
-			} // end const
-			for (i = 0; i < 5; i++) {
-				HAL_GPIO_WritePin(GPIOD, pattern[i], GPIO_PIN_RESET);
-				osDelay(150);
-			}
-		}
+		initsplat();
 #endif
 
 		HAL_TIM_Base_Start_IT(&htim6);		// basic packet timestamp 32 bits

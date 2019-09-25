@@ -89,6 +89,8 @@
 #define LWIP_DHCP 1
 /*----- Value in opt.h for LWIP_DNS: 0 -----*/
 #define LWIP_DNS 1
+/*----- Default Value for LWIP_TCPIP_CORE_LOCKING: 0 ---*/
+#define LWIP_TCPIP_CORE_LOCKING 1
 /*----- Value in opt.h for MEM_ALIGNMENT: 1 -----*/
 #define MEM_ALIGNMENT 4
 /*----- Default Value for MEM_SIZE: 1600 ---*/
@@ -157,12 +159,12 @@
 #define LWIP_HTTPD_SSI 1
 /*----- Default Value for LWIP_HTTPD_SUPPORT_POST: 0 ---*/
 #define LWIP_HTTPD_SUPPORT_POST 1
-/*----- Default Value for LWIP_HTTPD_DYNAMIC_HEADERS: 0 ---*/
-#define LWIP_HTTPD_DYNAMIC_HEADERS 1
 /*----- Default Value for LWIP_HTTPD_SUPPORT_EXTSTATUS: 0 ---*/
 #define LWIP_HTTPD_SUPPORT_EXTSTATUS 1
 /*----- Default Value for LWIP_HTTPD_SUPPORT_11_KEEPALIVE: 0 ---*/
 #define LWIP_HTTPD_SUPPORT_11_KEEPALIVE 1
+/*----- Default Value for LWIP_HTTPD_SSI_INCLUDE_TAG: 1 ---*/
+#define LWIP_HTTPD_SSI_INCLUDE_TAG 0
 /*----- Default Value for LWIP_HTTPD_ABORT_ON_CLOSE_MEM_ERROR: 0 ---*/
 #define LWIP_HTTPD_ABORT_ON_CLOSE_MEM_ERROR 1
 /*----- Value in opt.h for HTTPD_USE_CUSTOM_FSDATA: 0 -----*/
@@ -195,7 +197,6 @@
 #define LWIP_DBG_TYPES_ON LWIP_DBG_OFF
 /*-----------------------------------------------------------------------------*/
 /* USER CODE BEGIN 1 */
-#define MEMP_OVERFLOW_CHECK 2
 #define MEMP_SANITY_CHECK 1
 /* USER CODE END 1 */
 
