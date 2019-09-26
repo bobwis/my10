@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <time.h>
 #include "main.h"
 #include "stm32f7xx_hal.h"
 #include "lwip.h"
@@ -16,19 +17,27 @@
 #include "www.h"
 #include "neo7m.h"
 #include "udpstream.h"
-#include <time.h>
+
+#include "splat1.h"
 //#include "httpd.h"
 
 extern uint32_t pressure, pressfrac, temperature, tempfrac;
+extern uint8_t pgagain;
+
 // Support functions
 
 /*--------------------------------------------------*/
 // httpd server support
 /*--------------------------------------------------*/
+
 extern I2C_HandleTypeDef hi2c1;
+
+
+// The cgi handler is called when the user changes something on the webpage
 void httpd_cgi_handler(const char *uri, int count, char **http_cgi_params,
 		char **http_cgi_param_vals) {
-	const char id[10][6] = { "led1", "sw1A", "sw1B", "sw1C", "sw1D", "sw2A", "sw2B", "sw2C", "sw2D", "butt1" };
+	const char id[14][6] = { "led1", "sw1A", "sw1B", "sw1C", "sw1D", "sw2A", "sw2B", "sw2C", "sw2D",
+			"btn", "PG2", "PG1", "PG0", "RF1" };
 
 	int i, j, val;
 	char *ptr;
@@ -67,6 +76,25 @@ void httpd_cgi_handler(const char *uri, int count, char **http_cgi_params,
 				printf("I2C HAL returned error 1\n\r");
 			}
 			break;
+		case 20:		// PGA G2
+			val = (((*http_cgi_param_vals)[i]) == '0' ? pgagain & ~4 : pgagain | 4);
+			setpgagain(val);
+			break;
+		case 21:		// PGA G1
+			val = (((*http_cgi_param_vals)[i]) == '0' ? pgagain & ~2 : pgagain | 2);
+			setpgagain(val);
+			break;
+		case 22:		// PGA G0
+			val = (((*http_cgi_param_vals)[i]) == '0' ? pgagain & ~1 : pgagain | 1);
+			setpgagain(val);
+			break;
+
+		case 23:		// RF Switch
+			if (((*http_cgi_param_vals)[i]) == '0')
+				HAL_GPIO_WritePin(GPIOE, LP_FILT_Pin, GPIO_PIN_RESET);// select RF Switches to LP filter (normal route)
+				else
+					HAL_GPIO_WritePin(GPIOE, LP_FILT_Pin, GPIO_PIN_SET);// select RF Switches to bypass LP filter
+			break;
 
 		default:
 			printf("Unknown id in cgi handler %s\n", *http_cgi_params);
@@ -89,10 +117,11 @@ void httpd_post_finished(void *connection, char *response_uri, u16_t response_ur
 	printf("httpd_post_finished: \n");
 }
 
+// this is called to process tags when constructing the webpage being sent to the user
 void http_set_ssi_handler(tSSIHandler ssi_handler, const char **tags, int num_tags);  // proto
 // embedded ssi handler
 const char *tagname[] = { "temp", "pressure", "time", "led1", "sw1A", "sw1B", "sw1C", "sw1D",
-		"sw2A", "sw2B", "sw2C", "sw2D", "butt1", (void *) NULL };
+		"sw2A", "sw2B", "sw2C", "sw2D", "butt1", "PG0", "PG1", "PG2", "RF1", (void *) NULL };
 int i, j;
 
 tSSIHandler tag_callback(int index, char *newstring, int maxlen) {
@@ -142,6 +171,18 @@ tSSIHandler tag_callback(int index, char *newstring, int maxlen) {
 		case 12:		// butt1
 			strcpy(newstring, "5");
 			break;
+		case 13:	// PG0
+			strcpy(newstring, (pgagain & 1) ? "1" : "0");
+			break;
+		case 14:	// PG1
+			strcpy(newstring, (pgagain & 2) ? "1" : "0");
+			break;
+		case 15:	// PG2
+			strcpy(newstring, (pgagain & 4) ? "1" : "0");
+			break;
+		case 16:	// RF1
+			strcpy(newstring, (HAL_GPIO_ReadPin(GPIOE, LP_FILT_Pin) ? "0" : "1"));
+			break;
 		default:
 			sprintf(newstring, "ssi_handler: bad tag index %d", index);
 			break;
@@ -188,7 +229,7 @@ void httpclient(char Page[64]) {
 	static char *Postvars = NULL;
 
 	if (remoteip.addr == 0) {
-		err = dnslookup(/*"192.168.1.102" *//* "b7.bayside.space" */"lightning.vk4ya.space", &remoteip);
+		err = dnslookup("lightning.vk4ya.space", &remoteip);
 
 		ip = remoteip.addr;
 		printf("\nHTTP Target IP: %lu.%lu.%lu.%lu\n", ip & 0xff, (ip & 0xff00) >> 8,

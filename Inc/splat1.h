@@ -10,6 +10,6 @@
 
 extern void initsplat(void);
 
-
+extern void setpgagain(int gain);
 
 #endif /* SPLAT1_H_ */
