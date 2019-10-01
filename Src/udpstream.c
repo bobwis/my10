@@ -68,9 +68,7 @@ void sendtimedstatus(struct pbuf *ps, struct udp_pcb *pcb, uint8_t batchid) {
 	static uint32_t talive = 0;
 
 #ifdef TESTING
-//	if ((t1sec != talive)) { //} && (t1sec % 2 == 0)) { // this is a temporary mech to send timed status pkts...
-		if ((t1sec != talive) && (t1sec % 20 == 0)) { // this is a temporary mech to send timed status pkts...
-
+		if ((t1sec != talive) && (t1sec % 2 == 0)) { // this is a temporary mech to send timed status pkts...
 		talive = t1sec;
 
 #else

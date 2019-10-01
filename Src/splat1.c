@@ -188,11 +188,10 @@ void getpressure(void) {
 
 			pressure = dataout[0] << 10 | dataout[1] << 2 | (dataout[2] & 0xC0) >> 6;
 			pressfrac = ((dataout[2] & 0x30) >> 4) * 25;
-
-			printf("\npressure = %d.%d  ", pressure, pressfrac);
+//			printf("\npressure = %d.%d  ", pressure, pressfrac);
 			temperature = dataout[3];
 			tempfrac = ((dataout[4] >> 4) * 625) / 1000;
-			printf("temp = %d.%d\n", temperature, tempfrac);
+//			printf("temp = %d.%d\n", temperature, tempfrac);
 			break;
 		} 		// if data  ready
 		else {

@@ -1733,7 +1733,7 @@ void StartDefaultTask(void const * argument) {
 		i = 0;
 		dhcp = netif_dhcp_data(netif);		// do not call this too early
 		printf("DHCP in progress..\n");
-		while ((dhcp->state != DHCP_STATE_BOUND) && (i < 10)) {
+		while ((dhcp->state != DHCP_STATE_BOUND)) {
 			printf("Waiting %d for DHCP...\n", i);
 			osDelay(2000);
 			i++;
@@ -1850,12 +1850,16 @@ void StarLPTask(void const * argument) {
 		}
 		trigs = statuspkt.trigcount;
 
-	}
 	if (debugtimer > 30000) {
 		debugtimer = 0;
 		stats_display();
-		printf("triggers=%04d  ------------------------------------------- %s", trigs,
-				ctime(&epochtime));
+#ifdef SPLAT1
+		getpressure();
+		printf("triggers=%04d, pressure = %d.%02d, temp = %02d.%02d, %s",trigs,pressure, pressfrac, temperature, tempfrac, ctime(&epochtime));
+#else
+		printf("triggers=%04d,    ------------------------------------------- %s", trigs,ctime(&epochtime));
+#endif
+	}
 	}
 /* USER CODE END StarLPTask */
 }

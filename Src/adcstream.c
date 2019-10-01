@@ -9,11 +9,13 @@
 #include <math.h>
 #include "stm32f7xx_hal.h"
 #include "adcstream.h"
+#include "version.h"
 #include "main.h"
 #include "mydebug.h"
 #include "FreeRTOS.h"
 #include "task.h"
 #include "neo7m.h"
+
 
 HAL_StatusTypeDef adcstat;
 
@@ -359,7 +361,9 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)// adc conversion done (DM
 	} // end for i
 
 	if (sigsend) {
+#ifndef SPLAT1
 		HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_SET);	// blue led
+#endif
 		if (sigprev == 0)		// no trigger last time, so this is a new event
 			adcbatchid++;		// start a new adc batch number
 		sigprev = 1;	// remember this trigger for next packet
@@ -371,16 +375,24 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)// adc conversion done (DM
 			sendendstatus = 1;	// so tell udpstream to send the end of sequence status packet
 		}
 		sigprev = 0;
+#ifndef SPLAT1
 		HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);	// blue led
+#endif
 	}
 
 	if (ledhang) {		// this could be moved to the low priority process
 		ledhang--;
-		HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_SET);		// red led on
+#ifdef SPLAT1
+		HAL_GPIO_WritePin(GPIOD, LED_D5_Pin, GPIO_PIN_SET);		// Splat D5 led on
 	} else {
-		HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_RESET);	 // red led off
+		HAL_GPIO_WritePin(GPIOD, LED_D5_Pin, GPIO_PIN_RESET);	 // Splat D5 led off
 	}
-
+#else
+		HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_SET);		// onboard red led on
+	} else {
+		HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_RESET);	 // onboard red led off
+	}
+#endif
 	globaladcnoise = meanwindiff;
 	if (globaladcnoise == 0)
 		globaladcnoise = statuspkt.adcbase;		// dont allow zero peaks

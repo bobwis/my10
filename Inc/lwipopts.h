@@ -34,9 +34,9 @@
 
 #define LWIP_PLATFORM_DIAG(x) do {printf x;} while(0)
 
-#if 0
+#if 1
 #define LWIP_DEBUG 0
-#define LWIP_STATS 0
+#define LWIP_STATS 1
 #define LWIP_DBG_TRACE
 
 
@@ -96,7 +96,7 @@
 /*----- Default Value for MEM_SIZE: 1600 ---*/
 #define MEM_SIZE 12000
 /*----- Default Value for MEMP_OVERFLOW_CHECK: 0 ---*/
-#define MEMP_OVERFLOW_CHECK 2
+#define MEMP_OVERFLOW_CHECK 1
 /*----- Default Value for MEMP_SANITY_CHECK: 0 ---*/
 #define MEMP_SANITY_CHECK 1
 /*----- Default Value for MEMP_NUM_TCP_PCB_LISTEN: 8 ---*/
