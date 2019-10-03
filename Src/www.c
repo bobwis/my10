@@ -118,13 +118,18 @@ void httpd_post_finished(void *connection, char *response_uri, u16_t response_ur
 }
 
 // this is called to process tags when constructing the webpage being sent to the user
-void http_set_ssi_handler(tSSIHandler ssi_handler, const char **tags, int num_tags);  // proto
+void http_set_ssi_handler(tSSIHandler ssi_handler, const char **tags, int num_tags);  // prototype
+
+
 // embedded ssi handler
 const char *tagname[] = { "temp", "pressure", "time", "led1", "sw1A", "sw1B", "sw1C", "sw1D",
 		"sw2A", "sw2B", "sw2C", "sw2D", "butt1", "PG0", "PG1", "PG2", "RF1", (void *) NULL };
 int i, j;
 
-tSSIHandler tag_callback(int index, char *newstring, int maxlen) {
+// the tag callback handler
+tSSIHandler tag_callback(int index, char *newstring, int maxlen)
+{
+//  LOCK_TCPIP_CORE();
 
 //		printf("tSSIHandler: index=0x%x, newstring=%s, maxlen=%d\n",index,newstring,maxlen);
 
@@ -188,6 +193,7 @@ tSSIHandler tag_callback(int index, char *newstring, int maxlen) {
 			break;
 		}
 //		sprintf(newstring,"index=%d",index);
+//  UNLOCK_TCPIP_CORE();
 	return (strlen(newstring));
 }
 
@@ -208,8 +214,7 @@ void returnpage(volatile u8_t Num, volatile hc_errormsg errorm, volatile char *c
 	volatile uint32_t sn;
 
 	if (errorm == 0) {
-		printf("returnpage: Num=%d, errorm=%d, charcount=%d, content=%s\n", Num, errorm, charcount,
-				content);
+//		printf("returnpage: Num=%d, errorm=%d, charcount=%d, content=%s\n", Num, errorm, charcount,	content);
 		if (sscanf(content, "%5u", &sn) == 1) {		// converted a number
 			statuspkt.uid = sn;
 			printf("A response from Server -> Serial Number Changed to %lu\n", statuspkt.uid);

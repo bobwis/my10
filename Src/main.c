@@ -1669,6 +1669,7 @@ void StartDefaultTask(void const * argument) {
 		struct dhcp *dhcp;
 		int i;
 		uint16_t dacdata[64];
+		char stmuid[64] = { 0 };
 
 		MX_LWIP_Init();
 
@@ -1757,6 +1758,23 @@ void StartDefaultTask(void const * argument) {
 				(myip & 0xFF0000) >> 16, (myip & 0xFF000000) >> 24);
 		printf("*****************************************\n");
 
+// start the web stuff
+	sprintf(stmuid, "api/Device/%lx%lx%lx", STM32_UUID[0], STM32_UUID[1], STM32_UUID[2]);
+	i = 1;
+	while (statuspkt.uid == MY_UID)		// not yet found new S/N from server
+	{
+		printf("Try to get new S/N using http client. Try=%d\n", i++);
+		httpclient(stmuid);
+		osDelay(5000);
+		//stats_display() ; // this needs stats in LwIP enabling to do anything
+	}
+
+	osDelay(5000);
+	printf("starting httpd\n");
+	httpd_init();		// start the www server
+	init_httpd_ssi();	// set up the embedded tag handler
+
+
 // tim7 drives DAC
 #if 1
 		for (i = 0; i < sizeof(dacdata) >> 1; i++) {
@@ -1777,7 +1795,8 @@ void StartDefaultTask(void const * argument) {
 		while (lptask_init_done == 0)
 			osDelay(100);		// hold off starting udp railgun until LPtask has initalised
 		while (1) {	//
-			startudp();		// never returns?
+			startudp();		// should never return
+			osDelay(1);
 		}
 	}
 	/* USER CODE END 5 */
@@ -1797,7 +1816,6 @@ void StarLPTask(void const * argument) {
 	uint32_t reqtimer = 8000;
 	uint32_t debugtimer = 0;
 	int i, counter = 0;
-	char stmuid[64] = { 0 };
 
 	statuspkt.adcudpover = 0;		// debug use count overruns
 	statuspkt.trigcount = 0;		// debug use adc trigger count
@@ -1806,27 +1824,11 @@ void StarLPTask(void const * argument) {
 	while (main_init_done == 0)		// wait from main to complete the initilisation
 		osDelay(100);
 
-	sprintf(stmuid, "api/Device/%lx%lx%lx", STM32_UUID[0], STM32_UUID[1], STM32_UUID[2]);
-	i = 1;
-	while (statuspkt.uid == MY_UID)		// not yet found new S/N from server
-	{
-		printf("Try to get new S/N using http client. Try=%d\n", i++);
-		httpclient(stmuid);
-		osDelay(5000);
-		//stats_display() ; // this needs stats in LwIP enabling to do anything
-	}
-
-	osDelay(5000);
-	printf("starting httpd\n");
-	httpd_init();		// start the www server
-	init_httpd_ssi();	// set up the embedded tag handler
-
-	tcp_tmr();
 	lptask_init_done = 1;
 
 	for (;;) {
 		osDelay(1);
-		tcp_tmr();
+//		tcp_tmr();
 		reqtimer++;
 		debugtimer++;
 

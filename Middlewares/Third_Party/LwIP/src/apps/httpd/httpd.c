@@ -480,7 +480,7 @@ http_state_eof(struct http_state *hs)
   }
 #if LWIP_HTTPD_DYNAMIC_FILE_READ
   if (hs->buf != NULL) {
-    mem_free(hs->buf);
+    mem_free_callback(hs->buf);
     hs->buf = NULL;
   }
 #endif /* LWIP_HTTPD_DYNAMIC_FILE_READ */
@@ -492,7 +492,7 @@ http_state_eof(struct http_state *hs)
 #endif /* LWIP_HTTPD_SSI */
 #if LWIP_HTTPD_SUPPORT_REQUESTLIST
   if (hs->req) {
-    pbuf_free(hs->req);
+    pbuf_free_callback(hs->req);
     hs->req = NULL;
   }
 #endif /* LWIP_HTTPD_SUPPORT_REQUESTLIST */
@@ -2444,7 +2444,7 @@ http_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
     if (p != NULL) {
       /* Inform TCP that we have taken the data. */
       tcp_recved(pcb, p->tot_len);
-      pbuf_free(p);
+      pbuf_free_callback(p);
     }
     if (hs == NULL) {
       /* this should not happen, only to be robust */
@@ -2487,12 +2487,12 @@ http_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
       if (parsed != ERR_INPROGRESS) {
         /* request fully parsed or error */
         if (hs->req != NULL) {
-          pbuf_free(hs->req);
+          pbuf_free_callback(hs->req);
           hs->req = NULL;
         }
       }
 #endif /* LWIP_HTTPD_SUPPORT_REQUESTLIST */
-      pbuf_free(p);
+      pbuf_free_callback(p);
       if (parsed == ERR_OK) {
 #if LWIP_HTTPD_SUPPORT_POST
        if (hs->post_content_len_left == 0)
@@ -2508,7 +2508,7 @@ http_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
     } else {
       LWIP_DEBUGF(HTTPD_DEBUG, ("http_recv: already sending data\n"));
       /* already sending but still receiving data, we might want to RST here? */
-      pbuf_free(p);
+      pbuf_free_callback(p);
     }
   }
   return ERR_OK;

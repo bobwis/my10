@@ -28,7 +28,8 @@ void myudp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p,
 		/* send received packet back to sender */
 		udp_sendto(pcb, p, addr, port);
 		/* free the pbuf */
-		pbuf_free(p);
+// zzz		pbuf_free(p);
+		pbuf_free_callback(p);
 	}
 }
 
