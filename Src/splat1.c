@@ -46,6 +46,7 @@ uint16_t pgagain = 0x4001;  // initial gain set
 
 // dual mux
 uint8_t muxdat[] = { 1 };		// sw1A (AMPout -> ADC)
+uint32_t logampmode = 0;	// log amp mode flag
 
 //////////////////////////////////////////////
 //

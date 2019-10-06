@@ -13,4 +13,6 @@ extern void initsplat(void);
 extern void setpgagain(int gain);
 extern uint32_t pressure, pressfrac, temperature, tempfrac;
 
+extern uint32_t logampmode;
+
 #endif /* SPLAT1_H_ */

@@ -19,6 +19,7 @@
 #include "udpstream.h"
 
 #include "splat1.h"
+#include "adcstream.h"
 //#include "httpd.h"
 
 extern uint32_t pressure, pressfrac, temperature, tempfrac;
@@ -71,6 +72,7 @@ void httpd_cgi_handler(const char *uri, int count, char **http_cgi_params,
 			} else {
 				muxdat[0] = muxdat[0] | (1 << (j - 1));
 			}
+			logampmode = muxdat[0] & 2;
 			printf("setting outmux to 0x%02x\n", muxdat[0]);
 			if (HAL_I2C_Master_Transmit(&hi2c1, 0x44 << 1, &muxdat[0], 1, 1000) != HAL_OK) {// RF dual MUX
 				printf("I2C HAL returned error 1\n\r");
@@ -90,7 +92,7 @@ void httpd_cgi_handler(const char *uri, int count, char **http_cgi_params,
 			break;
 
 		case 23:		// RF Switch
-			if (((*http_cgi_param_vals)[i]) == '0')
+			if (((*http_cgi_param_vals)[i]) == '1')
 				HAL_GPIO_WritePin(GPIOE, LP_FILT_Pin, GPIO_PIN_RESET);// select RF Switches to LP filter (normal route)
 				else
 					HAL_GPIO_WritePin(GPIOE, LP_FILT_Pin, GPIO_PIN_SET);// select RF Switches to bypass LP filter
