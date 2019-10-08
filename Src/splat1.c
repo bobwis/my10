@@ -29,6 +29,7 @@
 #include "adcstream.h"
 #include "main.h"
 #include <time.h>
+#include <float.h>
 
 #ifdef SPLAT1
 
@@ -39,6 +40,9 @@ extern I2C_HandleTypeDef hi2c1;
 
 // globs for pressure sensor results
 uint32_t pressure, pressfrac, temperature, tempfrac;
+
+// MPL115A2 (cheapo pressure sensor compensation coeficients)
+static double a0, b1, b2, c12;
 
 // SPI based PGA
 const uint16_t spicmdchan[] = { 0x4100 };	// set chan reg 0
@@ -53,7 +57,8 @@ uint32_t logampmode = 0;	// log amp mode flag
 // Initialise and test the LEDS by cycling them
 //
 //////////////////////////////////////////////
-void cycleleds(void) {
+void cycleleds(void)
+{
 	const uint16_t pattern[] = {
 	LED_D1_Pin,
 	LED_D1_Pin | LED_D2_Pin,
@@ -89,8 +94,6 @@ void initrfswtch(void)
 	HAL_GPIO_WritePin(GPIOE, LP_FILT_Pin, GPIO_PIN_RESET);// select RF Switches to LP filter (normal route)
 }
 
-
-
 //////////////////////////////////////////////
 //
 // Set the Programmable Gain Amplifier GAIN
@@ -98,27 +101,26 @@ void initrfswtch(void)
 //////////////////////////////////////////////
 void setpgagain(int gain)
 {
-	  osDelay(5);
-		HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);	// deselect the PGA
-		osDelay(5);
-		HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_RESET);	// select the PGA
-		osDelay(5);
-		pgagain = 0x4000 | (gain & 0x07);
-		HAL_SPI_Transmit(&hspi2, &pgagain, 1, 1000);	// select gain
-		osDelay(5);
-		HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);	// deselect the PGA
+	osDelay(5);
+	HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);	// deselect the PGA
+	osDelay(5);
+	HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_RESET);	// select the PGA
+	osDelay(5);
+	pgagain = 0x4000 | (gain & 0x07);
+	HAL_SPI_Transmit(&hspi2, &pgagain, 1, 1000);	// select gain
+	osDelay(5);
+	HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);	// deselect the PGA
 }
-
 
 //////////////////////////////////////////////
 //
 // Initialise the Programmable Gain Amplifier MCP6S93
 //
 //////////////////////////////////////////////
-void initpga() {
+void initpga()
+{
 	// init spi based single ended PG Amp
 	HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);	// deselect the PGA
-
 
 	HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_RESET);	// reset the PGA seq
 	osDelay(50);
@@ -152,7 +154,8 @@ void initpga() {
 // Initialise the dual mux ADG729
 //
 //////////////////////////////////////////////
-void initdualmux(void) {
+void initdualmux(void)
+{
 	//HAL_I2C_Master_Transmit(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 
 	if (HAL_I2C_Master_Transmit(&hi2c1, 0x44 << 1, &muxdat[0], 1, 1000) != HAL_OK) {	// RF dual MUX
@@ -165,23 +168,27 @@ void initdualmux(void) {
 // get the pressure and put in globals
 //
 //////////////////////////////////////////////
-void getpressure(void) {
+void getpressure315(void)
+{
 	uint8_t data[8], dataout[8];
 	int i;
+	HAL_StatusTypeDef result;
 
 	data[0] = 0x55;
 	while (1) {
 
-		if (HAL_I2C_Mem_Read(&hi2c1, 0x60 << 1, 0, 1, &data[0], 1, 1000) != HAL_OK) {	// rd status reg pressure sense
-			printf("I2C HAL returned error 5\n\r");
+		result = HAL_I2C_Mem_Read(&hi2c1, 0x60 << 1, 0, 1, &data[0], 1, 1000);// rd status reg pressure sense
+		if (result != HAL_OK) {
+			printf("Splat1-1 I2C HAL returned error %d\n\r", result);
 			return;
 		}
 //		printf("Press stat: 0x%0x\n", data[0]);
 
 		if (data[0] & 0x08) {		// data ready
 			for (i = 1; i < 6; i++) {
-				if (HAL_I2C_Mem_Read(&hi2c1, 0x60 << 1, i, 1, &data[0], 1, 1000) != HAL_OK) {	// rd status reg pressure sense
-					printf("I2C HAL returned error 6+\n\r");
+				HAL_I2C_Mem_Read(&hi2c1, 0x60 << 1, i, 1, &data[0], 1, 1000);	// rd status reg pressure sense
+				if (result != HAL_OK) {
+					printf("Splat1-2 I2C HAL returned error %d\n\r", result);
 				}
 				dataout[i - 1] = data[0];
 //				printf("[0x%02x] ", data[0]);
@@ -201,7 +208,109 @@ void getpressure(void) {
 	} // while 1
 }
 
-void initpressure(void) {
+
+// 115 pressure sensor
+void getpressure115(void)
+{
+	uint8_t data[8], dataout[8];
+	int i;
+	HAL_StatusTypeDef result;
+	double p, t;
+	uint16_t pr, tr;
+
+	if (HAL_I2C_Master_Transmit(&hi2c1, 0x60 << 1, (uint8_t[] ) { 0x12, 0x00 }, 2, 1000) != HAL_OK) {	// CMD Start Conversion
+		printf("I2C 115 HAL returned error 7\n\r");
+	}
+	osDelay(4);		// conversion time max 3mS
+
+	if (HAL_I2C_Master_Transmit(&hi2c1, 0x60 << 1, (uint8_t[] ) { 0x00 }, 1, 1000) != HAL_OK) {	// CMD Read press etc
+		printf("I2C 115 HAL returned error 8\n\r");
+	}
+
+	if (HAL_I2C_Master_Receive(&hi2c1, (0x60 << 1) | 0x01, data, 4, 1000) != HAL_OK) {	// press and temp
+		printf("I2C 115 HAL returned error 9\n\r");
+	}
+#if 0
+	printf("Pressure, Temp: ");
+	for (i=0; i<4; i++)
+	{
+		printf(" %x",data[i]);
+	}
+	printf("\n");
+#endif
+	pr = (data[0] << 2) | ((data[1] & 0xc0) >> 6);
+	tr = (data[2] << 2) | ((data[3] & 0xc0) >> 6);
+
+//	pr = pr >> 6;
+//	tr = tr >> 6;
+
+//pr = 410;
+//	tr = 507;
+//a0 = 2009.75; b1 = -2.37585; b2 = -0.92047; c12 = 0.000790;
+
+//	printf("Raw: Press=%d, Temp=%d\n",pr,tr);
+
+	p = pr;
+	t = tr;
+
+// Pcomp = a0 + (b1 + c12 x Tadc) x Padc + b2 x Tadc
+
+	p = (a0 + ((b1 + (c12 * t)) * p)) + (b2 * t);
+//	printf("Comp: Press = %f\n",p);
+
+	p = (p * ((115.0-50.0) / 1023.0)) + 50.0;
+//	printf("kPA Press = %f\n",p);
+
+//	pr = p;
+	pressure = 0;;
+	pressfrac = 0;
+//			printf("\npressure = %d.%d  ", pressure, pressfrac);
+	temperature = 0;
+	tempfrac = 0;
+}
+
+
+// the cheap pressure sensor
+void initpressure115(void)
+{
+	uint8_t data[8];
+	int16_t wdata[4];
+	int16_t a0co, b1co, b2co, c12co;
+
+	int i;
+
+	for (i=0; i<8; i++)
+		data[i] = 0x55;
+
+	if (HAL_I2C_Master_Transmit(&hi2c1, 0x60 << 1, (uint8_t[] ) { 0x04 }, 1, 1000) != HAL_OK) {	// CMD Read “Coefficient data byte 1 High byte” = 0x04
+		printf("I2C 115 HAL returned error 5\n\r");
+	}
+
+	if (HAL_I2C_Master_Receive(&hi2c1, (0x60 << 1) | 0x01, data, 8, 1000) != HAL_OK) {	// Coefficient data byte 1 High byte
+		printf("I2C 115 HAL returned error 6\n\r");
+	}
+		else {
+			a0co = (data[0] << 8) | data[1];
+			b1co = (data[2] << 8) | data[3];
+			b2co = (data[4] << 8) | data[5];
+			c12co = ((data[6] << 8) | data[7]) >> 2;
+
+//			a0co = 0x3ECE ; b1co = 0xB3F9; b2co = 0xC517; c12co = 0x33C8;
+
+//			printf("a0=%d, b1=%d, b2=%d, c12=%d\n",a0co,b1co,b2co,c12co);
+
+			a0 = (double)a0co  / (double)(1 << 3);
+			b1 = (double)b1co  / (double)(1 << 13);
+			b2 = (double)b2co  / (double)(1 << 14);
+			c12 = (double)c12co  / (double)(1 << 24);
+
+//			printf("a0=%f, b1=%f, b2=%f, c12=%f\n",a0,b1,b2,c12);
+		}
+	getpressure115();
+}
+
+void initpressure315(void)
+{
 
 	//HAL_I2C_Master_Transmit(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 
@@ -215,7 +324,7 @@ void initpressure(void) {
 		printf("I2C HAL returned error 4\n\r");
 	}
 
-	getpressure();
+	getpressure315();
 }
 
 //////////////////////////////////////////////
@@ -223,13 +332,15 @@ void initpressure(void) {
 // Initialise the splat board
 //
 //////////////////////////////////////////////
-void initsplat(void) {
+void initsplat(void)
+{
 	int i, j, k;
 
 	cycleleds();
 	initdualmux();
 	initpga();
-	initpressure();
+//	initpressure315();
+	initpressure115();
 	osDelay(500);
 }
 #endif

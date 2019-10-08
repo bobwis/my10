@@ -1856,7 +1856,7 @@ void StarLPTask(void const * argument) {
 		debugtimer = 0;
 		stats_display();
 #ifdef SPLAT1
-		getpressure();
+		getpressure115();
 		printf("triggers=%04d, pressure = %d.%02d, temp = %02d.%02d, %s",trigs,pressure, pressfrac, temperature, tempfrac, ctime(&epochtime));
 #else
 		printf("triggers=%04d,    ------------------------------------------- %s", trigs,ctime(&epochtime));
