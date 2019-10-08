@@ -23,13 +23,15 @@
 #include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
+#include <float.h>
+#include <math.h>
 #include "stm32f7xx_hal.h"
 #include "version.h"
 #include "neo7m.h"
 #include "adcstream.h"
 #include "main.h"
 #include <time.h>
-#include <float.h>
+
 
 #ifdef SPLAT1
 
@@ -262,7 +264,7 @@ void getpressure115(void)
 //	printf("kPA Press = %f\n",p);
 
 //	pr = p;
-	pressure = 0;;
+	pressure = floor(p);
 	pressfrac = 0;
 //			printf("\npressure = %d.%d  ", pressure, pressfrac);
 	temperature = 0;
