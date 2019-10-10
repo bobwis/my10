@@ -22,9 +22,20 @@
 #endif
 
 #ifdef TESTING
-#define MY_UID 1004	// 16 bits  "serial number" of the lightning detector
+#define MY_UID 1002	// 16 bits  "serial number" of the lightning detector
 #else
 #define MY_UID 1001	// 16 bits  "serial number" of the lightning detector
 #endif
 
+#ifdef SPLAT1
+// Pressures sensor type fitted
+#if 0
+#define MPL115A2
+#endif
+
+#if 0
+#define MPL3115A2
+#endif
+
+#endif	/* SPLAT1 */
 #endif /* VERSION_H_ */

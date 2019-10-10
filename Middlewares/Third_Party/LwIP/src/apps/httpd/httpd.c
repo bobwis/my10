@@ -480,7 +480,7 @@ http_state_eof(struct http_state *hs)
   }
 #if LWIP_HTTPD_DYNAMIC_FILE_READ
   if (hs->buf != NULL) {
-    mem_free_callback(hs->buf);
+    mem_free(hs->buf);
     hs->buf = NULL;
   }
 #endif /* LWIP_HTTPD_DYNAMIC_FILE_READ */

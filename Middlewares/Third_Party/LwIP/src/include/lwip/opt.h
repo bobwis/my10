@@ -443,7 +443,7 @@
  * (only needed if you use the sequential API, like api_lib.c)
  */
 #if !defined MEMP_NUM_NETBUF || defined __DOXYGEN__
-#define MEMP_NUM_NETBUF                 32 /* 2 */
+#define MEMP_NUM_NETBUF                 2
 #endif
 
 /**
@@ -451,7 +451,7 @@
  * (only needed if you use the sequential API, like api_lib.c)
  */
 #if !defined MEMP_NUM_NETCONN || defined __DOXYGEN__
-#define MEMP_NUM_NETCONN                8 /* 4 */
+#define MEMP_NUM_NETCONN                4
 #endif
 
 /**
@@ -460,7 +460,7 @@
  * (only needed if you use tcpip.c)
  */
 #if !defined MEMP_NUM_TCPIP_MSG_API || defined __DOXYGEN__
-#define MEMP_NUM_TCPIP_MSG_API          16 /* 8 */
+#define MEMP_NUM_TCPIP_MSG_API          8
 #endif
 
 /**

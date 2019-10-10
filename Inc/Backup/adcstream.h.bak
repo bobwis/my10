@@ -16,7 +16,7 @@
 #define ADCBUFHEAD 16
 #define ADCBUFSIZE (UDPBUFSIZE-ADCBUFHEAD)
 
-#define TRIG_THRES 120			// adc trigger level above avg noise (should be calculated, not fixed)
+#define TRIG_THRES 1000			// adc trigger level above avg noise (is calculated when running, not fixed)
 
 typedef uint32_t adcbuffer[ADCBUFSIZE/2];
 typedef uint16_t adc16buffer[ADCBUFSIZE];
@@ -44,6 +44,7 @@ extern unsigned int dmabufno;
 
 extern unsigned int sigprev;		// number of streams let after adc thresh exceeded
 volatile extern unsigned int sigsend;	// flag to tell udp to send sample packet
+extern uint16_t trigthresh;	// dynamic trigger threshold
 
 extern uint32_t globaladcavg;		// adc global average level over 100-200msec
 extern uint32_t t2avg;				// cpu clock trim variable

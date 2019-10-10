@@ -318,7 +318,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)	// adc conversion done (D
 
 	BaseType_t xHigherPriorityTaskWoken = pdFALSE;
 	timestamp = TIM2->CNT;			// real time
-	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_11 /*PB11*/);		// debug pin
+//	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_11 /*PB11*/);		// debug pin
 
 	if (dmabufno == 1) {		// second buffer is ready
 		buf = &((*pktbuf)[(UDPBUFSIZE / 4)]);

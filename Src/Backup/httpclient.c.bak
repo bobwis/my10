@@ -81,7 +81,8 @@ err_t hc_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
 		while(p != NULL)
 		{
 			temp_p = p->next;
-			pbuf_free(p);
+			pbuf_free_callback(p);
+//	zzz		pbuf_free(p);
 			p = temp_p;
 		}
 

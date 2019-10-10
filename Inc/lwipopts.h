@@ -90,17 +90,17 @@
 /*----- Value in opt.h for LWIP_DNS: 0 -----*/
 #define LWIP_DNS 1
 /*----- Default Value for LWIP_TCPIP_CORE_LOCKING: 0 ---*/
-#define LWIP_TCPIP_CORE_LOCKING 0
+#define LWIP_TCPIP_CORE_LOCKING 1
 /*----- Value in opt.h for MEM_ALIGNMENT: 1 -----*/
 #define MEM_ALIGNMENT 4
 /*----- Default Value for MEM_SIZE: 1600 ---*/
 #define MEM_SIZE 12000
 /*----- Default Value for MEMP_OVERFLOW_CHECK: 0 ---*/
-#define MEMP_OVERFLOW_CHECK 1
+#define MEMP_OVERFLOW_CHECK 2
 /*----- Default Value for MEMP_SANITY_CHECK: 0 ---*/
 #define MEMP_SANITY_CHECK 1
 /*----- Default Value for MEMP_NUM_TCP_PCB_LISTEN: 8 ---*/
-#define MEMP_NUM_TCP_PCB_LISTEN 32
+#define MEMP_NUM_TCP_PCB_LISTEN 16
 /*----- Default Value for PBUF_POOL_SIZE: 16 ---*/
 #define PBUF_POOL_SIZE 32
 /*----- Default Value for ARP_TABLE_SIZE: 10 ---*/
