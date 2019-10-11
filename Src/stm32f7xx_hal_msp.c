@@ -362,14 +362,14 @@ void HAL_DAC_MspInit(DAC_HandleTypeDef* hdac)
     hdma_dac1.Init.Direction = DMA_MEMORY_TO_PERIPH;
     hdma_dac1.Init.PeriphInc = DMA_PINC_DISABLE;
     hdma_dac1.Init.MemInc = DMA_MINC_ENABLE;
-    hdma_dac1.Init.PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD;
-    hdma_dac1.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
-    hdma_dac1.Init.Mode = DMA_CIRCULAR;
+    hdma_dac1.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+    hdma_dac1.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+    hdma_dac1.Init.Mode = DMA_NORMAL;
     hdma_dac1.Init.Priority = DMA_PRIORITY_LOW;
     hdma_dac1.Init.FIFOMode = DMA_FIFOMODE_ENABLE;
     hdma_dac1.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_3QUARTERSFULL;
-    hdma_dac1.Init.MemBurst = DMA_MBURST_SINGLE;
-    hdma_dac1.Init.PeriphBurst = DMA_PBURST_INC4;
+    hdma_dac1.Init.MemBurst = DMA_MBURST_INC4;
+    hdma_dac1.Init.PeriphBurst = DMA_PBURST_SINGLE;
     if (HAL_DMA_Init(&hdma_dac1) != HAL_OK)
     {
       Error_Handler();

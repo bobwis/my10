@@ -53,7 +53,7 @@ const uint16_t spicmdchan[] = { 0x4100 };	// set chan reg 0
 uint16_t pgagain = 0x4001;  // initial gain set
 
 // dual mux
-uint8_t muxdat[] = { 1 };		// sw1A (AMPout -> ADC)
+uint8_t muxdat[] = { 0x81 };		// sw1A (AMPout -> ADC) sw2D (DAC->Spker)
 uint32_t logampmode = 0;	// log amp mode flag
 
 //////////////////////////////////////////////
