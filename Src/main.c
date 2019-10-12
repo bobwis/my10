@@ -210,6 +210,9 @@ uint32_t t1sec = 0;
 extern uint32_t t2cap[1];
 int main_init_done = 0;
 int lptask_init_done = 0;
+char trigtimestr[32] = {"No Triggers"};
+char nowtimestr[32] = {"No Time"};
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -1882,8 +1885,7 @@ void StartDefaultTask(void const * argument)
 		osDelay(100);
 
 		printf("\n\n--------------------------\nDetector S/N=%d\n", MY_UID);
-		printf("STM_UUID=%lx %lx %lx\n", STM32_UUID[0], STM32_UUID[1],
-		STM32_UUID[2]);
+		printf("STM_UUID=%lx %lx %lx\n", STM32_UUID[0], STM32_UUID[1],STM32_UUID[2]);
 
 #ifdef TESTING
 		printf("*** TESTING BUILD USED ***\n");
@@ -2038,17 +2040,21 @@ void StarLPTask(void const * argument)
 //			HAL_TIM_OC_Start (&htim4, TIM_CHANNEL_3);		// start audio buzz - broken on splat 1
 ///			HAL_TIM_Base_Start(&htim7);	// audio synth sampling interval timer
 			HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, phaser_wav, sizeof(phaser_wav), DAC_ALIGN_8B_R /*DAC_ALIGN_12B_R*/);
+			strcpy(trigtimestr, ctime(&epochtime));
+			trigtimestr[strlen(trigtimestr)-1] = '\0';	// replace newline with terminator
 		}
 
-/*
+
 		if (debugtimer % 1000 == 0) {
-			HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, phaser_wav, sizeof(phaser_wav),	DAC_ALIGN_8B_R);
+			char s[32];
+			strcpy(s, ctime(&epochtime));
+			s[strlen(s)-1] = '\0';	// replace newline with terminator
+			sprintf(nowtimestr,"\"%s\"",s);
 		}
-*/
+
 		if (debugtimer > 30000) {
 			debugtimer = 0;
-			stats_display();
-
+//			stats_display();
 #ifdef SPLAT1
 #ifdef MPL115A2
 		getpressure115();

@@ -37,6 +37,7 @@ extern UART_HandleTypeDef huart6;
 
 struct tm now;		// gps time updated every second
 time_t epochtime;	// gps time updated every second
+time_t last_trig_time = 0;	// last trigger time (to one second)
 
 
 static const unsigned char UBXGPS_HEADER[] = { 0xB5, 0x62, 0x01, 0x07 };

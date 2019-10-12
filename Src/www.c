@@ -17,7 +17,6 @@
 #include "www.h"
 #include "neo7m.h"
 #include "udpstream.h"
-
 #include "splat1.h"
 #include "adcstream.h"
 //#include "httpd.h"
@@ -121,11 +120,9 @@ void httpd_post_finished(void *connection, char *response_uri, u16_t response_ur
 
 // this is called to process tags when constructing the webpage being sent to the user
 void http_set_ssi_handler(tSSIHandler ssi_handler, const char **tags, int num_tags);  // prototype
-
-
 // embedded ssi handler
-const char *tagname[] = { "temp", "pressure", "time", "led1", "sw1A", "sw1B", "sw1C", "sw1D",
-		"sw2A", "sw2B", "sw2C", "sw2D", "butt1", "PG0", "PG1", "PG2", "RF1", (void *) NULL };
+const char *tagname[] = {  "temp", "pressure", "time", "led1", "sw1A", "sw1B", "sw1C", "sw1D",
+		"sw2A", "sw2B", "sw2C", "sw2D", "butt1", "PG0", "PG1", "PG2", "RF1", "devid", "detinfo", (void *) NULL };
 int i, j;
 
 // the tag callback handler
@@ -152,22 +149,7 @@ tSSIHandler tag_callback(int index, char *newstring, int maxlen)
 			sprintf(newstring, "%d.%d", pressure, pressfrac);
 			break;
 		case 2:
-#if 1
-		{
-			char timestr[32];
-			strcpy(timestr, ctime(&epochtime));
-			j = 0; 			// strlen(timestr);
-			newstring[j++] = '"';
-			for (i = 0; i < strlen(timestr); i++) {
-				if (timestr[i] == '\n') {
-					timestr[i] = ' ';
-//					newstring[j++] = '\\';
-				}
-				newstring[j++] = timestr[i];
-			} // end for
-			newstring[j] = '"';
-		} // end block
-#endif
+			strcpy(newstring,nowtimestr);
 			break;
 		case 3:			// Led1
 			if (HAL_GPIO_ReadPin(GPIOD, LED_D1_Pin) == GPIO_PIN_SET)
@@ -190,8 +172,23 @@ tSSIHandler tag_callback(int index, char *newstring, int maxlen)
 		case 16:	// RF1
 			strcpy(newstring, (HAL_GPIO_ReadPin(GPIOE, LP_FILT_Pin) ? "0" : "1"));
 			break;
+		case 17:	// Device IDs
+#ifdef TESTING
+			sprintf(newstring, "\"STM_UUID=%lx %lx %lx, Server assigned S/N=%lu, TESTING Software S/N=%d, Ver %d.%d\"",
+					STM32_UUID[0],STM32_UUID[1],STM32_UUID[2],statuspkt.uid,MY_UID,statuspkt.majorversion,statuspkt.minorversion);
+#else
+			sprintf(newstring, "\"STM_UUID=%lx %lx %lx, Server assigned S/N=%lu, Software S/N=%d, Ver %d.%d\"",
+					STM32_UUID[0],STM32_UUID[1],STM32_UUID[2],statuspkt.uid,MY_UID,statuspkt.majorversion,statuspkt.minorversion);
+#endif
+//			strcpy(newstring,"17");
+			break;
+		case 18:	// Detector Info
+			sprintf(newstring,"\"<b>Uptime</b> %d <b>secs<br><br>Last trigger</b> %s<br><br><b>Triggers</b> %d<br><br><b>Noise</b> %d<br><br><b>ADC Base</b> %d<br><br>\"",
+						statuspkt.sysuptime,trigtimestr,statuspkt.trigcount,statuspkt.adcnoise,statuspkt.adcbase);
+//			strcpy(newstring,"18");
+			break;
 		default:
-			sprintf(newstring, "ssi_handler: bad tag index %d", index);
+			sprintf(newstring, "\"ssi_handler: bad tag index %d\"", index);
 			break;
 		}
 //		sprintf(newstring,"index=%d",index);
