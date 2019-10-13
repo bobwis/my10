@@ -111,10 +111,15 @@ void setpgagain(int gain)
 	HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_RESET);	// select the PGA
 	osDelay(5);
 	pgagain = 0x4000 | (gain & 0x07);
-	HAL_SPI_Transmit(&hspi2, &pgagain, 1, 1000);	// select gain
+	if (HAL_SPI_Transmit(&hspi2, &pgagain, 1, 1000) != HAL_OK) {	// select gain
+		printf("setpgagain: SPI Error\n");
+	}
 	osDelay(5);
+//printf("PGA Gain set to %d\n",pgagain & 7);
 	HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);	// deselect the PGA
 }
+
+
 
 //////////////////////////////////////////////
 //

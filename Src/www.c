@@ -21,8 +21,6 @@
 #include "adcstream.h"
 //#include "httpd.h"
 
-extern uint32_t pressure, pressfrac, temperature, tempfrac;
-extern uint8_t pgagain;
 
 // Support functions
 
@@ -36,17 +34,18 @@ extern I2C_HandleTypeDef hi2c1;
 // The cgi handler is called when the user changes something on the webpage
 void httpd_cgi_handler(const char *uri, int count, char **http_cgi_params,
 		char **http_cgi_param_vals) {
-	const char id[14][6] = { "led1", "sw1A", "sw1B", "sw1C", "sw1D", "sw2A", "sw2B", "sw2C", "sw2D",
-			"btn", "PG2", "PG1", "PG0", "RF1" };
+	const char id[15][6] = { "led1", "sw1A", "sw1B", "sw1C", "sw1D", "sw2A", "sw2B", "sw2C", "sw2D",
+			"btn", "PG2", "PG1", "PG0", "RF1", "AGC" };
 
 	int i, j, val;
 	char *ptr;
 
 	printf("httpd_cgi_handler: uri=%s, count=%d\n", uri, count);
-	for (i = 0; i < count; i++) {			/// number of things sent from the form
-		printf("params=%d, id=%c, val=%c\n", i, **http_cgi_params, (*http_cgi_param_vals)[i]);
 
-		j = strtol(*http_cgi_params, &ptr, 10);
+	j = strtol(*http_cgi_params, &ptr, 10);
+
+	for (i = 0; i < count; i++) {			/// number of things sent from the form
+//		printf("params=%d, id=%c, val=%c, j=%d\n", i, **http_cgi_params, (*http_cgi_param_vals)[i],j);
 
 		switch (j) {
 
@@ -97,6 +96,10 @@ void httpd_cgi_handler(const char *uri, int count, char **http_cgi_params,
 					HAL_GPIO_WritePin(GPIOE, LP_FILT_Pin, GPIO_PIN_SET);// select RF Switches to bypass LP filter
 			break;
 
+		case 24:		// PGA
+			agc = (((*http_cgi_param_vals)[i]) == '0' ? 0 : 1);
+			break;
+
 		default:
 			printf("Unknown id in cgi handler %s\n", *http_cgi_params);
 			break;
@@ -122,7 +125,7 @@ void httpd_post_finished(void *connection, char *response_uri, u16_t response_ur
 void http_set_ssi_handler(tSSIHandler ssi_handler, const char **tags, int num_tags);  // prototype
 // embedded ssi handler
 const char *tagname[] = {  "temp", "pressure", "time", "led1", "sw1A", "sw1B", "sw1C", "sw1D",
-		"sw2A", "sw2B", "sw2C", "sw2D", "butt1", "PG0", "PG1", "PG2", "RF1", "devid", "detinfo", (void *) NULL };
+		"sw2A", "sw2B", "sw2C", "sw2D", "butt1", "PG0", "PG1", "PG2", "RF1", "devid", "detinfo", "GPS",  "AGC", (void *) NULL };
 int i, j;
 
 // the tag callback handler
@@ -143,10 +146,10 @@ tSSIHandler tag_callback(int index, char *newstring, int maxlen)
 	} else
 		switch (index) {
 		case 0:
-			sprintf(newstring, "%d.%d", temperature, tempfrac);
+			strcpy(newstring, tempstr);		// temperature
 			break;
 		case 1:
-			sprintf(newstring, "%d.%d", pressure, pressfrac);
+			strcpy(newstring, pressstr);		// pressure
 			break;
 		case 2:
 			strcpy(newstring,nowtimestr);
@@ -173,19 +176,16 @@ tSSIHandler tag_callback(int index, char *newstring, int maxlen)
 			strcpy(newstring, (HAL_GPIO_ReadPin(GPIOE, LP_FILT_Pin) ? "0" : "1"));
 			break;
 		case 17:	// Device IDs
-#ifdef TESTING
-			sprintf(newstring, "\"STM_UUID=%lx %lx %lx, Server assigned S/N=%lu, TESTING Software S/N=%d, Ver %d.%d\"",
-					STM32_UUID[0],STM32_UUID[1],STM32_UUID[2],statuspkt.uid,MY_UID,statuspkt.majorversion,statuspkt.minorversion);
-#else
-			sprintf(newstring, "\"STM_UUID=%lx %lx %lx, Server assigned S/N=%lu, Software S/N=%d, Ver %d.%d\"",
-					STM32_UUID[0],STM32_UUID[1],STM32_UUID[2],statuspkt.uid,MY_UID,statuspkt.majorversion,statuspkt.minorversion);
-#endif
-//			strcpy(newstring,"17");
+			strcpy(newstring, snstr);			// Detector ID
 			break;
 		case 18:	// Detector Info
-			sprintf(newstring,"\"<b>Uptime</b> %d <b>secs<br><br>Last trigger</b> %s<br><br><b>Triggers</b> %d<br><br><b>Noise</b> %d<br><br><b>ADC Base</b> %d<br><br>\"",
-						statuspkt.sysuptime,trigtimestr,statuspkt.trigcount,statuspkt.adcnoise,statuspkt.adcbase);
-//			strcpy(newstring,"18");
+			strcpy(newstring, statstr);		// Detector Status
+			break;
+		case 19:	// GPS
+			strcpy(newstring, gpsstr);		// GPS Status
+			break;
+		case 20:	// AGC
+			strcpy(newstring, (agc) ? "1" : "0");		// AGC Status
 			break;
 		default:
 			sprintf(newstring, "\"ssi_handler: bad tag index %d\"", index);

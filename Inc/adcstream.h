@@ -56,5 +56,6 @@ extern uint8_t	adcbatchid;	// adc sequence number of a batch of 1..n consecutive
 extern int jabber;			// jabber timeout for spamming detections
 extern uint8_t sendendstatus;	// flag from adc to udp to send status
 
+extern uint32_t globaladcnoise;
 
 #endif /* ADCSTREAM_H_ */
