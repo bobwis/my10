@@ -223,7 +223,7 @@ tSSIHandler tag_callback(int index, char *newstring, int maxlen)
 // embedded ssi tag handler setup
 init_httpd_ssi() {
 
-	http_set_ssi_handler(tag_callback, tagname, 32);
+	http_set_ssi_handler(tag_callback, tagname, 21);	// was 32
 }
 
 /* ---------------------------------------------- */

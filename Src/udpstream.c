@@ -237,6 +237,7 @@ void myreboot(char * msg)
 
 		while (1) {
 
+			for(;;) osDelay(1000);
 //		p1 = pbuf_alloc(PBUF_TRANSPORT, sizeof(mypbuf), PBUF_ROM);		// header pbuf
 //		p1->tot_len = sizeof(mypbuf);
 //		vTaskDelay(1); //some delay!

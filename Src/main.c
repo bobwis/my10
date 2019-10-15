@@ -207,12 +207,12 @@ uint32_t t1sec = 0;
 extern uint32_t t2cap[1];
 int main_init_done = 0;
 int lptask_init_done = 0;
-char trigtimestr[32] = { "No Triggers" };
-char nowtimestr[32] = { "\"No Time\"" };
+char trigtimestr[64] = { "No Triggers" };
+char nowtimestr[64] = { "\"No Time\"" };
 char pressstr[10] = { "0" };
 char tempstr[6] = { "0" };
 char snstr[160] = { "\"No S/N\"" };
-char statstr[160] = { "\"No status\"" };
+char statstr[172] = { "\"No status\"" };
 char gpsstr[128] = { "\"No GPS data\"" };
 uint16_t agc = 1;	// agc enable > 0
 
@@ -1879,8 +1879,6 @@ void calcagc()
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void const * argument)
 {
-    
-    
                  
   /* init code for USB_DEVICE */
   MX_USB_DEVICE_Init();
@@ -1889,9 +1887,7 @@ void StartDefaultTask(void const * argument)
   /* Up to user to call mbedtls_net_init() function in MBEDTLS initialization step */
 
   /* Up to user define the empty MX_MBEDTLS_Init() function located in mbedtls.c file */
-           
-          
-                 
+
   /* init code for FATFS */
   MX_FATFS_Init();
 
@@ -2046,6 +2042,7 @@ void StarLPTask(void const * argument)
 	uint32_t reqtimer = 8000;
 	uint16_t tenmstimer = 0;
 	int i, counter = 0;
+	char str[32] = {"empty"};
 
 	statuspkt.adcudpover = 0;		// debug use count overruns
 	statuspkt.trigcount = 0;		// debug use adc trigger count
@@ -2093,17 +2090,26 @@ void StarLPTask(void const * argument)
 ///			HAL_TIM_Base_Start(&htim7);	// audio synth sampling interval timer
 			HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, phaser_wav, sizeof(phaser_wav),
 			DAC_ALIGN_8B_R /*DAC_ALIGN_12B_R*/);	// start phaser noise
-#if 0
-			strcpy(trigtimestr, ctime(&epochtime));		// copy current time into trig time string
-			trigtimestr[strlen(trigtimestr) - 1] = '\0';	// replace newline with terminator
+
+#if 1
+			while (!(xSemaphoreTake(ssicontentHandle,( TickType_t ) 1 ) == pdTRUE))	{		// take the ssi generation semaphore (portMAX_DELAY == infinite)
+				printf("sem wait 1a\n");
+			}
+//			strcpy(trigtimestr, ctime(&epochtime));		// ctime etc giving problems
+//			trigtimestr[strlen(trigtimestr) - 1] = '\0';	// replace newline with terminator
+		sprintf(trigtimestr,"%u",epochtime);
+
+			if (xSemaphoreGive(ssicontentHandle) != pdTRUE)	{													// give the ssi generation semaphore
+				printf("semaphore 1a release failed\n");
+			}
 #endif
-//			ctime_r(&epochtime,trigtimestr);		// copy current time into trig time string
-			strcpy(trigtimestr,"\"There goes the time\"");		// copy current time into trig time string
+
+//			strcpy(trigtimestr,"There goes the time");		// copy current time into trig time string
 
 		} else {	// there was a trigger so dont bother updating the strings to save CPU
 
-//			if (tenmstimer % 100 == 0) {		// every second
-				if (tenmstimer % 1 == 0) {
+			if (tenmstimer % 100 == 0) {		// every second
+
 				char s[32];
 				HAL_GPIO_TogglePin(GPIOD, LED_D2_Pin);
 
@@ -2113,13 +2119,13 @@ void StarLPTask(void const * argument)
 
 	//////////// generate web page data
 #if 0
-				if (xSemaphoreTake(ssicontentHandle,( TickType_t ) 100 ) == pdTRUE)	{		// give the ssi generation semaphore (portMAX_DELAY == infinite)
+				if (xSemaphoreTake(ssicontentHandle,( TickType_t ) 100 ) == pdTRUE)	{		// take the ssi generation semaphore (portMAX_DELAY == infinite)
 					/*printf("We have the semaphore\n")*/;
 				}		else {
 					printf("semaphore take failed\n");
 				}
 #endif
-				while (!(xSemaphoreTake(ssicontentHandle,( TickType_t ) 1 ) == pdTRUE))	{		// give the ssi generation semaphore (portMAX_DELAY == infinite)
+				while (!(xSemaphoreTake(ssicontentHandle,( TickType_t ) 25 ) == pdTRUE))	{		// give the ssi generation semaphore (portMAX_DELAY == infinite)
 					printf("sem wait 1\n");
 				}
 				{
@@ -2128,16 +2134,15 @@ void StarLPTask(void const * argument)
 
 
 #if 0
-				strcpy(s, ctime(&epochtime));
-				s[strlen(s) - 1] = '\0';	// replace newline with terminator
-				sprintf(nowtimestr, "\"%s\"", s);
+				strcpy(str, ctime(&epochtime));
+				s[strlen(str) - 1] = '\0';	// replace newline with terminator
+				sprintf(nowtimestr, "\"%s\"", str);
 #endif
-//				strcpy(nowtimestr,"\"This is the time\"");
-
+			sprintf(nowtimestr,"\"%u\"",epochtime);
 
 				sprintf(tempstr, "%d.%d", temperature, tempfrac);
 				sprintf(pressstr, "%d.%d", pressure, pressfrac);
-
+#if 1
 				// construct detector status for webpage
 				sprintf(statstr,
 						"\"<b>Uptime</b> %d <b>secs<br><br>Last trigger</b> %s<br><br><b>Triggers</b> %d<br><br><b>Noise</b> %d<br><br><b>ADC Base</b> %d<br><br>\"",
@@ -2151,7 +2156,7 @@ void StarLPTask(void const * argument)
 				else {
 					strcpy(gpsstr, "\"<font color=red>**Lost GPS**<\/font>\"");
 				}
-
+#endif
 				if (xSemaphoreGive(ssicontentHandle) != pdTRUE)	{		// give the ssi generation semaphore
 					printf("semaphore release failed\n");
 				}

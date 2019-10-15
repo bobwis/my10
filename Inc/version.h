@@ -22,7 +22,7 @@
 #endif
 
 #ifdef TESTING
-#define MY_UID 105	// 16 bits  "serial number" of the lightning detector
+#define MY_UID 1052	// 16 bits  "serial number" of the lightning detector
 #else
 #define MY_UID 1001	// 16 bits  "serial number" of the lightning detector
 #endif
@@ -33,7 +33,7 @@
 #define MPL115A2
 #endif
 
-#if 1
+#if 0
 #define MPL3115A2
 #endif
 
