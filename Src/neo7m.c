@@ -24,6 +24,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "stm32f7xx_hal.h"
+#include "version.h"
 #include "neo7m.h"
 #include "adcstream.h"
 #include <time.h>
@@ -131,7 +132,12 @@ uint32_t calcepoch()
     epochtime = mktime(getgpstime());
 
 //    printf("Epoch=%ld\n", (long) epochtime);
+#ifdef LOCALTIME
+    return((uint32_t)epochtime+(10*60*60));		// add ten hours
+#else
     return((uint32_t)epochtime);
+#endif
+
 }
 #endif
 /**

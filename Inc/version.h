@@ -22,7 +22,7 @@
 #endif
 
 #ifdef TESTING
-#define MY_UID 1054	// 16 bits  "serial number" of the lightning detector
+#define MY_UID 105	// 16 bits  "serial number" of the lightning detector
 #else
 #define MY_UID 1001	// 16 bits  "serial number" of the lightning detector
 #endif
@@ -39,3 +39,9 @@
 
 #endif	/* SPLAT1 */
 #endif /* VERSION_H_ */
+
+
+// If we want localtime (+10H) not UTC, define LOCALTIME
+#if 1
+#define LOCALTIME
+#endif

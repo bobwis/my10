@@ -361,6 +361,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)	// adc conversion done (D
 			}
 		} // end for i
 
+sigsend = ((samplecnt & 0x1ff) == 0) ? 1 : 0;
 		if (sigsend) {
 #ifndef SPLAT1
 			HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_SET);	// blue led

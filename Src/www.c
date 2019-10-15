@@ -40,9 +40,9 @@ void httpd_cgi_handler(const char *uri, int count, char **http_cgi_params,
 	int i, j, val;
 	char *ptr;
 
-	printf("httpd_cgi_handler: uri=%s, count=%d\n", uri, count);
+	j = strtol(*http_cgi_params, &ptr, 10);		// allow two chars len for the number
 
-	j = strtol(*http_cgi_params, &ptr, 10);
+	printf("httpd_cgi_handler: uri=%s, count=%d j=%d\n", uri, count, j);
 
 	for (i = 0; i < count; i++) {			/// number of things sent from the form
 //		printf("params=%d, id=%c, val=%c, j=%d\n", i, **http_cgi_params, (*http_cgi_param_vals)[i],j);
@@ -133,7 +133,27 @@ tSSIHandler tag_callback(int index, char *newstring, int maxlen)
 {
 //  LOCK_TCPIP_CORE();
 
+	HAL_GPIO_TogglePin(GPIOD, LED_D3_Pin);
+/*
+	newstring[0] = '5';
+	newstring[1] = '\0';
+	return (1);
+*/
 //		printf("tSSIHandler: index=0x%x, newstring=%s, maxlen=%d\n",index,newstring,maxlen);
+#if 0
+	if (xSemaphoreTake(ssicontentHandle,( TickType_t ) 100 ) == pdTRUE)	{		// get the ssi generation semaphore (portMAX_DELAY == infinite)
+		/*printf("We have the semaphore\n")*/;
+	}		else {
+		printf("semaphore take2 failed\n");
+	}
+#endif
+	while (!(xSemaphoreTake(ssicontentHandle,( TickType_t ) 1 ) == pdTRUE))	{		// get the ssi generation semaphore (portMAX_DELAY == infinite)
+		printf("sem wait 2\n");
+	}
+	{
+//		printf("sem2 wait done\n");
+	}
+
 
 	if ((index > 3) && (index < 12)) {		// omux array
 		i = index - 4;		// 0 to 7
@@ -193,6 +213,10 @@ tSSIHandler tag_callback(int index, char *newstring, int maxlen)
 		}
 //		sprintf(newstring,"index=%d",index);
 //  UNLOCK_TCPIP_CORE();
+
+	if (xSemaphoreGive(ssicontentHandle) != pdTRUE)	{		// give the ssi generation semaphore
+		printf("semaphore give2 failed\n");		// expect this to fail as part of the normal setup
+	}
 	return (strlen(newstring));
 }
 

@@ -36,7 +36,7 @@
 
 #if 1
 #define LWIP_DEBUG 0
-#define LWIP_STATS 1
+#define LWIP_STATS 0
 #define LWIP_DBG_TRACE
 
 
@@ -47,25 +47,7 @@
 #include <stdlib.h>
 
 
-#define LINK_STATS                      0
-#define ETHARP_STATS                    1
-#define IP_STATS                        1
-#define IPFRAG_STATS                    1
-#define ICMP_STATS                      0
-#define IGMP_STATS                      0
-#define UDP_STATS                       1
-#define TCP_STATS                       0
-#define MEM_STATS                       0
-#define MEMP_STATS                      0
-#define SYS_STATS                       0
-#define LWIP_STATS_DISPLAY              1
-#define IP6_STATS                       0
-#define ICMP6_STATS                     0
-#define IP6_FRAG_STATS                  0
-#define MLD6_STATS                      0
-#define ND6_STATS                       0
-#define MIB2_STATS                      0
-#endif
+
 
 /* USER CODE END 0 */
 
@@ -89,8 +71,10 @@
 #define LWIP_DHCP 1
 /*----- Value in opt.h for LWIP_DNS: 0 -----*/
 #define LWIP_DNS 1
+/*----- Default Value for MEMP_NUM_TCP_PCB: 5 ---*/
+#define MEMP_NUM_TCP_PCB 32
 /*----- Default Value for LWIP_TCPIP_CORE_LOCKING: 0 ---*/
-#define LWIP_TCPIP_CORE_LOCKING 0
+#define LWIP_TCPIP_CORE_LOCKING 1
 /*----- Value in opt.h for MEM_ALIGNMENT: 1 -----*/
 #define MEM_ALIGNMENT 4
 /*----- Default Value for MEM_SIZE: 1600 ---*/
@@ -99,6 +83,8 @@
 #define MEMP_OVERFLOW_CHECK 2
 /*----- Default Value for MEMP_SANITY_CHECK: 0 ---*/
 #define MEMP_SANITY_CHECK 1
+/*----- Default Value for LWIP_ALLOW_MEM_FREE_FROM_OTHER_CONTEXT: 0 ---*/
+#define LWIP_ALLOW_MEM_FREE_FROM_OTHER_CONTEXT 1
 /*----- Default Value for MEMP_NUM_TCP_PCB_LISTEN: 8 ---*/
 #define MEMP_NUM_TCP_PCB_LISTEN 16
 /*----- Default Value for PBUF_POOL_SIZE: 16 ---*/
@@ -169,8 +155,10 @@
 #define LWIP_HTTPD_ABORT_ON_CLOSE_MEM_ERROR 1
 /*----- Value in opt.h for HTTPD_USE_CUSTOM_FSDATA: 0 -----*/
 #define HTTPD_USE_CUSTOM_FSDATA 1
-/*----- Value in opt.h for LWIP_STATS: 1 -----*/
-#define LWIP_STATS 0
+/*----- Default Value for LWIP_STATS: 0 ---*/
+#define LWIP_STATS 1
+/*----- Value in opt.h for MIB2_STATS: 0 or SNMP_LWIP_MIB2 -----*/
+#define MIB2_STATS 0
 /*----- Value in opt.h for CHECKSUM_GEN_IP: 1 -----*/
 #define CHECKSUM_GEN_IP 0
 /*----- Value in opt.h for CHECKSUM_GEN_UDP: 1 -----*/
@@ -198,6 +186,26 @@
 /*-----------------------------------------------------------------------------*/
 /* USER CODE BEGIN 1 */
 #define MEMP_SANITY_CHECK 1
+
+#define LINK_STATS                      0
+#define ETHARP_STATS                    0
+#define IP_STATS                        0
+#define IPFRAG_STATS                    0
+#define ICMP_STATS                      0
+#define IGMP_STATS                      0
+#define UDP_STATS                       0
+#define TCP_STATS                       0
+#define MEM_STATS                       0
+#define MEMP_STATS                      0
+#define SYS_STATS                       0
+#define LWIP_STATS_DISPLAY              0
+#define IP6_STATS                       0
+#define ICMP6_STATS                     0
+#define IP6_FRAG_STATS                  0
+#define MLD6_STATS                      0
+#define ND6_STATS                       0
+#define MIB2_STATS                      0
+#endif
 /* USER CODE END 1 */
 
 #ifdef __cplusplus
