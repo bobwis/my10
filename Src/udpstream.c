@@ -10,6 +10,7 @@
 #include "mydebug.h"
 #include "FreeRTOS.h"
 #include "neo7m.h"
+#include "splat1.h"
 #include "ip_addr.h"
 #include "lwip/dns.h"
 #include "lwip/prot/dns.h"
@@ -83,6 +84,8 @@ void myreboot(char * msg)
 		volatile err_t err;
 
 		statuspkt.auxstatus1 = (statuspkt.auxstatus1 & 0xffff0000) | (((jabber & 0xff) << 8) | batchid);
+
+		statuspkt.adctrigoff = ((TRIG_THRES + (abs(globaladcnoise - statuspkt.adcbase))) & 0xFFF) | ((pgagain & 7) << 12);
 
 		while (ps->ref != 1) { // old packet not finished with yet
 			printf("******* timed status1: ps->ref = %d *******\n", ps->ref);
@@ -237,7 +240,7 @@ void myreboot(char * msg)
 
 		while (1) {
 
-			for(;;) osDelay(1000);
+//			for(;;) osDelay(1000);
 //		p1 = pbuf_alloc(PBUF_TRANSPORT, sizeof(mypbuf), PBUF_ROM);		// header pbuf
 //		p1->tot_len = sizeof(mypbuf);
 //		vTaskDelay(1); //some delay!

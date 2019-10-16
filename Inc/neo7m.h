@@ -79,9 +79,9 @@ struct statpkt {
 		uint32_t adcudpover;	// adc -> udp send overruns
 		uint32_t trigcount;		// adc trigger count
 		uint32_t udpsent;		// udp sample packets sent
-		uint16_t peaklevel;		// peak trig level
+		uint16_t reserved3;		// unused, was peak trig level
 		uint16_t jabcnt;		// jabber counter
-		uint32_t noisevar;		// noise variance (UNUSED)
+		uint32_t temppress;		// temperature top 12 bits, pressure bottom 20 bits
 		uint32_t epochsecs;
 		uint32_t reserved1;
 		uint32_t reserved2;

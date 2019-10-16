@@ -207,7 +207,7 @@ uint32_t t1sec = 0;
 extern uint32_t t2cap[1];
 int main_init_done = 0;
 int lptask_init_done = 0;
-char trigtimestr[64] = { "No Triggers" };
+char trigtimestr[128] = { "No Triggers" };
 char nowtimestr[64] = { "\"No Time\"" };
 char pressstr[10] = { "0" };
 char tempstr[6] = { "0" };
@@ -1851,7 +1851,7 @@ void calcagc()
 
 	if (samples > GAININT) {
 		newgain = (pgagain & 0x07);
-		if (noiseacc > (20 * GAININT))	// too noisy
+		if (noiseacc > (40 * GAININT))	// too noisy
 				{
 			if (newgain > 0) {
 				newgain--;			// decrease the gain

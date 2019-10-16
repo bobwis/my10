@@ -398,12 +398,12 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)	// adc conversion done (D
 		globaladcnoise = meanwindiff;
 		if (globaladcnoise == 0)
 			globaladcnoise = statuspkt.adcbase;		// dont allow zero peaks
-
+#if 0	// moved to status send
 		statuspkt.adctrigoff = TRIG_THRES + (abs(globaladcnoise - statuspkt.adcbase));
 
 		if (statuspkt.adctrigoff > 4095)
 			statuspkt.adctrigoff = 4095;
-
+#endif
 		samplecnt++;
 
 		if (samplecnt == 2048) {		// 2k adc bufffers sampled approx 0.5 sec

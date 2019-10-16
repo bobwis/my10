@@ -309,7 +309,7 @@ void getpressure3115(void)
 //				printf("[0x%02x] ", data[0]);
 			}  // end for
 
-			pressure = dataout[0] << 10 | dataout[1] << 2 | (dataout[2] & 0xC0) >> 6;
+			pressure = (dataout[0] << 10) | (dataout[1] << 2) | ((dataout[2] &0xC0) >> 6); // | (dataout[2] & 0xF0) >> 4;
 			pressfrac = ((dataout[2] & 0x30) >> 4) * 25;
 //			printf("\npressure = %d.%d  ", pressure, pressfrac);
 			temperature = dataout[3];
@@ -321,6 +321,7 @@ void getpressure3115(void)
 			osDelay(50);
 		}
 	} // while 1
+	statuspkt.temppress = (dataout[0] << 12) | (dataout[1] << 4) | ((dataout[2] & 0xF0) >> 4) |	(dataout[3] << (24)) | ((dataout[4] & 0xF0) << 16);
 }
 
 

@@ -16,7 +16,8 @@ void startudp(void);
 //#define SERVER_DESTINATION "lightning.local"
 //#define SERVER_DESTINATION "lightning.vk4ya.space"
 //#define SERVER_DESTINATION "10.10.201.232"
-#define SERVER_DESTINATION "10.10.201.157"
+#define SERVER_DESTINATION "10.10.201.240"
+//#define SERVER_DESTINATION "10.10.201.157"
 //#define SERVER_DESTINATION "10.10.201.184"
 //#define SERVER_DESTINATION "lightning.vk4ya.space"
 #else
