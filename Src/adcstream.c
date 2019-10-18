@@ -450,7 +450,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)	// adc conversion done (D
 		statuspkt.clktrim = 107000000;
 		statuspkt.adcpktssent = 0;
 
-		printf("Startadc:\n");
+		printf("Starting ADC DMA\n");
 		osDelay(1000);
 // get some heap for the ADC stream DMA buffer 1
 		pktbuf = pvPortMalloc(UDPBUFSIZE * 2);	// two buffers concatenated
@@ -479,7 +479,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)	// adc conversion done (D
 		adcstat = HAL_ADCEx_MultiModeStart_DBDMA(&hadc1, adcbuf1, adcbuf2, (ADCBUFSIZE / 2));	// len in 16bit words
 
 //	adcstat = HAL_ADCEx_MultiModeStart_DBDMA(&hadc1, adcbufdum1, adcbufdum2, (ADCBUFSIZE / 4));		// DEBUG
-		printf("ADC_MM_Start returned %u\r\n", adcstat);
+//		printf("ADC_MM_Start returned %u\r\n", adcstat);
 
 		if (HAL_ADC_Start(&hadc3) != HAL_OK)
 			printf("ADC3 failed start\r\n");

@@ -49,6 +49,11 @@ void httpd_cgi_handler(const char *uri, int count, char **http_cgi_params,
 
 		switch (j) {
 
+		case 10:			// reboot button
+			printf("Reboot command from wwww\n");
+			osDelay(1000);
+			__NVIC_SystemReset();   // reboot
+			break;
 		case 11:				// LED1
 			if (((*http_cgi_param_vals)[i]) == '0')
 				HAL_GPIO_WritePin(GPIOD, LED_D1_Pin, GPIO_PIN_RESET);

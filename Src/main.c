@@ -215,6 +215,7 @@ char snstr[160] = { "\"No S/N\"" };
 char statstr[172] = { "\"No status\"" };
 char gpsstr[128] = { "\"No GPS data\"" };
 uint16_t agc = 1;	// agc enable > 0
+uint32_t myip;
 
 //char snstr[4] = {"No"};
 //char statstr[4] = {"No"};
@@ -1980,7 +1981,6 @@ void StartDefaultTask(void const * argument)
 		} // end while
 
 		ip_addr_t ip = { 0 };
-		uint32_t myip;
 
 		ip = dhcp->offered_ip_addr;
 		myip = ip.addr;
@@ -2177,8 +2177,8 @@ void StarLPTask(void const * argument)
 //			TCP_STATS_DISPLAY() ;
 //			stats_display();
 #endif
-//			printf("triggers=%04d, pressure = %d.%02d, temp = %02d.%02d, %s\n", trigs, pressure,
-//					pressfrac, temperature, tempfrac, nowtimestr);
+			printf("SN:%d/%lu %d:%d:%d:%d ",MY_UID,statuspkt.uid, myip & 0xFF, (myip & 0xFF00) >> 8,	(myip & 0xFF0000) >> 16, (myip & 0xFF000000) >> 24);
+			printf("triggers:%04d, pressure:%d.%02d, temp:%02d.%02d, time:%s\n", trigs, pressure,pressfrac, temperature, tempfrac, nowtimestr);
 #else
 			printf("triggers=%04d,    ------------------------------------------- %s", trigs,ctime(&epochtime));
 #endif

@@ -172,7 +172,7 @@ void myreboot(char * msg)
 
 		static uint8_t lastadcbatchid = 0;
 
-		printf("Startudp:\n");
+//printf("Startudp:\n");
 		/* Store the handle of the calling task. */
 		xTaskToNotify = xTaskGetCurrentTaskHandle();
 		osDelay(1000);
@@ -196,6 +196,7 @@ void myreboot(char * msg)
 //	udp_recv(pcb, myudp_recv, NULL);
 
 // set UDP destination server IP using DNS lookup
+		printf("Finding host for UDP streaming\n");
 		err = dnslookup(SERVER_DESTINATION, &udpdestip);
 		ip = udpdestip.addr;
 		printf("\nUDP Target IP: %lu.%lu.%lu.%lu\n", ip & 0xff, (ip & 0xff00) >> 8,
