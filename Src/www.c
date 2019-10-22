@@ -56,9 +56,9 @@ void httpd_cgi_handler(const char *uri, int count, char **http_cgi_params,
 			break;
 		case 11:				// LED1
 			if (((*http_cgi_param_vals)[i]) == '0')
-				HAL_GPIO_WritePin(GPIOD, LED_D1_Pin, GPIO_PIN_RESET);
+				HAL_GPIO_WritePin(GPIOD, LED_D4_Pin, GPIO_PIN_RESET);
 			else
-				HAL_GPIO_WritePin(GPIOD, LED_D1_Pin, GPIO_PIN_SET);
+				HAL_GPIO_WritePin(GPIOD, LED_D4_Pin, GPIO_PIN_SET);
 			break;
 
 		case 12:
@@ -180,7 +180,7 @@ tSSIHandler tag_callback(int index, char *newstring, int maxlen)
 			strcpy(newstring,nowtimestr);
 			break;
 		case 3:			// Led1
-			if (HAL_GPIO_ReadPin(GPIOD, LED_D1_Pin) == GPIO_PIN_SET)
+			if (HAL_GPIO_ReadPin(GPIOD, LED_D4_Pin) == GPIO_PIN_SET)
 				strcpy(newstring, "1");
 			else
 				strcpy(newstring, "0");

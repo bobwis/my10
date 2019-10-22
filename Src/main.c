@@ -1802,7 +1802,11 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 	uint32_t diff;
 	static uint32_t lastcap = 0;
 
+#ifdef SPLAT1
+	HAL_GPIO_TogglePin(GPIOD, LED_D1_Pin);
+#else
 	HAL_GPIO_TogglePin(GPIOB, LD1_Pin);		// green led
+#endif
 
 	if (htim->Instance == TIM2) {
 		rtseconds = (statuspkt.NavPvt.sec + 1) % 60;// assume we get here before serial comms updates gps seconds field

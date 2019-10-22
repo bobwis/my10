@@ -57,3 +57,4 @@ NUCLEO-F767ZI.xml
 *.list
 
 /Release/
+/Debug/
