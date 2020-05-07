@@ -19,7 +19,8 @@ extern uint32_t t1sec;
 uint8_t gpslocked = 0;
 uint8_t epochvalid = 0;
 
-static struct ip4_addr udpdestip;		// udp dst ipv4 address
+struct ip4_addr udpdestip;		// udp dst ipv4 address
+char udp_ips[16]; // string version of IP address
 static uint32_t ip_ready = 0;
 
 
@@ -125,8 +126,11 @@ void myreboot(char * msg)
 
 	void dnsfound(const char *name, const ip_addr_t *ipaddr, void *callback_arg)
 	{
-
-		ip_ready = ipaddr->addr;
+		if (ipaddr->addr == NULL) {
+			ip_ready = -1;
+		}
+		else
+			ip_ready = ipaddr->addr;
 	}
 
 // set destination server IP using DNS lookup
@@ -147,6 +151,10 @@ void myreboot(char * msg)
 				osDelay(1000);		// give it 20 seconds
 				printf(".");
 				if (ip_ready) {
+					if (ip_ready == -1) {
+						ip->addr = "127.0.0.1";	// safe ?
+						return(ERR_TIMEOUT);			// not always timeout, but some error
+					}
 					ip->addr = ip_ready;
 					return (ERR_OK);
 				}
@@ -160,13 +168,29 @@ void myreboot(char * msg)
 		return (err);
 	}
 
-	void startudp()
+
+	uint32_t locateudp()
+	{
+		volatile err_t err;
+		uint32_t ip = 0;
+
+		printf("Finding %s for UDP streaming\n",udp_target);
+		err = dnslookup(udp_target, &udpdestip);
+		if (err)
+			rebootme();
+
+		ip = udpdestip.addr;
+		sprintf(udp_ips,"%lu.%lu.%lu.%lu", ip & 0xff, (ip & 0xff00) >> 8,	(ip & 0xff0000) >> 16, (ip & 0xff000000) >> 24);
+		printf("\nUDP Target IP: %s\n",udp_ips);
+   return(ip);
+	}
+
+	void startudp(uint32_t ip)
 	{
 		struct udp_pcb *pcb;
 		struct pbuf *pd, *p1, *p2, *ps;
 		uint32_t ulNotificationValue = 0;
 		const TickType_t xMaxBlockTime = pdMS_TO_TICKS(1000);
-		uint32_t ip = 0;
 		volatile err_t err;
 		int i;
 
@@ -195,12 +219,6 @@ void myreboot(char * msg)
 
 //	udp_recv(pcb, myudp_recv, NULL);
 
-// set UDP destination server IP using DNS lookup
-		printf("Finding host for UDP streaming\n");
-		err = dnslookup(SERVER_DESTINATION, &udpdestip);
-		ip = udpdestip.addr;
-		printf("\nUDP Target IP: %lu.%lu.%lu.%lu\n", ip & 0xff, (ip & 0xff00) >> 8,
-				(ip & 0xff0000) >> 16, (ip & 0xff000000) >> 24);
 
 		p1 = pbuf_alloc(PBUF_TRANSPORT, UDPBUFSIZE, PBUF_REF /* PBUF_ROM */); // pk1 pbuf
 

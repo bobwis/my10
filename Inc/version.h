@@ -9,7 +9,7 @@
 #define VERSION_H_
 
 #define MAJORVERSION 0
-#define MINORVERSION 6
+#define MINORVERSION 7
 
 // TESTING Speeds up the frequency of status packets
 #if		1
@@ -22,7 +22,7 @@
 #endif
 
 #ifdef TESTING
-#define MY_UID 1052	// 16 bits  "serial number" of the lightning detector
+#define MY_UID 1055	// 16 bits  "serial number" of the lightning detector
 #else
 #define MY_UID 1001	// 16 bits  "serial number" of the lightning detector
 #endif

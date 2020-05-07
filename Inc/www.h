@@ -10,7 +10,6 @@
 
 void httpclient(char *);
 
-
 extern osSemaphoreId ssicontentHandle;
 
 #endif /* WWW_H_ */

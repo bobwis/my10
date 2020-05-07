@@ -146,6 +146,7 @@ const unsigned char phaser_wav[] = /* { 128, 0, 255, 0, 255, 0, 255, 0, 255, 0, 
 		191, 179, 178, 166, 152, 141, 128, 113, 102, 89, 76, 63, 64, 49, 50 };
 
 const unsigned int phaser_wav_len = 1792;
+uint32_t uip;		// udp target
 
 /* USER CODE END PD */
 
@@ -1741,6 +1742,17 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+
+void rebootme()
+{
+	while(1) {
+	osDelay(2000);
+	__NVIC_SystemReset();   // reboot
+	}
+}
+
+
 void netif_status_callbk_fn(struct netif *netif)
 {
 
@@ -1810,6 +1822,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 
 	if (htim->Instance == TIM2) {
 		rtseconds = (statuspkt.NavPvt.sec + 1) % 60;// assume we get here before serial comms updates gps seconds field
+//printf(":%d ",rtseconds);
 //		statuspkt.epochsecs++;
 //		neotime();
 #if 0		// clktrim with non-resetting pps counter
@@ -1979,8 +1992,7 @@ void StartDefaultTask(void const * argument)
 				printf("*****************************************\n");
 				printf("************* DHCP ABORTED **************\n");
 				printf("*****************************************\n");
-				osDelay(2000);
-				__NVIC_SystemReset();   // reboot
+				rebootme();
 			} // end if
 		} // end while
 
@@ -2004,7 +2016,7 @@ void StartDefaultTask(void const * argument)
 //			stats_display() ; // this needs stats in LwIP enabling to do anything
 		}
 
-		osDelay(5000);
+		osDelay(1000);
 		printf("starting httpd\n");
 		httpd_init();		// start the www server
 		init_httpd_ssi();	// set up the embedded tag handler
@@ -2019,13 +2031,13 @@ void StartDefaultTask(void const * argument)
 
 		setupnotify();
 		startadc();
-
+		uip = locateudp();
 		main_init_done = 1; // let lptask now main has initilised
 
 		while (lptask_init_done == 0)
 			osDelay(100);		// hold off starting udp railgun until LPtask has initalised
 		while (1) {	//
-			startudp();		// should never return
+			startudp(uip);		// should never return
 			osDelay(1);
 		}
 	}
@@ -2043,8 +2055,9 @@ void StarLPTask(void const * argument)
 {
   /* USER CODE BEGIN StarLPTask */
 	static uint32_t trigs = 0;
-	uint32_t reqtimer = 8000;
+	uint32_t ip, reqtimer = 8000;
 	uint16_t tenmstimer = 0;
+	uint16_t onesectimer = 0;
 	int i, counter = 0;
 	char str[32] = {"empty"};
 
@@ -2054,16 +2067,14 @@ void StarLPTask(void const * argument)
 
 	while (main_init_done == 0)		// wait from main to complete the initilisation
 		osDelay(100);
-
 #if 1
 #ifdef TESTING
-	sprintf(snstr,
-			"\"STM_UUID=%lx %lx %lx, Server assigned S/N=%lu, TESTING Software S/N=%d, Ver %d.%d\"",
+	sprintf(snstr,"\"STM_UUID=%lx %lx %lx, Assigned S/N=%lu, TESTING Sw S/N=%d, Ver %d.%d, UDP Target=%s %s\"",
 			STM32_UUID[0], STM32_UUID[1], STM32_UUID[2], statuspkt.uid, MY_UID, statuspkt.majorversion,
-			statuspkt.minorversion);
+			statuspkt.minorversion,udp_target,udp_ips);
 #else
-	sprintf(snstr, "\"STM_UUID=%lx %lx %lx, Server assigned S/N=%lu, Software S/N=%d, Ver %d.%d\"",
-			STM32_UUID[0],STM32_UUID[1],STM32_UUID[2],statuspkt.uid,MY_UID,statuspkt.majorversion,statuspkt.minorversion);
+	sprintf(snstr, "\"STM_UUID=%lx %lx %lx, Assigned S/N=%lu, Ver %d.%d, UDP Target=%s %s\"",
+			STM32_UUID[0],STM32_UUID[1],STM32_UUID[2],statuspkt.uid,statuspkt.majorversion,statuspkt.minorversion,udp_target,udp_ips);
 #endif
 #endif
 
@@ -2072,7 +2083,7 @@ void StarLPTask(void const * argument)
 // timer 4 used to generate audio monotone to splat speaker, but PCB fault prevents it working
 //HAL_TIM_OC_Start (&htim4, TIM_CHANNEL_3);		// HAL_TIM_OC_Start (TIM_HandleTypeDef* htim, uint32_t Channel)
 
-	lptask_init_done = 1;		// this lp task has done its initiilisation
+	lptask_init_done = 1;		// this lp task has done its initialisation
 
 	for (;;) {
 		osDelay(10);		// 10mSec
@@ -2121,6 +2132,7 @@ void StarLPTask(void const * argument)
 					calcagc();		// try to set the gain automatically
 				}
 
+				onesectimer++;
 	//////////// generate web page data
 #if 0
 				if (xSemaphoreTake(ssicontentHandle,( TickType_t ) 100 ) == pdTRUE)	{		// take the ssi generation semaphore (portMAX_DELAY == infinite)
@@ -2167,8 +2179,9 @@ void StarLPTask(void const * argument)
 			}		// if seconds timer hit
 		}  // else triggered
 
-		if (tenmstimer > 3000) {		// reset timer after 300 seconds
+		if (tenmstimer > 3000) {		// reset timer after 30 seconds
 			tenmstimer = 0;
+
 
 #ifdef SPLAT1
 #ifdef MPL115A2
@@ -2187,6 +2200,12 @@ void StarLPTask(void const * argument)
 			printf("triggers=%04d,    ------------------------------------------- %s", trigs,ctime(&epochtime));
 #endif
 		} // end if 30 second timer
+
+	if (onesectimer > 300) {			// 5 mins
+    onesectimer = 0;
+		if (locateudp() != uip)		// periodic check
+				rebootme();					// target udp host has changed or network has gone away
+	}
 	} // end for
   /* USER CODE END StarLPTask */
 }

@@ -553,6 +553,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 			}
 		if (statuspkt.NavPvt.flags & 1)	{ // locked
 			statuspkt.epochsecs = calcepoch();		// should not be needed if our 1 sec timer was accurate, also dbg desyncs this
+//printf("*%d ",statuspkt.epochsecs % 60);
 			gpslocked = 1;
 		}
 		else
