@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="DefaultPage8" displayName="GUISL001" className="IfxGroupBox" controlId="1337851946155">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group58" displayName="Devices Available" className="IfxGroupBox" controlId="1337851979919">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/guisl001/0/guisl001_erwusbdevices" displayName="USB devices" className="EnumerationType" constraint="if (CM.getParamValue(&quot;app/guisl001/0/guisl001_erwnodevices/0&quot;) == &quot;1&quot;) &#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(false);&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(true);&#xD;&#xA;}" paramName="app/guisl001/0/guisl001_erwusbdevices:USB Devices" controlId="1337863500160">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/guisl001/0/guisl001_erwusetouchscreen" displayName="TouchPad Device" className="EnumerationType" constraint="if ( (CM.getParamValue(&quot;app/guisl001/0/guisl001_erwusbdevices/1&quot;) == &quot;1&quot;)  ||&#xD;&#xA;     (CM.getParamValue(&quot;app/guisl001/0/guisl001_erwnodevices/0&quot;) == &quot;1&quot;) &#xD;&#xA;  )&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(false);&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(true);&#xD;&#xA;}&#xD;&#xA;" paramName="app/guisl001/0/guisl001_erwusetouchscreen:Touch Screen Device" controlId="1337929644512">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/guisl001/0/guisl001_erwnodevices" displayName="No Available Devices" labelRequired="false" className="EnumerationType" paramName="app/guisl001/0/guisl001_erwnodevices:No Available Devices" controlId="1337928175684">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/guisl001/0/guisl001_erwwinsupport" displayName="Window Manager Configuration" className="EnumerationType" constraint="if ( (CM.getParamValue(&quot;app/guisl001/0/guisl001_erwusbdevices/0&quot;) == &quot;1&quot;)  ||&#xD;&#xA;&#x9;(CM.getParamValue(&quot;app/guisl001/0/guisl001_erwusbdevices/1&quot;) == &quot;1&quot;) ||&#xD;&#xA;      (CM.getParamValue(&quot;app/guisl001/0/guisl001_erwusetouchscreen/0&quot;) == &quot;1&quot;)&#xD;&#xA; )&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(false);&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(true);&#xD;&#xA;}" paramName="app/guisl001/0/guisl001_erwwinsupport:Window Manager Configuration" controlId="1337852052026">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group72" displayName="Please manually correct the order of below library in project settings." className="IfxGroupBox" controlId="1342589606831">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalSpan="2"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/guisl001/0/guisl001_library_note" displayName="Library" labelRequired="false" className="StringType" paramName="app/guisl001/0/guisl001_library_note:Library" controlId="1342589754837">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalSpan="2"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

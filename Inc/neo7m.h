@@ -28,7 +28,7 @@ h * neo7m.h
 //const unsigned char UBXGPS_HEADER[] = { 0xB5, 0x62 };
 
 struct statpkt {
-	uint32_t udpcount;		// udp packet sent index (24 bits, other 8 bits are packet type)
+	uint32_t udppknum;		// udp packet sent index (24 bits, other 8 bits are packet type)
 
 	struct UbxGpsNavPvt {
 		//        Type  Name           Unit   Description (scaling)
@@ -104,6 +104,9 @@ extern time_t epochtime;	// gps time updated every second
 extern char trigtimestr[];	// last trig time as a string
 extern char nowtimestr[];		// current time as as string
 extern uint8_t muxdat[];
+
+extern uint32_t ledhang;
+extern int16_t meanwindiff;	// sliding mean of window differences
 
 #endif /* NEO7M_H_ */
 

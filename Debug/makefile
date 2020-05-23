@@ -65,7 +65,6 @@ clean:
 post-build:
 	-@echo 'Generating hex and Printing size information:'
 	arm-none-eabi-objcopy -O ihex "my10.elf" "my10.hex"
-	arm-none-eabi-objcopy -O binary "my10.elf" "my10.bin"
 	arm-none-eabi-size "my10.elf"
 	-@echo ' '
 

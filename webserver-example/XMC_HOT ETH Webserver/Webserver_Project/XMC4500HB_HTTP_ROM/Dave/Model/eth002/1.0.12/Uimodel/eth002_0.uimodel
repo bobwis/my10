@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="DefaultPage" displayName="PHY Configuration" className="IfxGroupBox" controlId="1318832302000">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth002/0/eth002_phyvendor" displayName="Select PHY Vendor" className="ComboEnumerationType" paramName="app/eth002/0/eth002_phyvendor:Select PHY Vendor" controlId="1318832304968">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth002/0/eth002_auto_negotiation" displayName="Enable auto negotiation" labelRequired="false" className="EnumerationType" paramName="app/eth002/0/eth002_auto_negotiation:Enable auto negotiation" controlId="1329990742531">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth002/0/eth002_auto_nego_warn" displayName="Auto Nego warning" readonly="true" labelRequired="false" className="StringType" paramName="app/eth002/0/eth002_auto_nego_warn:Auto Nego warning" controlId="1331876511343">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth002/0/eth002_halffullduplex" displayName="Duplex mode" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/eth002/0/eth002_auto_negotiation/0&quot;) == &quot;0&quot;) {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;}else {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;" paramName="app/eth002/0/eth002_halffullduplex:Duplex mode" controlId="1331876760562">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eth002/0/eth002_linkspeed" displayName="Link Speed" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/eth002/0/eth002_auto_negotiation/0&quot;) == &quot;0&quot;) {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;}else {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;" paramName="app/eth002/0/eth002_linkspeed:Link Speed" controlId="1331876765625">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

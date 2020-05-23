@@ -1,0 +1,1446 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ResourceModel:Peripheral xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" name="SDMMC" description="SD/MMC Interface" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0">
+  <provided xsi:type="ResourceModel:ResourceGroup" name="HOST" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.0"/>
+    <resourcesList name="block_size" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/block_size" isResolved="true"/>
+    <resourcesList name="block_count" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/block_count" isResolved="true"/>
+    <resourcesList name="argument1" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/argument1" isResolved="true"/>
+    <resourcesList name="transfer_mode" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/transfer_mode" isResolved="true"/>
+    <resourcesList name="command" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/command" isResolved="true"/>
+    <resourcesList name="response0" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/response0" isResolved="true"/>
+    <resourcesList name="response2" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/response2" isResolved="true"/>
+    <resourcesList name="response4" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/response4" isResolved="true"/>
+    <resourcesList name="response6" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/response6" isResolved="true"/>
+    <resourcesList name="data_buffer" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/data_buffer" isResolved="true"/>
+    <resourcesList name="present_state" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/present_state" isResolved="true"/>
+    <resourcesList name="host_ctrl" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host_ctrl" isResolved="true"/>
+    <resourcesList name="power_ctrl" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/power_ctrl" isResolved="true"/>
+    <resourcesList name="block_gap_ctrl" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/block_gap_ctrl" isResolved="true"/>
+    <resourcesList name="wakeup_ctrl" requiredResourceUri="http://www.infineon.com/Peripheral/0.1.28/sdmmc/0/wakeup_ctrl"/>
+    <resourcesList name="clock_ctrl" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/clock_ctrl" isResolved="true"/>
+    <resourcesList name="timeout_ctrl" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/timeout_ctrl" isResolved="true"/>
+    <resourcesList name="sw_reset" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/sw_reset" isResolved="true"/>
+    <resourcesList name="int_status_norm" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/int_status_norm" isResolved="true"/>
+    <resourcesList name="int_status_err" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/int_status_err" isResolved="true"/>
+    <resourcesList name="en_int_status_norm" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/en_int_status_norm" isResolved="true"/>
+    <resourcesList name="en_int_status_err" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/en_int_status_err" isResolved="true"/>
+    <resourcesList name="en_int_signal_norm" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/en_int_signal_norm" isResolved="true"/>
+    <resourcesList name="en_int_signal_err" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/en_int_signal_err" isResolved="true"/>
+    <resourcesList name="acmd_err_status" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/acmd_err_status" isResolved="true"/>
+    <resourcesList name="force_event_acmd_err_status" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/force_event_acmd_err_status" isResolved="true"/>
+    <resourcesList name="force_event_err_status" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/force_event_err_status" isResolved="true"/>
+    <resourcesList name="debug_sel" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/debug_sel" isResolved="true"/>
+    <resourcesList name="spi" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/spi" isResolved="true"/>
+    <resourcesList name="slot_int_status" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/slot_int_status" isResolved="true"/>
+    <resourcesList name="mmc_clk_in" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_clk_in" isResolved="true"/>
+    <resourcesList name="mmc_cmd_in" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_cmd_in" isResolved="true"/>
+    <resourcesList name="mmc_data_in0" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_data_in0" isResolved="true"/>
+    <resourcesList name="mmc_data_in1" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_data_in1" isResolved="true"/>
+    <resourcesList name="mmc_data_in2" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_data_in2" isResolved="true"/>
+    <resourcesList name="mmc_data_in3" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_data_in3" isResolved="true"/>
+    <resourcesList name="mmc_data_in4" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_data_in4" isResolved="true"/>
+    <resourcesList name="mmc_data_in5" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_data_in5" isResolved="true"/>
+    <resourcesList name="mmc_data_in6" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_data_in6" isResolved="true"/>
+    <resourcesList name="mmc_data_in7" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_data_in7" isResolved="true"/>
+    <resourcesList name="mmc_sdcd" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_sdcd" isResolved="true"/>
+    <resourcesList name="mmc_sdwc" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_sdwc" isResolved="true"/>
+    <resourcesList name="mmc_clk_out" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_clk_out" isResolved="true"/>
+    <resourcesList name="mmc_cmd_out" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_cmd_out" isResolved="true"/>
+    <resourcesList name="mmc_data_out0" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_data_out0" isResolved="true"/>
+    <resourcesList name="mmc_data_out1" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_data_out1" isResolved="true"/>
+    <resourcesList name="mmc_data_out2" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_data_out2" isResolved="true"/>
+    <resourcesList name="mmc_data_out3" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_data_out3" isResolved="true"/>
+    <resourcesList name="mmc_data_out4" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_data_out4" isResolved="true"/>
+    <resourcesList name="mmc_data_out5" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_data_out5" isResolved="true"/>
+    <resourcesList name="mmc_data_out6" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_data_out6" isResolved="true"/>
+    <resourcesList name="mmc_data_out7" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_data_out7" isResolved="true"/>
+    <resourcesList name="mmc_led" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_led" isResolved="true"/>
+    <resourcesList name="mmc_reset" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_reset" isResolved="true"/>
+    <resourcesList name="mmc_bus_power" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/mmc_bus_power" isResolved="true"/>
+    <resourcesList name="interrupt" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/interrupt" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="MMC_CMD_IN" description="" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/mmc_cmd_in" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.19"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="interrupt" description="" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/interrupt" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.20"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="MMC_DATA_IN0" description="" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/mmc_data_in0" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.24"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="MMC_DATA_OUT1" description="" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/mmc_data_out1" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.25"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="MMC_CMD_OUT" description="" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/mmc_cmd_out" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.27"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="MMC_SDCD" description="" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/mmc_sdcd" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.28"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="MMC_CLK_IN" description="" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/mmc_clk_in" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.29"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="MMC_SDWC" description="" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/mmc_sdwc" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.30"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="MMC_BUS_POWER" description="" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/mmc_bus_power" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.31"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="MMC_CLK_OUT" description="" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/mmc_clk_out" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.32"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="MMC_DATA_OUT0" description="" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/mmc_data_out0" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.34"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="MMC_RESET" description="" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/mmc_reset" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.35"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="MMC_DATA_OUT3" description="" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/mmc_data_out3" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.38"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="MMC_DATA_IN1" description="" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/mmc_data_in1" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.42"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="MMC_LED" description="" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/mmc_led" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.44"/>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="BLOCK_SIZE" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/block_size" accessPermission="rw" addressOffset="0x0004" resetValue="0000" resetMask="0xFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.46"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <toolTipHelpDescription>Block Size Register</toolTipHelpDescription>
+    <bitFields name="TX_BLOCK_SIZE_12" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/block_size/tx_block_size_12" maxValue="1" minValue="0" startPos="15" stopPos="15" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Transfer Block Size 12th bit.</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="TX_BLOCK_SIZE" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/block_size/tx_block_size" maxValue="4095" minValue="0" startPos="0" stopPos="11" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Transfer Block Size</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0000" description="No Data Transfer"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0001" description="1 Byte"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0002" description="2 Bytes"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0003" description="3 Bytes"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0004" description="4 Bytes"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="01FF" description="511 Bytes"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0200" description="512 Bytes (Maximum Block Size)"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="BLOCK_COUNT" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/block_count" accessPermission="rw" addressOffset="0x0006" resetValue="0000" resetMask="0xFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.47"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <toolTipHelpDescription>Block Count Register</toolTipHelpDescription>
+    <bitFields name="BLOCK_COUNT" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/block_count/block_count" maxValue="65535" minValue="0" startPos="0" stopPos="15" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Blocks Count for Current Transfer</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0000" description="Stop Count"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0001" description="1 block"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0002" description="2 blocks"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="FFFF" description="65535 blocks"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="ARGUMENT1" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/argument1" accessPermission="rw" addressOffset="0x0008" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.48"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Argument1 Register</toolTipHelpDescription>
+    <bitFields name="ARGUMENT1" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/argument1/argument1" maxValue="2147483647" minValue="0" startPos="0" stopPos="31" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command Argument</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="TRANSFER_MODE" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/transfer_mode" accessPermission="rw" addressOffset="0x000C" resetValue="0000" resetMask="0xFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.49"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <toolTipHelpDescription>Transfer Mode Register</toolTipHelpDescription>
+    <bitFields name="CMD_COMP_ATA" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/transfer_mode/cmd_comp_ata" maxValue="1" minValue="0" startPos="6" stopPos="6" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command Completion Signal Enable for CE-ATA Device</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Device will send command completion Signal"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Device will not send command completion Signal"/>
+    </bitFields>
+    <bitFields name="MULTI_BLOCK_SELECT" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/transfer_mode/multi_block_select" maxValue="1" minValue="0" startPos="5" stopPos="5" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Multi / Single Block Select</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Single Block"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Multiple Block"/>
+    </bitFields>
+    <bitFields name="TX_DIR_SELECT" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/transfer_mode/tx_dir_select" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Data Transfer Direction Select</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Write (Host to Card)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Read (Card to Host)"/>
+    </bitFields>
+    <bitFields name="ACMD_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/transfer_mode/acmd_en" maxValue="3" minValue="0" startPos="2" stopPos="3" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Auto CMD Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Auto Command Disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Auto CMD12 Enable"/>
+    </bitFields>
+    <bitFields name="BLOCK_COUNT_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/transfer_mode/block_count_en" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Block Count Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Disable"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enable"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="COMMAND" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/command" accessPermission="rw" addressOffset="0x000E" resetValue="0000" resetMask="0xFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.50"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <toolTipHelpDescription>Command Register</toolTipHelpDescription>
+    <bitFields name="CMD_IND" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/command/cmd_ind" maxValue="63" minValue="0" startPos="8" stopPos="13" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command Index</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="CMD_TYPE" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/command/cmd_type" maxValue="3" minValue="0" startPos="6" stopPos="7" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command Type</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Normal"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Suspend"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Resume"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Abort"/>
+    </bitFields>
+    <bitFields name="DATA_PRESENT_SELECT" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/command/data_present_select" maxValue="1" minValue="0" startPos="5" stopPos="5" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Data Present Select</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Data Present"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Data Present"/>
+    </bitFields>
+    <bitFields name="CMD_IND_CHECK_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/command/cmd_ind_check_en" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command Index Check Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Disable"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enable"/>
+    </bitFields>
+    <bitFields name="CMD_CRC_CHECK_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/command/cmd_crc_check_en" maxValue="1" minValue="0" startPos="3" stopPos="3" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command CRC Check Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Disable"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enable"/>
+    </bitFields>
+    <bitFields name="RESP_TYPE_SELECT" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/command/resp_type_select" maxValue="3" minValue="0" startPos="0" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Response Type Select</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="No Response"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Response length 136"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Response length 48"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Response length 48 check Busy after response"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="RESPONSE0" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/response0" addressOffset="0x0010" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.51"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Response 0 Register</toolTipHelpDescription>
+    <bitFields name="RESPONSE1" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/response0/response1" maxValue="65535" minValue="0" startPos="16" stopPos="31">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Response1</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="RESPONSE0" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/response0/response0" maxValue="65535" minValue="0" startPos="0" stopPos="15">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Response0</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="RESPONSE2" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/response2" addressOffset="0x0014" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.52"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Response 2 Register</toolTipHelpDescription>
+    <bitFields name="RESPONSE3" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/response2/response3" maxValue="65535" minValue="0" startPos="16" stopPos="31">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Response3</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="RESPONSE2" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/response2/response2" maxValue="65535" minValue="0" startPos="0" stopPos="15">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Response2</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="RESPONSE4" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/response4" addressOffset="0x0018" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.53"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Response 4 Register</toolTipHelpDescription>
+    <bitFields name="RESPONSE5" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/response4/response5" maxValue="65535" minValue="0" startPos="16" stopPos="31">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Response5</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="RESPONSE4" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/response4/response4" maxValue="65535" minValue="0" startPos="0" stopPos="15">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Response4</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="RESPONSE6" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/response6" addressOffset="0x001C" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.54"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Response 6 Register</toolTipHelpDescription>
+    <bitFields name="RESPONSE7" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/response6/response7" maxValue="65535" minValue="0" startPos="16" stopPos="31">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Response7</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="RESPONSE6" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/response6/response6" maxValue="65535" minValue="0" startPos="0" stopPos="15">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Response6</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="DATA_BUFFER" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/data_buffer" accessPermission="rw" addressOffset="0x0020" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.55"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Data Buffer Register</toolTipHelpDescription>
+    <bitFields name="DATA_BUFFER" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/data_buffer/data_buffer" maxValue="2147483647" minValue="0" startPos="0" stopPos="31" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Data Buffer</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="PRESENT_STATE" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/present_state" addressOffset="0x0024" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.56"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Present State Register</toolTipHelpDescription>
+    <bitFields name="DAT_7_4_PIN_LEVEL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/present_state/dat_7_4_pin_level" maxValue="15" minValue="0" startPos="25" stopPos="28">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Line Signal Level</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="CMD_LINE_LEVEL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/present_state/cmd_line_level" maxValue="1" minValue="0" startPos="24" stopPos="24">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>CMD Line Signal Level</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="DAT_3_0_PIN_LEVEL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/present_state/dat_3_0_pin_level" maxValue="15" minValue="0" startPos="20" stopPos="23">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Line Signal Level</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="WRITE_PROTECT_PIN_LEVEL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/present_state/write_protect_pin_level" maxValue="1" minValue="0" startPos="19" stopPos="19">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Write Protect Switch Pin Level</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Write protected (SDWP = 1)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Write enabled (SDWP = 0)"/>
+    </bitFields>
+    <bitFields name="CARD_DETECT_PIN_LEVEL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/present_state/card_detect_pin_level" maxValue="1" minValue="0" startPos="18" stopPos="18">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Card Detect Pin Level</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Card present (SDCD = 1)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Card present (SDCD = 0)"/>
+    </bitFields>
+    <bitFields name="CARD_STATE_STABLE" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/present_state/card_state_stable" maxValue="1" minValue="0" startPos="17" stopPos="17">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Card State Stable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Reset of Debouncing"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="No Card or Inserted"/>
+    </bitFields>
+    <bitFields name="CARD_INSERTED" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/present_state/card_inserted" maxValue="1" minValue="0" startPos="16" stopPos="16">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Card Inserted</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Reset or Debouncing or No Card"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Card Inserted"/>
+    </bitFields>
+    <bitFields name="BUFFER_READ_ENABLE" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/present_state/buffer_read_enable" maxValue="1" minValue="0" startPos="11" stopPos="11">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Buffer Read Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Read Disable"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Read Enable."/>
+    </bitFields>
+    <bitFields name="BUFFER_WRITE_ENABLE" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/present_state/buffer_write_enable" maxValue="1" minValue="0" startPos="10" stopPos="10">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Buffer Write Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Write Disable"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Write Enable."/>
+    </bitFields>
+    <bitFields name="READ_TRANSFER_ACTIVE" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/present_state/read_transfer_active" maxValue="1" minValue="0" startPos="9" stopPos="9">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Read Transfer Active</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No valid data"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Transferring data"/>
+    </bitFields>
+    <bitFields name="WRITE_TRANSFER_ACTIVE" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/present_state/write_transfer_active" maxValue="1" minValue="0" startPos="8" stopPos="8">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Write Transfer Active</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No valid data"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Transferring data"/>
+    </bitFields>
+    <bitFields name="DAT_LINE_ACTIVE" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/present_state/dat_line_active" maxValue="1" minValue="0" startPos="2" stopPos="2">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>DAT Line Active</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="DAT line inactive"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="DAT line active"/>
+    </bitFields>
+    <bitFields name="COMMAND_INHIBIT_DAT" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/present_state/command_inhibit_dat" maxValue="1" minValue="0" startPos="1" stopPos="1">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command Inhibit (DAT)</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Can issue command which uses the DAT line"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Cannot issue command which uses the DAT line"/>
+    </bitFields>
+    <bitFields name="COMMAND_INHIBIT_CMD" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/present_state/command_inhibit_cmd" maxValue="1" minValue="0" startPos="0" stopPos="0">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command Inhibit (CMD)</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="HOST_CTRL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/host_ctrl" accessPermission="rw" addressOffset="0x0028" resetValue="00" resetMask="0xFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.57"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00"/>
+    <toolTipHelpDescription>Host Control Register</toolTipHelpDescription>
+    <bitFields name="CARD_DET_SIGNAL_DETECT" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/host_ctrl/card_det_signal_detect" maxValue="1" minValue="0" startPos="7" stopPos="7" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Card detect signal detetction</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="SDCD is selected (for normal use)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The card detect test level is selected"/>
+    </bitFields>
+    <bitFields name="CARD_DETECT_TEST_LEVEL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/host_ctrl/card_detect_test_level" maxValue="1" minValue="0" startPos="6" stopPos="6" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Card Detect Test Level</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Card"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Card Inserted"/>
+    </bitFields>
+    <bitFields name="HIGH_SPEED_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/host_ctrl/high_speed_en" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>High Speed Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Normal Speed Mode"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="High Speed Mode"/>
+    </bitFields>
+    <bitFields name="DATA_TX_WIDTH" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/host_ctrl/data_tx_width" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Data Transfer Width (SD1 or SD4)</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="1 bit mode"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="4-bit mode"/>
+    </bitFields>
+    <bitFields name="LED_CTRL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/host_ctrl/led_ctrl" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>LED Control</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="LED off"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="LED on"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="POWER_CTRL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/power_ctrl" accessPermission="rw" addressOffset="0x0029" resetValue="00" resetMask="0xFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.58"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00"/>
+    <toolTipHelpDescription>Power Control Register</toolTipHelpDescription>
+    <bitFields name="HARDWARE_RESET" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/power_ctrl/hardware_reset" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Hardware reset</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="SD_BUS_VOLTAGE_SEL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/power_ctrl/sd_bus_voltage_sel" maxValue="7" minValue="0" startPos="1" stopPos="3" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>SD Bus Voltage Select</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b111" description="3.3V (Flattop.)"/>
+    </bitFields>
+    <bitFields name="SD_BUS_POWER" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/power_ctrl/sd_bus_power" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>SD Bus Power</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Power off"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Power on"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="BLOCK_GAP_CTRL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/block_gap_ctrl" accessPermission="rw" addressOffset="0x002A" resetValue="00" resetMask="0xFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.59"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00"/>
+    <toolTipHelpDescription>Block Gap Control Register</toolTipHelpDescription>
+    <bitFields name="SPI_MODE" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/block_gap_ctrl/spi_mode" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>SPI_MODE</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="SD mode"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="SPI mode"/>
+    </bitFields>
+    <bitFields name="INT_AT_BLOCK_GAP" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/block_gap_ctrl/int_at_block_gap" maxValue="1" minValue="0" startPos="3" stopPos="3" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Interrupt At Block Gap</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="READ_WAIT_CTRL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/block_gap_ctrl/read_wait_ctrl" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Read Wait Control</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Disable Read Wait Control"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enable Read Wait Control"/>
+    </bitFields>
+    <bitFields name="CONTINUE_REQ" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/block_gap_ctrl/continue_req" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Continue Request</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Ignored"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Restart"/>
+    </bitFields>
+    <bitFields name="STOP_AT_BLOCK_GAP" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/block_gap_ctrl/stop_at_block_gap" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Stop At Block Gap Request</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Transfer"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Stop"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CLOCK_CTRL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/clock_ctrl" accessPermission="rw" addressOffset="0x002C" resetValue="0000" resetMask="0xFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.61"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <toolTipHelpDescription>Clock Control Register</toolTipHelpDescription>
+    <bitFields name="SDCLK_FREQ_SEL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/clock_ctrl/sdclk_freq_sel" maxValue="255" minValue="0" startPos="8" stopPos="15" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>SDCLK Frequency Select</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="00" description="base clock(10MHz-63MHz)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="01" description="base clock divided by 2"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="10" description="base clock divided by 32"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="02" description="base clock divided by 4"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="04" description="base clock divided by 8"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="08" description="base clock divided by 16"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="20" description="base clock divided by 64"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="40" description="base clock divided by 128"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="80" description="base clock divided by 256"/>
+    </bitFields>
+    <bitFields name="SDCLOCK_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/clock_ctrl/sdclock_en" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>SD Clock Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Disable"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enable"/>
+    </bitFields>
+    <bitFields name="INTERNAL_CLOCK_STABLE" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/clock_ctrl/internal_clock_stable" maxValue="1" minValue="0" startPos="1" stopPos="1">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Internal Clock Stable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Not Ready"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Ready"/>
+    </bitFields>
+    <bitFields name="INTERNAL_CLOCK_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/clock_ctrl/internal_clock_en" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Internal Clock Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Stop"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Oscillate"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="TIMEOUT_CTRL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/timeout_ctrl" accessPermission="rw" addressOffset="0x002E" resetValue="00" resetMask="0xFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.62"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00"/>
+    <toolTipHelpDescription>Timeout Control Register</toolTipHelpDescription>
+    <bitFields name="DAT_TIMEOUT_CNT_VAL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/timeout_ctrl/dat_timeout_cnt_val" maxValue="15" minValue="0" startPos="0" stopPos="3" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Data Timeout Counter Value</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0000" description="TMCLK * 2^13"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0001" description="TMCLK * 2^14"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1110" description="TMCLK * 2^27"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1111" description="Reserved"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="SW_RESET" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/sw_reset" accessPermission="rw" addressOffset="0x002F" resetValue="00" resetMask="0xFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.63"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00"/>
+    <toolTipHelpDescription>Software Reset Register</toolTipHelpDescription>
+    <bitFields name="SW_RST_DAT_LINE" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/sw_reset/sw_rst_dat_line" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Software Reset for DAT Line</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Work"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Reset"/>
+    </bitFields>
+    <bitFields name="SW_RST_CMD_LINE" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/sw_reset/sw_rst_cmd_line" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Software Reset for CMD Line</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Work"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Reset"/>
+    </bitFields>
+    <bitFields name="SW_RST_ALL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/sw_reset/sw_rst_all" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Software Reset for All</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="INT_STATUS_NORM" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_norm" accessPermission="rw" addressOffset="0x0030" resetValue="0000" resetMask="0xFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.64"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <toolTipHelpDescription>Normal Interrupt Status Register</toolTipHelpDescription>
+    <bitFields name="ERR_INT" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_norm/err_int" maxValue="1" minValue="0" startPos="15" stopPos="15">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Error Interrupt</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Error."/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Error."/>
+    </bitFields>
+    <bitFields name="CARD_INT" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_norm/card_int" maxValue="1" minValue="0" startPos="8" stopPos="8">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Card Interrupt</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Card Interrupt"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Generate Card Interrupt"/>
+    </bitFields>
+    <bitFields name="CARD_REMOVAL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_norm/card_removal" maxValue="1" minValue="0" startPos="7" stopPos="7" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Card Removal</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Card State Stable or Debouncing"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Card Removed"/>
+    </bitFields>
+    <bitFields name="CARD_INS" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_norm/card_ins" maxValue="1" minValue="0" startPos="6" stopPos="6" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Card Insertion</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Card State Stable or Debouncing"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Card Inserted"/>
+    </bitFields>
+    <bitFields name="BUFF_READ_READY" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_norm/buff_read_ready" maxValue="1" minValue="0" startPos="5" stopPos="5" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Buffer Read Ready</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Not Ready to read Buffer."/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Ready to read Buffer."/>
+    </bitFields>
+    <bitFields name="BUFF_WRITE_READY" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_norm/buff_write_ready" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Buffer Write Ready</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Not Ready to Write Buffer."/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Ready to Write Buffer."/>
+    </bitFields>
+    <bitFields name="BLOCK_GAP_EVENT" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_norm/block_gap_event" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Block Gap Event</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Block Gap Event"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Transaction stopped at Block Gap"/>
+    </bitFields>
+    <bitFields name="TX_COMPLETE" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_norm/tx_complete" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Transfer Complete</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Data Transfer Complete"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Data Transfer Complete"/>
+    </bitFields>
+    <bitFields name="CMD_COMPLETE" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_norm/cmd_complete" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command Complete</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Command Complete"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Command Complete"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="INT_STATUS_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_err" accessPermission="rw" addressOffset="0x0032" resetValue="0000" resetMask="0xFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.65"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <toolTipHelpDescription>Error Interrupt Status Register</toolTipHelpDescription>
+    <bitFields name="CEATA_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_err/ceata_err" maxValue="1" minValue="0" startPos="13" stopPos="13" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Ceata Error Status</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="no error"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="error"/>
+    </bitFields>
+    <bitFields name="ACMD_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_err/acmd_err" maxValue="1" minValue="0" startPos="8" stopPos="8" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Auto CMD Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Error"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Error"/>
+    </bitFields>
+    <bitFields name="CURRENT_LIMIT_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_err/current_limit_err" maxValue="1" minValue="0" startPos="7" stopPos="7" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Current Limit Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Error"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Power Fail"/>
+    </bitFields>
+    <bitFields name="DATA_END_BIT_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_err/data_end_bit_err" maxValue="1" minValue="0" startPos="6" stopPos="6" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Data End Bit Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Error"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Error"/>
+    </bitFields>
+    <bitFields name="DATA_CRC_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_err/data_crc_err" maxValue="1" minValue="0" startPos="5" stopPos="5" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Data CRC Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Error"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Error"/>
+    </bitFields>
+    <bitFields name="DATA_TIMEOUT_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_err/data_timeout_err" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Data Timeout Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Error"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Timeout"/>
+    </bitFields>
+    <bitFields name="CMD_IND_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_err/cmd_ind_err" maxValue="1" minValue="0" startPos="3" stopPos="3" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command Index Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Error"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Error"/>
+    </bitFields>
+    <bitFields name="CMD_END_BIT_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_err/cmd_end_bit_err" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command End Bit Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Error"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="End Bit Error Generated"/>
+    </bitFields>
+    <bitFields name="CMD_CRC_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_err/cmd_crc_err" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command CRC Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Error"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="CRC Error Generated"/>
+    </bitFields>
+    <bitFields name="CMD_TIMEOUT_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/int_status_err/cmd_timeout_err" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command Timeout Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Error"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Timeout"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="EN_INT_STATUS_NORM" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_norm" accessPermission="rw" addressOffset="0x0034" resetValue="0000" resetMask="0xFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.66"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <toolTipHelpDescription>Normal Interrupt Status Enable Register</toolTipHelpDescription>
+    <bitFields name="FIXED_TO_0" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_norm/fixed_to_0" maxValue="1" minValue="0" startPos="15" stopPos="15">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Fixed to 0</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="CARD_INT_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_norm/card_int_en" maxValue="1" minValue="0" startPos="8" stopPos="8" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Card Interrupt Status Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="CARD_REMOVAL_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_norm/card_removal_en" maxValue="1" minValue="0" startPos="7" stopPos="7" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Card Removal Status Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="CARD_INS_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_norm/card_ins_en" maxValue="1" minValue="0" startPos="6" stopPos="6" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Card Insertion Status Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="BUFF_READ_READY_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_norm/buff_read_ready_en" maxValue="1" minValue="0" startPos="5" stopPos="5" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Buffer Read Ready Status Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="BUFF_WRITE_READY_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_norm/buff_write_ready_en" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Buffer Write Ready Status Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="BLOCK_GAP_EVENT_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_norm/block_gap_event_en" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Block Gap Event Status Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="TX_COMPLETE_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_norm/tx_complete_en" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Transfer Complete Status Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="CMD_COMPLETE_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_norm/cmd_complete_en" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command Complete Status Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="EN_INT_STATUS_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_err" accessPermission="rw" addressOffset="0x0036" resetValue="0000" resetMask="0xFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.67"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <toolTipHelpDescription>Error Interrupt Status Enable Register</toolTipHelpDescription>
+    <bitFields name="CEATA_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_err/ceata_err_en" maxValue="1" minValue="0" startPos="13" stopPos="13" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Ceata Error Status Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="TARGET_RESP_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_err/target_resp_err_en" maxValue="1" minValue="0" startPos="12" stopPos="12" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Target Response Error Status Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="ACMD_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_err/acmd_err_en" maxValue="1" minValue="0" startPos="8" stopPos="8" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Auto CMD12 Error Status Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="CURRENT_LIMIT_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_err/current_limit_err_en" maxValue="1" minValue="0" startPos="7" stopPos="7" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Current Limit Error Status Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="DATA_END_BIT_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_err/data_end_bit_err_en" maxValue="1" minValue="0" startPos="6" stopPos="6" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Data End Bit Error Status Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="DATA_CRC_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_err/data_crc_err_en" maxValue="1" minValue="0" startPos="5" stopPos="5" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Data CRC Error Status Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="DATA_TIMEOUT_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_err/data_timeout_err_en" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Data Timeout Error Status Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="CMD_IND_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_err/cmd_ind_err_en" maxValue="1" minValue="0" startPos="3" stopPos="3" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command Index Error Status Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="CMD_END_BIT_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_err/cmd_end_bit_err_en" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command End Bit Error Status Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="CMD_CRC_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_err/cmd_crc_err_en" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command CRC Error Status Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="CMD_TIMEOUT_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_status_err/cmd_timeout_err_en" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command Timeout Error Status Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="EN_INT_SIGNAL_NORM" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_norm" accessPermission="rw" addressOffset="0x0038" resetValue="0000" resetMask="0xFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.68"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <toolTipHelpDescription>Normal Interrupt Signal Enable Register</toolTipHelpDescription>
+    <bitFields name="FIXED_TO_0" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_norm/fixed_to_0" maxValue="1" minValue="0" startPos="15" stopPos="15">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Fixed to 0</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="CARD_INT_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_norm/card_int_en" maxValue="1" minValue="0" startPos="8" stopPos="8" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Card Interrupt Signal Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="CARD_REMOVAL_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_norm/card_removal_en" maxValue="1" minValue="0" startPos="7" stopPos="7" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Card Removal Signal Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="CARD_INS_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_norm/card_ins_en" maxValue="1" minValue="0" startPos="6" stopPos="6" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Card Insertion Signal Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="BUFF_READ_READY_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_norm/buff_read_ready_en" maxValue="1" minValue="0" startPos="5" stopPos="5" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Buffer Read Ready Signal Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="BUFF_WRITE_READY_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_norm/buff_write_ready_en" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Buffer Write Ready Signal Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="BLOCK_GAP_EVENT_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_norm/block_gap_event_en" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Block Gap Event Signal Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="TX_COMPLETE_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_norm/tx_complete_en" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Transfer Complete Signal Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="CMD_COMPLETE_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_norm/cmd_complete_en" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command Complete Signal Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="EN_INT_SIGNAL_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_err" accessPermission="rw" addressOffset="0x003A" resetValue="0000" resetMask="0xFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.69"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <toolTipHelpDescription>Error Interrupt Signal Enable Register</toolTipHelpDescription>
+    <bitFields name="CEATA_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_err/ceata_err_en" maxValue="1" minValue="0" startPos="13" stopPos="13" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Ceata Error Signal Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="TARGET_RESP_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_err/target_resp_err_en" maxValue="1" minValue="0" startPos="12" stopPos="12" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Target Response Error Signal Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="ACMD_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_err/acmd_err_en" maxValue="1" minValue="0" startPos="8" stopPos="8" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Auto CMD12 Error Signal Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="CURRENT_LIMIT_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_err/current_limit_err_en" maxValue="1" minValue="0" startPos="7" stopPos="7" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Current Limit Error Signal Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="DATA_END_BIT_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_err/data_end_bit_err_en" maxValue="1" minValue="0" startPos="6" stopPos="6" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Data End Bit Error Signal Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="DATA_CRC_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_err/data_crc_err_en" maxValue="1" minValue="0" startPos="5" stopPos="5" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Data CRC Error Signal Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="DATA_TIMEOUT_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_err/data_timeout_err_en" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Data Timeout Error Signal Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="CMD_IND_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_err/cmd_ind_err_en" maxValue="1" minValue="0" startPos="3" stopPos="3" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command Index Error Signal Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="CMD_END_BIT_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_err/cmd_end_bit_err_en" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command End Bit Error Signal Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="CMD_CRC_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_err/cmd_crc_err_en" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command CRC Error Signal Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+    <bitFields name="CMD_TIMEOUT_ERR_EN" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/en_int_signal_err/cmd_timeout_err_en" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command Timeout Error Signal Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Masked"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Enabled"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="ACMD_ERR_STATUS" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/acmd_err_status" addressOffset="0x003C" resetValue="0000" resetMask="0xFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.70"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <toolTipHelpDescription>Auto CMD Error Status Register</toolTipHelpDescription>
+    <bitFields name="CMD_NOT_ISSUED_BY_ACMD12_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/acmd_err_status/cmd_not_issued_by_acmd12_err" maxValue="1" minValue="0" startPos="7" stopPos="7">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Command Not Issued By Auto CMD12 Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Error"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Not Issued"/>
+    </bitFields>
+    <bitFields name="ACMD_IND_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/acmd_err_status/acmd_ind_err" maxValue="1" minValue="0" startPos="4" stopPos="4">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Auto CMD Index Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Error"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Error"/>
+    </bitFields>
+    <bitFields name="ACMD_END_BIT_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/acmd_err_status/acmd_end_bit_err" maxValue="1" minValue="0" startPos="3" stopPos="3">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Auto CMD End Bit Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Error"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="End Bit Error Generated"/>
+    </bitFields>
+    <bitFields name="ACMD_CRC_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/acmd_err_status/acmd_crc_err" maxValue="1" minValue="0" startPos="2" stopPos="2">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Auto CMD CRC Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Error"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="CRC Error Generated"/>
+    </bitFields>
+    <bitFields name="ACMD_TIMEOUT_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/acmd_err_status/acmd_timeout_err" maxValue="1" minValue="0" startPos="1" stopPos="1">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Auto CMD Timeout Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No Error"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Timeout"/>
+    </bitFields>
+    <bitFields name="ACMD12_NOT_EXEC_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/acmd_err_status/acmd12_not_exec_err" maxValue="1" minValue="0" startPos="0" stopPos="0">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Auto CMD12 Not Executed</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Executed"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Not Executed"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="FORCE_EVENT_ACMD_ERR_STATUS" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/force_event_acmd_err_status" accessPermission="w" addressOffset="0x0050" resetValue="0000" resetMask="0xFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.71"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <toolTipHelpDescription>Force Event Register for Auto CMD Error Status</toolTipHelpDescription>
+    <bitFields name="FE_CMD_NOT_ISSUED_ACMD12_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/force_event_acmd_err_status/fe_cmd_not_issued_acmd12_err" maxValue="1" minValue="0" startPos="7" stopPos="7" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Force Event for CMD not issued by Auto CMD12 Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No interrupt"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Interrupt is generated"/>
+    </bitFields>
+    <bitFields name="FE_ACMD_IND_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/force_event_acmd_err_status/fe_acmd_ind_err" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Force Event for Auto CMD Index Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No interrupt"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Interrupt is generated"/>
+    </bitFields>
+    <bitFields name="FE_ACMD_END_BIT_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/force_event_acmd_err_status/fe_acmd_end_bit_err" maxValue="1" minValue="0" startPos="3" stopPos="3" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Force Event for Auto CMD End bit Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No interrupt"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Interrupt is generated"/>
+    </bitFields>
+    <bitFields name="FE_ACMD_CRC_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/force_event_acmd_err_status/fe_acmd_crc_err" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Force Event for Auto CMD CRC Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No interrupt"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Interrupt is generated"/>
+    </bitFields>
+    <bitFields name="FE_ACMD_TIMEOUT_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/force_event_acmd_err_status/fe_acmd_timeout_err" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Force Event for Auto CMD timeout Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No interrupt"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Interrupt is generated"/>
+    </bitFields>
+    <bitFields name="FE_ACMD_NOT_EXEC" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/force_event_acmd_err_status/fe_acmd_not_exec" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Force Event for Auto CMD12 NOT Executed</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No interrupt"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Interrupt is generated"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="FORCE_EVENT_ERR_STATUS" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/force_event_err_status" accessPermission="w" addressOffset="0x0052" resetValue="0000" resetMask="0xFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.72"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <toolTipHelpDescription>Force Event Register for Error Interrupt Status</toolTipHelpDescription>
+    <bitFields name="FE_CEATA_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/force_event_err_status/fe_ceata_err" maxValue="1" minValue="0" startPos="13" stopPos="13" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Force Event for Ceata Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No interrupt"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Interrupt is generated"/>
+    </bitFields>
+    <bitFields name="FE_TARGET_RESPONSE_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/force_event_err_status/fe_target_response_err" maxValue="1" minValue="0" startPos="12" stopPos="12" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Force event for Target Response Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No interrupt"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Interrupt is generated"/>
+    </bitFields>
+    <bitFields name="FE_ACMD12_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/force_event_err_status/fe_acmd12_err" maxValue="1" minValue="0" startPos="8" stopPos="8" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Force Event for Auto CMD Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No interrupt"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Interrupt is generated"/>
+    </bitFields>
+    <bitFields name="FE_CURRENT_LIMIT_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/force_event_err_status/fe_current_limit_err" maxValue="1" minValue="0" startPos="7" stopPos="7" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Force Event for Current Limit Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No interrupt"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Interrupt is generated"/>
+    </bitFields>
+    <bitFields name="FE_DATA_END_BIT_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/force_event_err_status/fe_data_end_bit_err" maxValue="1" minValue="0" startPos="6" stopPos="6" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Force Event for Data End Bit Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No interrupt"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Interrupt is generated"/>
+    </bitFields>
+    <bitFields name="FE_DATA_CRC_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/force_event_err_status/fe_data_crc_err" maxValue="1" minValue="0" startPos="5" stopPos="5" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Force Event for Data CRC Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No interrupt"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Interrupt is generated"/>
+    </bitFields>
+    <bitFields name="FE_DATA_TIMEOUT_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/force_event_err_status/fe_data_timeout_err" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Force Event for Data Timeout Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No interrupt"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Interrupt is generated"/>
+    </bitFields>
+    <bitFields name="FE_CMD_IND_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/force_event_err_status/fe_cmd_ind_err" maxValue="1" minValue="0" startPos="3" stopPos="3" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Force Event for Command Index Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No interrupt"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Interrupt is generated"/>
+    </bitFields>
+    <bitFields name="FE_CMD_END_BIT_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/force_event_err_status/fe_cmd_end_bit_err" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Force Event for Command End Bit Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No interrupt"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Interrupt is generated"/>
+    </bitFields>
+    <bitFields name="FE_CMD_CRC_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/force_event_err_status/fe_cmd_crc_err" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Force Event for Command CRC Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No interrupt"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Interrupt is generated"/>
+    </bitFields>
+    <bitFields name="FE_CMD_TIMEOUT_ERR" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/force_event_err_status/fe_cmd_timeout_err" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Force Event for Command Timeout Error</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No interrupt"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Interrupt is generated"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="DEBUG_SEL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/debug_sel" accessPermission="w" addressOffset="0x0074" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.73"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Debug Selection Register</toolTipHelpDescription>
+    <bitFields name="DEBUG_SEL" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/debug_sel/debug_sel" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Debug_sel</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="receiver module and fifo_ctrl module signals are probed out"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="cmd register, Interrupt status, transmitter module and clk sdcard signals are probed out."/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="SPI" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/spi" accessPermission="rw" addressOffset="0x00F0" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.74"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>SPI Interrupt Support Register</toolTipHelpDescription>
+    <bitFields name="SPI_INT_SUPPORT" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/spi/spi_int_support" maxValue="255" minValue="0" startPos="0" stopPos="7" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>SPI INT SUPPORT</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="SLOT_INT_STATUS" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/slot_int_status" addressOffset="0x00FC" resetValue="0000" resetMask="0xFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.75"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0000"/>
+    <toolTipHelpDescription>Slot Interrupt Status Register</toolTipHelpDescription>
+    <bitFields name="SLOT_INT_STATUS" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/slot_int_status/slot_int_status" maxValue="255" minValue="0" startPos="0" stopPos="7">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Interrupt Signal for Card Slot</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="00" description="Slot 1"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="MMC_DATA_OUT2" description="" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/mmc_data_out2" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.79"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="MMC_DATA_IN2" description="" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/mmc_data_in2" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.80"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="MMC_DATA_IN3" description="" URI="http://www.infineon.com/0.1.28/peripheral/sdmmc/0/host/mmc_data_in3" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../sdmmc003/1.0.14/sdmmc003_0.app#//@consumed.81"/>
+  </provided>
+  <categoryDescription description="The SD/MMC provides an interface between SD/SDIO/MMC cards and the AHB bus." name="SDMMC"/>
+</ResourceModel:Peripheral>

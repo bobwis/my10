@@ -55,100 +55,98 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-const uint32_t fred = 0x12345678;	// align
 const unsigned char phaser_wav[] = /* { 128, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255,128,128,0,255,128 }; */
-{
-		114, 89, 141, 101, 114, 127, 102, 127, 89, 127, 128, 113, 141,
-		101, 128, 113, 128, 127, 128, 127, 153, 113, 114, 140, 141, 140, 153, 113, 114, 127, 128, 127,
-		153, 140, 141, 152, 128, 113, 128, 127, 141, 141, 128, 127, 128, 101, 128, 152, 140, 114, 101,
-		128, 127, 128, 113, 114, 128, 114, 128, 127, 102, 113, 102, 127, 127, 114, 113, 102, 113, 114,
-		141, 102, 89, 101, 114, 89, 102, 102, 88, 141, 114, 128, 128, 114, 102, 113, 114, 127, 141, 127,
-		114, 152, 141, 128, 114, 141, 141, 140, 128, 127, 128, 165, 141, 140, 102, 88, 102, 101, 89,
-		152, 128, 113, 102, 102, 113, 102, 127, 114, 128, 113, 141, 127, 128, 113, 140, 166, 127, 114,
-		127, 141, 113, 128, 127, 114, 140, 153, 102, 101, 102, 141, 127, 89, 88, 114, 101, 141, 113,
-		141, 152, 114, 113, 128, 152, 102, 101, 114, 141, 113, 89, 101, 128, 101, 128, 140, 76, 113,
-		141, 89, 101, 114, 114, 140, 89, 101, 114, 114, 127, 141, 101, 114, 141, 152, 128, 101, 152,
-		166, 127, 141, 113, 128, 152, 76, 140, 114, 141, 102, 128, 128, 113, 114, 152, 128, 113, 153,
-		128, 88, 102, 140, 64, 88, 141, 88, 89, 101, 166, 102, 88, 179, 49, 114, 140, 64, 141, 113, 152,
-		102, 140, 141, 101, 140, 166, 101, 153, 128, 88, 128, 127, 102, 128, 113, 102, 192, 128, 114,
-		140, 192, 114, 127, 141, 101, 141, 88, 166, 75, 140, 166, 49, 166, 64, 127, 114, 76, 165, 102,
-		140, 102, 113, 166, 63, 179, 76, 179, 49, 153, 75, 141, 102, 140, 114, 101, 166, 63, 191, 76,
-		165, 114, 178, 102, 128, 166, 114, 153, 76, 192, 49, 166, 37, 178, 38, 152, 88, 102, 127, 76,
-		101, 76, 153, 64, 152, 64, 140, 76, 152, 102, 152, 76, 178, 76, 178, 89, 165, 89, 152, 89, 204,
-		64, 191, 141, 114, 127, 153, 101, 179, 75, 205, 89, 141, 114, 114, 152, 64, 140, 141, 102, 191,
-		64, 191, 89, 102, 152, 50, 204, 50, 191, 50, 101, 166, 63, 179, 24, 179, 88, 114, 152, 102, 140,
-		64, 128, 64, 179, 75, 76, 179, 25, 205, 76, 101, 141, 88, 192, 89, 89, 178, 38, 165, 114, 113,
-		179, 11, 179, 166, 24, 166, 140, 64, 205, 88, 102, 140, 64, 141, 178, 89, 101, 166, 37, 179,
-		140, 37, 205, 191, 38, 178, 153, 63, 205, 75, 114, 230, 64, 114, 216, 49, 76, 204, 50, 88, 217,
-		89, 113, 205, 75, 114, 165, 76, 127, 153, 37, 141, 216, 50, 128, 191, 50, 128, 179, 89, 101,
-		179, 88, 113, 205, 88, 89, 204, 102, 49, 192, 140, 75, 141, 165, 102, 140, 192, 89, 88, 179, 89,
-		63, 166, 102, 64, 166, 140, 76, 140, 141, 140, 192, 88, 37, 166, 191, 50, 49, 179, 166, 24, 64,
-		191, 128, 49, 152, 179, 37, 50, 178, 166, 50, 50, 178, 179, 63, 50, 166, 165, 25, 63, 205, 152,
-		50, 113, 192, 152, 25, 49, 179, 152, 25, 64, 178, 166, 63, 64, 204, 192, 37, 25, 192, 191, 38,
-		25, 165, 230, 88, 12, 127, 216, 128, 24, 102, 229, 192, 75, 64, 178, 205, 75, 25, 166, 255, 140,
-		12, 75, 205, 216, 76, 38, 127, 192, 127, 64, 128, 216, 179, 64, 63, 179, 204, 102, 50, 140, 243,
-		165, 25, 37, 153, 242, 178, 76, 49, 114, 165, 128, 63, 64, 141, 165, 102, 49, 114, 216, 153, 37,
-		38, 165, 243, 152, 38, 24, 140, 217, 152, 25, 25, 127, 192, 128, 25, 25, 140, 230, 178, 50, 25,
-		101, 217, 204, 102, 38, 75, 179, 243, 178, 64, 24, 128, 242, 217, 101, 12, 50, 166, 217, 166,
-		75, 38, 88, 153, 152, 101, 38, 50, 140, 192, 127, 24, 0, 75, 192, 243, 178, 76, 0, 50, 165, 217,
-		165, 63, 12, 63, 166, 229, 179, 75, 25, 89, 191, 243, 204, 89, 25, 50, 141, 230, 229, 153, 63,
-		38, 101, 205, 243, 191, 89, 11, 38, 127, 230, 229, 153, 38, 0, 50, 152, 230, 204, 114, 37, 50,
-		113, 179, 192, 128, 38, 12, 75, 166, 204, 179, 88, 12, 37, 128, 216, 230, 179, 113, 64, 63, 114,
-		152, 166, 127, 89, 63, 64, 101, 153, 165, 127, 89, 63, 89, 101, 141, 153, 140, 102, 89, 113,
-		141, 166, 152, 141, 113, 76, 75, 114, 165, 192, 165, 102, 38, 24, 76, 165, 217, 216, 153, 75,
-		38, 49, 114, 191, 217, 192, 140, 89, 75, 114, 179, 205, 166, 114, 63, 38, 63, 128, 191, 205,
-		165, 101, 50, 24, 64, 140, 205, 205, 140, 64, 12, 25, 89, 165, 230, 229, 192, 113, 50, 24, 38,
-		101, 179, 217, 204, 153, 88, 38, 37, 76, 153, 205, 216, 179, 101, 38, 25, 49, 102, 153, 191,
-		179, 141, 88, 63, 50, 75, 102, 140, 179, 165, 141, 101, 76, 75, 102, 140, 179, 178, 166, 114,
-		75, 50, 63, 114, 178, 217, 216, 166, 101, 50, 24, 38, 101, 166, 204, 217, 179, 127, 76, 37, 50,
-		88, 153, 205, 216, 179, 140, 76, 37, 38, 88, 153, 205, 230, 191, 128, 63, 12, 11, 49, 114, 178,
-		205, 191, 153, 102, 49, 25, 37, 76, 141, 191, 205, 179, 140, 76, 25, 24, 50, 101, 166, 204, 217,
-		191, 141, 75, 38, 24, 64, 127, 179, 230, 229, 191, 128, 75, 38, 38, 49, 102, 141, 178, 192, 166,
-		127, 102, 75, 76, 102, 140, 179, 178, 166, 140, 102, 75, 76, 101, 141, 165, 192, 191, 179, 127,
-		88, 50, 49, 76, 113, 166, 204, 217, 178, 128, 64, 11, 0, 24, 76, 127, 192, 230, 229, 205, 152,
-		102, 50, 24, 38, 75, 114, 165, 192, 192, 178, 141, 101, 49, 25, 24, 50, 101, 153, 191, 205, 191,
-		166, 113, 76, 37, 38, 63, 102, 152, 205, 217, 217, 178, 128, 75, 38, 25, 38, 63, 114, 165, 205,
-		217, 216, 192, 153, 101, 50, 24, 25, 63, 102, 152, 192, 216, 217, 178, 141, 76, 37, 25, 24, 50,
-		101, 153, 192, 217, 217, 192, 152, 102, 49, 25, 24, 38, 76, 127, 179, 217, 216, 205, 165, 114,
-		63, 25, 11, 25, 63, 114, 166, 204, 230, 217, 204, 166, 113, 64, 38, 37, 50, 88, 128, 178, 204,
-		217, 204, 166, 128, 76, 25, 12, 24, 50, 101, 140, 192, 216, 217, 192, 165, 128, 75, 38, 24, 25,
-		49, 76, 127, 166, 204, 217, 204, 179, 141, 101, 64, 49, 50, 63, 89, 113, 166, 191, 205, 204,
-		192, 152, 114, 76, 50, 49, 64, 88, 128, 165, 192, 204, 192, 178, 153, 128, 101, 76, 64, 64, 75,
-		102, 127, 166, 178, 192, 178, 153, 127, 89, 49, 38, 38, 49, 76, 101, 128, 152, 179, 191, 192,
-		178, 153, 128, 88, 76, 63, 50, 63, 76, 102, 127, 153, 166, 165, 166, 152, 128, 114, 76, 63, 50,
-		38, 49, 76, 101, 141, 165, 192, 205, 204, 192, 165, 141, 101, 76, 64, 49, 50, 76, 89, 127, 153,
-		191, 205, 204, 191, 179, 152, 114, 88, 76, 63, 50, 64, 75, 102, 127, 153, 166, 166, 165, 153,
-		140, 128, 113, 89, 75, 76, 76, 88, 102, 113, 141, 153, 166, 179, 178, 166, 140, 114, 101, 76,
-		64, 64, 63, 76, 89, 127, 153, 178, 192, 204, 192, 192, 165, 128, 101, 64, 50, 37, 37, 50, 75,
-		102, 127, 166, 192, 204, 205, 192, 178, 153, 127, 102, 75, 50, 38, 24, 38, 63, 89, 114, 140,
-		179, 191, 217, 204, 192, 178, 153, 140, 102, 75, 38, 24, 12, 24, 50, 75, 102, 140, 166, 191,
-		205, 204, 205, 179, 166, 141, 114, 89, 63, 50, 50, 50, 76, 89, 114, 140, 166, 191, 205, 205,
-		205, 191, 179, 140, 114, 75, 50, 38, 24, 25, 49, 64, 88, 102, 140, 166, 178, 192, 204, 205, 191,
-		166, 140, 114, 75, 49, 25, 24, 25, 37, 64, 89, 113, 141, 165, 192, 205, 216, 217, 204, 179, 166,
-		127, 102, 75, 50, 38, 37, 38, 64, 88, 102, 127, 153, 178, 192, 204, 205, 205, 192, 165, 141,
-		113, 102, 75, 64, 49, 50, 49, 76, 88, 114, 140, 166, 178, 205, 216, 205, 192, 165, 141, 113, 89,
-		63, 38, 24, 25, 25, 37, 50, 75, 102, 127, 153, 165, 192, 204, 205, 204, 192, 165, 153, 127, 102,
-		76, 64, 50, 38, 38, 37, 50, 76, 101, 128, 152, 166, 191, 204, 217, 205, 204, 192, 165, 141, 127,
-		102, 75, 50, 38, 37, 38, 37, 64, 75, 102, 127, 153, 178, 192, 205, 204, 192, 191, 179, 165, 140,
-		128, 101, 89, 63, 50, 50, 38, 37, 50, 75, 89, 113, 141, 165, 179, 191, 204, 205, 204, 192, 165,
-		153, 127, 114, 88, 76, 50, 37, 38, 37, 50, 76, 89, 101, 128, 152, 166, 191, 192, 205, 204, 205,
-		191, 179, 152, 141, 114, 88, 76, 49, 38, 38, 37, 38, 50, 63, 89, 101, 128, 152, 179, 192, 192,
-		205, 204, 192, 178, 166, 152, 141, 113, 102, 75, 64, 49, 38, 38, 38, 50, 50, 63, 89, 101, 128,
-		152, 166, 179, 191, 192, 192, 178, 179, 166, 152, 128, 113, 89, 75, 63, 50, 49, 50, 63, 63, 76,
-		88, 102, 113, 141, 152, 166, 192, 191, 192, 191, 192, 178, 179, 165, 153, 128, 113, 89, 76, 63,
-		64, 49, 64, 64, 75, 89, 102, 113, 128, 152, 166, 179, 192, 191, 192, 178, 179, 165, 153, 140,
-		128, 101, 89, 75, 64, 63, 49, 50, 64, 63, 76, 88, 102, 114, 127, 141, 165, 179, 191, 192, 192,
-		192, 178, 179, 165, 153, 140, 128, 101, 89, 75, 50, 49, 50, 37, 38, 50, 63, 76, 75, 89, 113,
-		128, 140, 153, 165, 179, 191, 192, 192, 191, 179, 178, 166, 152, 128, 113, 102, 89, 63, 64, 49,
-		38, 38, 50, 50, 63, 76, 88, 114, 127, 141, 152, 166, 178, 192, 191, 192, 204, 192, 178, 166,
-		152, 153, 127, 114, 101, 89, 75, 64, 63, 50, 49, 50, 49, 64, 75, 89, 101, 114, 127, 153, 165,
-		166, 178, 192, 204, 192, 192, 192, 178, 166, 152, 141, 127, 114, 101, 89, 75, 64, 50, 49, 50,
-		63, 64, 76, 76, 89, 102, 127, 141, 140, 153, 166, 179, 178, 179, 178, 179, 179, 166, 152, 141,
-		127, 114, 102, 88, 76, 63, 64, 49, 50, 49, 64, 63, 76, 75, 89, 102, 114, 127, 141, 152, 166,
-		179, 178, 192, 191, 192, 192, 191, 179, 178, 166, 152, 141, 128, 113, 102, 89, 76, 63, 64, 49,
-		50 };
+{ 114, 89, 141, 101, 114, 127, 102, 127, 89, 127, 128, 113, 141, 101, 128, 113, 128, 127, 128, 127,
+		153, 113, 114, 140, 141, 140, 153, 113, 114, 127, 128, 127, 153, 140, 141, 152, 128, 113, 128,
+		127, 141, 141, 128, 127, 128, 101, 128, 152, 140, 114, 101, 128, 127, 128, 113, 114, 128, 114,
+		128, 127, 102, 113, 102, 127, 127, 114, 113, 102, 113, 114, 141, 102, 89, 101, 114, 89, 102,
+		102, 88, 141, 114, 128, 128, 114, 102, 113, 114, 127, 141, 127, 114, 152, 141, 128, 114, 141,
+		141, 140, 128, 127, 128, 165, 141, 140, 102, 88, 102, 101, 89, 152, 128, 113, 102, 102, 113,
+		102, 127, 114, 128, 113, 141, 127, 128, 113, 140, 166, 127, 114, 127, 141, 113, 128, 127, 114,
+		140, 153, 102, 101, 102, 141, 127, 89, 88, 114, 101, 141, 113, 141, 152, 114, 113, 128, 152,
+		102, 101, 114, 141, 113, 89, 101, 128, 101, 128, 140, 76, 113, 141, 89, 101, 114, 114, 140, 89,
+		101, 114, 114, 127, 141, 101, 114, 141, 152, 128, 101, 152, 166, 127, 141, 113, 128, 152, 76,
+		140, 114, 141, 102, 128, 128, 113, 114, 152, 128, 113, 153, 128, 88, 102, 140, 64, 88, 141, 88,
+		89, 101, 166, 102, 88, 179, 49, 114, 140, 64, 141, 113, 152, 102, 140, 141, 101, 140, 166, 101,
+		153, 128, 88, 128, 127, 102, 128, 113, 102, 192, 128, 114, 140, 192, 114, 127, 141, 101, 141,
+		88, 166, 75, 140, 166, 49, 166, 64, 127, 114, 76, 165, 102, 140, 102, 113, 166, 63, 179, 76,
+		179, 49, 153, 75, 141, 102, 140, 114, 101, 166, 63, 191, 76, 165, 114, 178, 102, 128, 166, 114,
+		153, 76, 192, 49, 166, 37, 178, 38, 152, 88, 102, 127, 76, 101, 76, 153, 64, 152, 64, 140, 76,
+		152, 102, 152, 76, 178, 76, 178, 89, 165, 89, 152, 89, 204, 64, 191, 141, 114, 127, 153, 101,
+		179, 75, 205, 89, 141, 114, 114, 152, 64, 140, 141, 102, 191, 64, 191, 89, 102, 152, 50, 204,
+		50, 191, 50, 101, 166, 63, 179, 24, 179, 88, 114, 152, 102, 140, 64, 128, 64, 179, 75, 76, 179,
+		25, 205, 76, 101, 141, 88, 192, 89, 89, 178, 38, 165, 114, 113, 179, 11, 179, 166, 24, 166, 140,
+		64, 205, 88, 102, 140, 64, 141, 178, 89, 101, 166, 37, 179, 140, 37, 205, 191, 38, 178, 153, 63,
+		205, 75, 114, 230, 64, 114, 216, 49, 76, 204, 50, 88, 217, 89, 113, 205, 75, 114, 165, 76, 127,
+		153, 37, 141, 216, 50, 128, 191, 50, 128, 179, 89, 101, 179, 88, 113, 205, 88, 89, 204, 102, 49,
+		192, 140, 75, 141, 165, 102, 140, 192, 89, 88, 179, 89, 63, 166, 102, 64, 166, 140, 76, 140,
+		141, 140, 192, 88, 37, 166, 191, 50, 49, 179, 166, 24, 64, 191, 128, 49, 152, 179, 37, 50, 178,
+		166, 50, 50, 178, 179, 63, 50, 166, 165, 25, 63, 205, 152, 50, 113, 192, 152, 25, 49, 179, 152,
+		25, 64, 178, 166, 63, 64, 204, 192, 37, 25, 192, 191, 38, 25, 165, 230, 88, 12, 127, 216, 128,
+		24, 102, 229, 192, 75, 64, 178, 205, 75, 25, 166, 255, 140, 12, 75, 205, 216, 76, 38, 127, 192,
+		127, 64, 128, 216, 179, 64, 63, 179, 204, 102, 50, 140, 243, 165, 25, 37, 153, 242, 178, 76, 49,
+		114, 165, 128, 63, 64, 141, 165, 102, 49, 114, 216, 153, 37, 38, 165, 243, 152, 38, 24, 140,
+		217, 152, 25, 25, 127, 192, 128, 25, 25, 140, 230, 178, 50, 25, 101, 217, 204, 102, 38, 75, 179,
+		243, 178, 64, 24, 128, 242, 217, 101, 12, 50, 166, 217, 166, 75, 38, 88, 153, 152, 101, 38, 50,
+		140, 192, 127, 24, 0, 75, 192, 243, 178, 76, 0, 50, 165, 217, 165, 63, 12, 63, 166, 229, 179,
+		75, 25, 89, 191, 243, 204, 89, 25, 50, 141, 230, 229, 153, 63, 38, 101, 205, 243, 191, 89, 11,
+		38, 127, 230, 229, 153, 38, 0, 50, 152, 230, 204, 114, 37, 50, 113, 179, 192, 128, 38, 12, 75,
+		166, 204, 179, 88, 12, 37, 128, 216, 230, 179, 113, 64, 63, 114, 152, 166, 127, 89, 63, 64, 101,
+		153, 165, 127, 89, 63, 89, 101, 141, 153, 140, 102, 89, 113, 141, 166, 152, 141, 113, 76, 75,
+		114, 165, 192, 165, 102, 38, 24, 76, 165, 217, 216, 153, 75, 38, 49, 114, 191, 217, 192, 140,
+		89, 75, 114, 179, 205, 166, 114, 63, 38, 63, 128, 191, 205, 165, 101, 50, 24, 64, 140, 205, 205,
+		140, 64, 12, 25, 89, 165, 230, 229, 192, 113, 50, 24, 38, 101, 179, 217, 204, 153, 88, 38, 37,
+		76, 153, 205, 216, 179, 101, 38, 25, 49, 102, 153, 191, 179, 141, 88, 63, 50, 75, 102, 140, 179,
+		165, 141, 101, 76, 75, 102, 140, 179, 178, 166, 114, 75, 50, 63, 114, 178, 217, 216, 166, 101,
+		50, 24, 38, 101, 166, 204, 217, 179, 127, 76, 37, 50, 88, 153, 205, 216, 179, 140, 76, 37, 38,
+		88, 153, 205, 230, 191, 128, 63, 12, 11, 49, 114, 178, 205, 191, 153, 102, 49, 25, 37, 76, 141,
+		191, 205, 179, 140, 76, 25, 24, 50, 101, 166, 204, 217, 191, 141, 75, 38, 24, 64, 127, 179, 230,
+		229, 191, 128, 75, 38, 38, 49, 102, 141, 178, 192, 166, 127, 102, 75, 76, 102, 140, 179, 178,
+		166, 140, 102, 75, 76, 101, 141, 165, 192, 191, 179, 127, 88, 50, 49, 76, 113, 166, 204, 217,
+		178, 128, 64, 11, 0, 24, 76, 127, 192, 230, 229, 205, 152, 102, 50, 24, 38, 75, 114, 165, 192,
+		192, 178, 141, 101, 49, 25, 24, 50, 101, 153, 191, 205, 191, 166, 113, 76, 37, 38, 63, 102, 152,
+		205, 217, 217, 178, 128, 75, 38, 25, 38, 63, 114, 165, 205, 217, 216, 192, 153, 101, 50, 24, 25,
+		63, 102, 152, 192, 216, 217, 178, 141, 76, 37, 25, 24, 50, 101, 153, 192, 217, 217, 192, 152,
+		102, 49, 25, 24, 38, 76, 127, 179, 217, 216, 205, 165, 114, 63, 25, 11, 25, 63, 114, 166, 204,
+		230, 217, 204, 166, 113, 64, 38, 37, 50, 88, 128, 178, 204, 217, 204, 166, 128, 76, 25, 12, 24,
+		50, 101, 140, 192, 216, 217, 192, 165, 128, 75, 38, 24, 25, 49, 76, 127, 166, 204, 217, 204,
+		179, 141, 101, 64, 49, 50, 63, 89, 113, 166, 191, 205, 204, 192, 152, 114, 76, 50, 49, 64, 88,
+		128, 165, 192, 204, 192, 178, 153, 128, 101, 76, 64, 64, 75, 102, 127, 166, 178, 192, 178, 153,
+		127, 89, 49, 38, 38, 49, 76, 101, 128, 152, 179, 191, 192, 178, 153, 128, 88, 76, 63, 50, 63,
+		76, 102, 127, 153, 166, 165, 166, 152, 128, 114, 76, 63, 50, 38, 49, 76, 101, 141, 165, 192,
+		205, 204, 192, 165, 141, 101, 76, 64, 49, 50, 76, 89, 127, 153, 191, 205, 204, 191, 179, 152,
+		114, 88, 76, 63, 50, 64, 75, 102, 127, 153, 166, 166, 165, 153, 140, 128, 113, 89, 75, 76, 76,
+		88, 102, 113, 141, 153, 166, 179, 178, 166, 140, 114, 101, 76, 64, 64, 63, 76, 89, 127, 153,
+		178, 192, 204, 192, 192, 165, 128, 101, 64, 50, 37, 37, 50, 75, 102, 127, 166, 192, 204, 205,
+		192, 178, 153, 127, 102, 75, 50, 38, 24, 38, 63, 89, 114, 140, 179, 191, 217, 204, 192, 178,
+		153, 140, 102, 75, 38, 24, 12, 24, 50, 75, 102, 140, 166, 191, 205, 204, 205, 179, 166, 141,
+		114, 89, 63, 50, 50, 50, 76, 89, 114, 140, 166, 191, 205, 205, 205, 191, 179, 140, 114, 75, 50,
+		38, 24, 25, 49, 64, 88, 102, 140, 166, 178, 192, 204, 205, 191, 166, 140, 114, 75, 49, 25, 24,
+		25, 37, 64, 89, 113, 141, 165, 192, 205, 216, 217, 204, 179, 166, 127, 102, 75, 50, 38, 37, 38,
+		64, 88, 102, 127, 153, 178, 192, 204, 205, 205, 192, 165, 141, 113, 102, 75, 64, 49, 50, 49, 76,
+		88, 114, 140, 166, 178, 205, 216, 205, 192, 165, 141, 113, 89, 63, 38, 24, 25, 25, 37, 50, 75,
+		102, 127, 153, 165, 192, 204, 205, 204, 192, 165, 153, 127, 102, 76, 64, 50, 38, 38, 37, 50, 76,
+		101, 128, 152, 166, 191, 204, 217, 205, 204, 192, 165, 141, 127, 102, 75, 50, 38, 37, 38, 37,
+		64, 75, 102, 127, 153, 178, 192, 205, 204, 192, 191, 179, 165, 140, 128, 101, 89, 63, 50, 50,
+		38, 37, 50, 75, 89, 113, 141, 165, 179, 191, 204, 205, 204, 192, 165, 153, 127, 114, 88, 76, 50,
+		37, 38, 37, 50, 76, 89, 101, 128, 152, 166, 191, 192, 205, 204, 205, 191, 179, 152, 141, 114,
+		88, 76, 49, 38, 38, 37, 38, 50, 63, 89, 101, 128, 152, 179, 192, 192, 205, 204, 192, 178, 166,
+		152, 141, 113, 102, 75, 64, 49, 38, 38, 38, 50, 50, 63, 89, 101, 128, 152, 166, 179, 191, 192,
+		192, 178, 179, 166, 152, 128, 113, 89, 75, 63, 50, 49, 50, 63, 63, 76, 88, 102, 113, 141, 152,
+		166, 192, 191, 192, 191, 192, 178, 179, 165, 153, 128, 113, 89, 76, 63, 64, 49, 64, 64, 75, 89,
+		102, 113, 128, 152, 166, 179, 192, 191, 192, 178, 179, 165, 153, 140, 128, 101, 89, 75, 64, 63,
+		49, 50, 64, 63, 76, 88, 102, 114, 127, 141, 165, 179, 191, 192, 192, 192, 178, 179, 165, 153,
+		140, 128, 101, 89, 75, 50, 49, 50, 37, 38, 50, 63, 76, 75, 89, 113, 128, 140, 153, 165, 179,
+		191, 192, 192, 191, 179, 178, 166, 152, 128, 113, 102, 89, 63, 64, 49, 38, 38, 50, 50, 63, 76,
+		88, 114, 127, 141, 152, 166, 178, 192, 191, 192, 204, 192, 178, 166, 152, 153, 127, 114, 101,
+		89, 75, 64, 63, 50, 49, 50, 49, 64, 75, 89, 101, 114, 127, 153, 165, 166, 178, 192, 204, 192,
+		192, 192, 178, 166, 152, 141, 127, 114, 101, 89, 75, 64, 50, 49, 50, 63, 64, 76, 76, 89, 102,
+		127, 141, 140, 153, 166, 179, 178, 179, 178, 179, 179, 166, 152, 141, 127, 114, 102, 88, 76, 63,
+		64, 49, 50, 49, 64, 63, 76, 75, 89, 102, 114, 127, 141, 152, 166, 179, 178, 192, 191, 192, 192,
+		191, 179, 178, 166, 152, 141, 128, 113, 102, 89, 76, 63, 64, 49, 50 };
 
 const unsigned int phaser_wav_len = 1792;
+uint32_t uip;		// udp target
 
 /* USER CODE END PD */
 
@@ -201,7 +199,7 @@ osThreadId LPTaskHandle;
 osMessageQId myQueue01Handle;
 osTimerId myTimer01Handle;
 osMutexId myMutex01Handle;
-osSemaphoreId myBinarySem01Handle;
+osSemaphoreId ssicontentHandle;
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
 struct netif *netif, *netif2;
@@ -210,6 +208,19 @@ uint32_t t1sec = 0;
 extern uint32_t t2cap[1];
 int main_init_done = 0;
 int lptask_init_done = 0;
+char trigtimestr[128] = { "No Triggers" };
+char nowtimestr[64] = { "\"No Time\"" };
+char pressstr[10] = { "0" };
+char tempstr[6] = { "0" };
+char snstr[160] = { "\"No S/N\"" };
+char statstr[172] = { "\"No status\"" };
+char gpsstr[128] = { "\"No GPS data\"" };
+uint16_t agc = 1;	// agc enable > 0
+uint32_t myip;
+
+//char snstr[4] = {"No"};
+//char statstr[4] = {"No"};
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -339,9 +350,9 @@ int main(void)
   /* USER CODE END RTOS_MUTEX */
 
   /* Create the semaphores(s) */
-  /* definition and creation of myBinarySem01 */
-  osSemaphoreDef(myBinarySem01);
-  myBinarySem01Handle = osSemaphoreCreate(osSemaphore(myBinarySem01), 1);
+  /* definition and creation of ssicontent */
+  osSemaphoreDef(ssicontent);
+  ssicontentHandle = osSemaphoreCreate(osSemaphore(ssicontent), 1);
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
 	/* add semaphores, ... */
@@ -1731,6 +1742,17 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+
+void rebootme()
+{
+	while(1) {
+	osDelay(2000);
+	__NVIC_SystemReset();   // reboot
+	}
+}
+
+
 void netif_status_callbk_fn(struct netif *netif)
 {
 
@@ -1792,10 +1814,15 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 	uint32_t diff;
 	static uint32_t lastcap = 0;
 
+#ifdef SPLAT1
+	HAL_GPIO_TogglePin(GPIOD, LED_D1_Pin);
+#else
 	HAL_GPIO_TogglePin(GPIOB, LD1_Pin);		// green led
+#endif
 
 	if (htim->Instance == TIM2) {
 		rtseconds = (statuspkt.NavPvt.sec + 1) % 60;// assume we get here before serial comms updates gps seconds field
+//printf(":%d ",rtseconds);
 //		statuspkt.epochsecs++;
 //		neotime();
 #if 0		// clktrim with non-resetting pps counter
@@ -1828,6 +1855,37 @@ void setupnotify()
 	xTaskToNotify = xTaskGetCurrentTaskHandle();
 }
 
+// caclulate and set the pga gain - gets called once per second
+// uses agc noise but this may be too simplistic...
+#define GAININT 20	/* seconds */
+void calcagc()
+{
+	static uint32_t noiseacc = 0;
+	static int samples = 0;
+	uint16_t newgain;
+
+	noiseacc += globaladcnoise;
+	samples++;
+
+	if (samples > GAININT) {
+		newgain = (pgagain & 0x07);
+		if (noiseacc > (40 * GAININT))	// too noisy
+				{
+			if (newgain > 0) {
+				newgain--;			// decrease the gain
+				setpgagain(newgain);
+			}
+		} else if (noiseacc < (3 * GAININT))	// too quiet
+				{
+			if (newgain < 7) {
+				newgain++;			// increase the gain
+				setpgagain(newgain);
+			}
+		}
+		samples = 0;
+		noiseacc = 0;
+	}
+}
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_StartDefaultTask */
@@ -1841,19 +1899,8 @@ void StartDefaultTask(void const * argument)
 {
     
     
-                 
-  /* init code for USB_DEVICE */
-  MX_USB_DEVICE_Init();
-
-  /* MX_LWIP_Init() is generated within mbedtls_net_init() function in net_cockets.c file */
-  /* Up to user to call mbedtls_net_init() function in MBEDTLS initialization step */
-
-  /* Up to user define the empty MX_MBEDTLS_Init() function located in mbedtls.c file */
-           
-          
-                 
-  /* init code for FATFS */
-  MX_FATFS_Init();
+    
+    
 
   /* USER CODE BEGIN 5 */
 	{
@@ -1875,20 +1922,18 @@ void StartDefaultTask(void const * argument)
 		statuspkt.uid = MY_UID;		// 16 bits
 		statuspkt.majorversion = MAJORVERSION;
 		statuspkt.minorversion = MINORVERSION;
-		statuspkt.udpcount = 0;
+		statuspkt.udppknum = 0;
 		statuspkt.sysuptime = 0;
 		statuspkt.netuptime = 0;
 		statuspkt.gpsuptime = 0;
 
 		statuspkt.adcpktssent = 0;
-
 		statuspkt.adctrigoff = TRIG_THRES;
 
 		osDelay(100);
 
 		printf("\n\n--------------------------\nDetector S/N=%d\n", MY_UID);
-		printf("STM_UUID=%lx %lx %lx\n", STM32_UUID[0], STM32_UUID[1],
-		STM32_UUID[2]);
+		printf("STM_UUID=%lx %lx %lx\n", STM32_UUID[0], STM32_UUID[1], STM32_UUID[2]);
 
 #ifdef TESTING
 		printf("*** TESTING BUILD USED ***\n");
@@ -1900,6 +1945,10 @@ void StartDefaultTask(void const * argument)
 #ifdef SPLAT1
 		initsplat();
 #endif
+
+		if (xSemaphoreGive(ssicontentHandle) != pdTRUE)	{		// give the ssi generation semaphore
+			/*printf("Initial semaphoregive failed\n")*/;					// expect this to fail as part of the normal setup
+		}
 
 		HAL_TIM_Base_Start_IT(&htim6);		// basic packet timestamp 32 bits
 //		HAL_TIM_Base_Start_IT(&htim3);		// test timebase 1Hz pulse output
@@ -1936,13 +1985,11 @@ void StartDefaultTask(void const * argument)
 				printf("*****************************************\n");
 				printf("************* DHCP ABORTED **************\n");
 				printf("*****************************************\n");
-				osDelay(2000);
-				__NVIC_SystemReset();   // reboot
+				rebootme();
 			} // end if
 		} // end while
 
 		ip_addr_t ip = { 0 };
-		uint32_t myip;
 
 		ip = dhcp->offered_ip_addr;
 		myip = ip.addr;
@@ -1959,35 +2006,35 @@ void StartDefaultTask(void const * argument)
 			printf("Try to get new S/N using http client. Try=%d\n", i++);
 			httpclient(stmuid);
 			osDelay(5000);
-			//stats_display() ; // this needs stats in LwIP enabling to do anything
+//			stats_display() ; // this needs stats in LwIP enabling to do anything
+			if (i++ > 10) {
+				printf("************* ABORTED **************\n");
+				rebootme();
+			}
 		}
 
-		osDelay(5000);
+		osDelay(1000);
 		printf("starting httpd\n");
 		httpd_init();		// start the www server
 		init_httpd_ssi();	// set up the embedded tag handler
 
 // tim7 drives DAC
 #if 1
-//		for (i = 0; i < sizeof(dacdata) >> 1; i++) {
-//			dacdata[i] = i * 4096 / (sizeof(dacdata) >> 1);
-//			dacdata[i] = 2048;
-//		}
-
 //		HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, dacdata, sizeof(dacdata) >> 1, DAC_ALIGN_12B_L);
-		HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, phaser_wav, sizeof(phaser_wav),	DAC_ALIGN_8B_R /*DAC_ALIGN_12B_R*/);
+		HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, phaser_wav, sizeof(phaser_wav),
+		DAC_ALIGN_8B_R /*DAC_ALIGN_12B_R*/);
 		HAL_TIM_Base_Start(&htim7);		// fast interval DAC timer sample rate
 #endif
 
 		setupnotify();
 		startadc();
-
+		uip = locateudp();
 		main_init_done = 1; // let lptask now main has initilised
 
 		while (lptask_init_done == 0)
 			osDelay(100);		// hold off starting udp railgun until LPtask has initalised
 		while (1) {	//
-			startudp();		// should never return
+			startudp(uip);		// should never return
 			osDelay(1);
 		}
 	}
@@ -2005,9 +2052,11 @@ void StarLPTask(void const * argument)
 {
   /* USER CODE BEGIN StarLPTask */
 	static uint32_t trigs = 0;
-	uint32_t reqtimer = 8000;
-	uint32_t debugtimer = 0;
+	uint32_t ip, reqtimer = 8000;
+	uint16_t tenmstimer = 0;
+	uint16_t onesectimer = 0;
 	int i, counter = 0;
+	char str[32] = {"empty"};
 
 	statuspkt.adcudpover = 0;		// debug use count overruns
 	statuspkt.trigcount = 0;		// debug use adc trigger count
@@ -2015,23 +2064,51 @@ void StarLPTask(void const * argument)
 
 	while (main_init_done == 0)		// wait from main to complete the initilisation
 		osDelay(100);
-
-	lptask_init_done = 1;
+#if 1
+#ifdef TESTING
+	sprintf(snstr,"\"STM_UUID=%lx %lx %lx, Assigned S/N=%lu, TESTING Sw S/N=%d, Ver %d.%d, UDP Target=%s %s\"",
+			STM32_UUID[0], STM32_UUID[1], STM32_UUID[2], statuspkt.uid, MY_UID, statuspkt.majorversion,
+			statuspkt.minorversion,udp_target,udp_ips);
+#else
+	sprintf(snstr, "\"STM_UUID=%lx %lx %lx, Assigned S/N=%lu, Ver %d.%d, UDP Target=%s %s\"",
+			STM32_UUID[0],STM32_UUID[1],STM32_UUID[2],statuspkt.uid,statuspkt.majorversion,statuspkt.minorversion,udp_target,udp_ips);
+#endif
+#endif
 
 	HAL_TIM_Base_Start(&htim7);	// start audio synth sampling interval timer
 
 // timer 4 used to generate audio monotone to splat speaker, but PCB fault prevents it working
 //HAL_TIM_OC_Start (&htim4, TIM_CHANNEL_3);		// HAL_TIM_OC_Start (TIM_HandleTypeDef* htim, uint32_t Channel)
 
+	lptask_init_done = 1;		// this lp task has done its initialisation
+
 	for (;;) {
-		osDelay(1);
+		osDelay(10);		// 10mSec
 //		tcp_tmr();
 		reqtimer++;
-		debugtimer++;
+		tenmstimer++;
 
-		if (statuspkt.trigcount > (3600 + trigs))	// spamming: 3600 packets sent in 2 Sec (out of approx 7.2K packets)
-				{
-			jabber = 2000;		// 2 seconds pause
+		if (ledhang)	{	// trigger led
+			ledhang--;
+#ifdef SPLAT1
+			HAL_GPIO_WritePin(GPIOD, LED_D5_Pin, GPIO_PIN_SET);		// Splat D5 led on
+		} else {
+			HAL_GPIO_WritePin(GPIOD, LED_D5_Pin, GPIO_PIN_RESET);	 // Splat D5 led off
+		}
+#else
+		HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_SET);		// onboard red led on
+	} else {
+		HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_RESET);	 // onboard red led off
+	}
+#endif
+
+	globaladcnoise = meanwindiff;
+	if (globaladcnoise == 0)
+		globaladcnoise = statuspkt.adcbase;		// dont allow zero peaks
+
+
+		if (statuspkt.trigcount > (360 + trigs)) { // spamming: 3600 packets sent in 2 Sec (out of approx 7.2K packets)
+			jabber = 200;		// 2 seconds pause
 			statuspkt.jabcnt++;
 		} else {
 			if (jabber)
@@ -2042,33 +2119,110 @@ void StarLPTask(void const * argument)
 			trigs = statuspkt.trigcount;
 //			HAL_TIM_OC_Start (&htim4, TIM_CHANNEL_3);		// start audio buzz - broken on splat 1
 ///			HAL_TIM_Base_Start(&htim7);	// audio synth sampling interval timer
-			HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, phaser_wav, sizeof(phaser_wav), DAC_ALIGN_8B_R /*DAC_ALIGN_12B_R*/);
-		}
+			HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, phaser_wav, sizeof(phaser_wav),
+			DAC_ALIGN_8B_R /*DAC_ALIGN_12B_R*/);	// start phaser noise
 
-/*
-		if (debugtimer % 1000 == 0) {
-			HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, phaser_wav, sizeof(phaser_wav),	DAC_ALIGN_8B_R /*DAC_ALIGN_12B_R*/);
-		}
-*/
-		if (debugtimer > 30000) {
-			debugtimer = 0;
-			stats_display();
+#if 1
+			while (!(xSemaphoreTake(ssicontentHandle,( TickType_t ) 1 ) == pdTRUE))	{		// take the ssi generation semaphore (portMAX_DELAY == infinite)
+				printf("sem wait 1a\n");
+			}
+//			strcpy(trigtimestr, ctime(&epochtime));		// ctime etc giving problems
+//			trigtimestr[strlen(trigtimestr) - 1] = '\0';	// replace newline with terminator
+		sprintf(trigtimestr,"%u",epochtime);
+
+			if (xSemaphoreGive(ssicontentHandle) != pdTRUE)	{													// give the ssi generation semaphore
+				printf("semaphore 1a release failed\n");
+			}
+#endif
+
+//			strcpy(trigtimestr,"There goes the time");		// copy current time into trig time string
+
+		} else {	// there was a trigger so dont bother updating the strings to save CPU
+
+			if (tenmstimer % 100 == 0) {		// every second
+
+				char s[32];
+				HAL_GPIO_TogglePin(GPIOD, LED_D2_Pin);
+
+				if (agc) {
+					calcagc();		// try to set the gain automatically
+				}
+
+				onesectimer++;
+	//////////// generate web page data
+#if 0
+				if (xSemaphoreTake(ssicontentHandle,( TickType_t ) 100 ) == pdTRUE)	{		// take the ssi generation semaphore (portMAX_DELAY == infinite)
+					/*printf("We have the semaphore\n")*/;
+				}		else {
+					printf("semaphore take failed\n");
+				}
+#endif
+				while (!(xSemaphoreTake(ssicontentHandle,( TickType_t ) 25 ) == pdTRUE))	{		// give the ssi generation semaphore (portMAX_DELAY == infinite)
+					printf("sem wait 1\n");
+				}
+				{
+					//printf("sem1 wait done\n");
+				}
+
+
+#if 0
+				strcpy(str, ctime(&epochtime));
+				s[strlen(str) - 1] = '\0';	// replace newline with terminator
+				sprintf(nowtimestr, "\"%s\"", str);
+#endif
+			sprintf(nowtimestr,"\"%u\"",epochtime);
+
+				sprintf(tempstr, "%d.%d", temperature, tempfrac);
+				sprintf(pressstr, "%d.%d", pressure, pressfrac);
+#if 1
+				// construct detector status for webpage
+				sprintf(statstr,
+						"\"<b>Uptime</b> %d <b>secs<br><br>Last trigger</b> %s<br><br><b>Triggers</b> %d<br><br><b>Noise</b> %d<br><br><b>ADC Base</b> %d<br><br>\"",
+						statuspkt.sysuptime, trigtimestr, statuspkt.trigcount, statuspkt.adcnoise,
+						statuspkt.adcbase);
+
+				if (gpslocked) {
+					sprintf(gpsstr, "\"Locked: %d Sats<br>Lon: %d<br>Lat: %d\"", statuspkt.NavPvt.numSV,
+							statuspkt.NavPvt.lon, statuspkt.NavPvt.lat);
+				}
+				else {
+					strcpy(gpsstr, "\"<font color=red>**Lost GPS**<\/font>\"");
+				}
+#endif
+				if (xSemaphoreGive(ssicontentHandle) != pdTRUE)	{		// give the ssi generation semaphore
+					printf("semaphore release failed\n");
+				}
+			}		// if seconds timer hit
+		}  // else triggered
+
+		if (tenmstimer > 3000) {		// reset timer after 30 seconds
+			tenmstimer = 0;
+
 
 #ifdef SPLAT1
 #ifdef MPL115A2
-		getpressure115();
+			getpressure115();
 #endif
 #ifdef MPL3115A2
-		getpressure3115();
+			getpressure3115();
 #endif
-		printf("triggers=%04d, pressure = %d.%02d, temp = %02d.%02d, %s", trigs, pressure, pressfrac,
-				temperature, tempfrac, ctime(&epochtime));
+#ifdef TESTING
+//			TCP_STATS_DISPLAY() ;
+//			stats_display();
+#endif
+			printf("SN:%d/%lu %d:%d:%d:%d ",MY_UID,statuspkt.uid, myip & 0xFF, (myip & 0xFF00) >> 8,	(myip & 0xFF0000) >> 16, (myip & 0xFF000000) >> 24);
+			printf("triggers:%04d, pressure:%d.%02d, temp:%02d.%02d, time:%s\n", trigs, pressure,pressfrac, temperature, tempfrac, nowtimestr);
 #else
-		printf("triggers=%04d,    ------------------------------------------- %s", trigs,ctime(&epochtime));
+			printf("triggers=%04d,    ------------------------------------------- %s", trigs,ctime(&epochtime));
 #endif
-		}
-	} // end for
+		} // end if 30 second timer
 
+	if (onesectimer > 300) {			// 5 mins
+    onesectimer = 0;
+		if (locateudp() != uip)		// periodic check
+				rebootme();					// target udp host has changed or network has gone away
+	}
+	} // end for
   /* USER CODE END StarLPTask */
 }
 
@@ -2076,7 +2230,7 @@ void StarLPTask(void const * argument)
 void Callback01(void const * argument)
 {
   /* USER CODE BEGIN Callback01 */
-printf("Callback01\n");
+	printf("Callback01\n");
   /* USER CODE END Callback01 */
 }
 
@@ -2091,43 +2245,43 @@ printf("Callback01\n");
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* USER CODE BEGIN Callback 0 */
-if (htim->Instance == TIM2) {
-	printf("T2P PeriodElapsedCallback %lu %lu\n", t2cap[0], statuspkt.clktrim);
-	return;
-}
-if (htim->Instance == TIM3) {
-	printf("T3 PeriodElapsedCallback\n");
-	return;
-}
-
-if (htim->Instance == TIM6) { // 1 second (internally timed, not compensated by GPS)
-//		printf("T6 PeriodElapsedCallback %u SR=%u\n", myfullcomplete, TIM6->SR);
-	t1sec++;
-	statuspkt.sysuptime++;
-	if (netup)
-		statuspkt.netuptime++;
-	if (gpslocked) {
-		statuspkt.gpsuptime++;
-		if (epochvalid == 0) {
-			statuspkt.epochsecs = calcepoch();
-			epochvalid = 1;
-		}
-	} else {
-		statuspkt.gpsuptime = 0;	// gps uptime is zero
-		statuspkt.epochsecs = 0;	// make epoch time obviously wrong
-		epochvalid = 0;
+	if (htim->Instance == TIM2) {
+		printf("T2P PeriodElapsedCallback %lu %lu\n", t2cap[0], statuspkt.clktrim);
+		return;
 	}
-	return;
-}
+	if (htim->Instance == TIM3) {
+		printf("T3 PeriodElapsedCallback\n");
+		return;
+	}
+
+	if (htim->Instance == TIM6) { // 1 second (internally timed, not compensated by GPS)
+//		printf("T6 PeriodElapsedCallback %u SR=%u\n", myfullcomplete, TIM6->SR);
+		t1sec++;
+		statuspkt.sysuptime++;
+		if (netup)
+			statuspkt.netuptime++;
+		if (gpslocked) {
+			statuspkt.gpsuptime++;
+			/*	if (epochvalid == 0) */{
+				statuspkt.epochsecs = calcepoch();
+				epochvalid = 1;
+			}
+		} else {
+			statuspkt.gpsuptime = 0;	// gps uptime is zero
+			statuspkt.epochsecs = 0;	// make epoch time obviously wrong
+			epochvalid = 0;
+		}
+		return;
+	}
 
   /* USER CODE END Callback 0 */
   if (htim->Instance == TIM12) {
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
-else {
-	printf("Unknown Timer Period Elapsed callback\n");
-}
+	else {
+		printf("Unknown Timer Period Elapsed callback\n");
+	}
   /* USER CODE END Callback 1 */
 }
 
@@ -2138,10 +2292,10 @@ else {
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
-/* User can add his own implementation to report the HAL error return state */
-while (1) {
-	printf("HAL error\n");
-}
+	/* User can add his own implementation to report the HAL error return state */
+	while (1) {
+		printf("HAL error (main.c 2160)\n");
+	}
   /* USER CODE END Error_Handler_Debug */
 }
 
@@ -2156,8 +2310,8 @@ while (1) {
 void assert_failed(uint8_t *file, uint32_t line)
 { 
   /* USER CODE BEGIN 6 */
-/* User can add his own implementation to report the file name and line number,
- tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+	/* User can add his own implementation to report the file name and line number,
+	 tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

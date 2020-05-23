@@ -1,0 +1,437 @@
+<%@ jet package="CodeGenerator" class="motorlibsh_template"
+imports="java.util.* com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+
+/******************************************************************************
+ *
+ * Copyright (C) 2011 Infineon Technologies AG. All rights reserved.
+ *
+ * Infineon Technologies AG (Infineon) is supplying this software for use with
+ * Infineon's microcontrollers.
+ * This file can be freely distributed within development tools that are
+ * supporting such microcontrollers.
+ *
+ * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+ * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+ * INFINEON SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL,
+ * OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+ *
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon XMC4500/XMC1000 Series                                 **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR   : App Developer                                                   **
+**                                                                            **
+** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+**                                                                            **
+** MODIFICATION DATE :  29 May, 2013                                          **
+**                                                                            **
+*******************************************************************************/
+
+/*******************************************************************************
+**                       Author(s) Identity                                   **
+********************************************************************************
+**                                                                            **
+** Initials     Name                                                          **
+** ---------------------------------------------------------------------------**
+** PA           App Developer                                                 **
+*******************************************************************************/
+/**
+ * @file MOTORLIBS.h
+ *
+ * @brief This file contains all public data structures,enums and function
+ *        prototypes for motor control library.
+ *
+ */
+/* Revision History
+ * 03 Apr 2013   v1.0.0    Initial version
+ * 25 Apr 2013   v1.0.2    Added support for XMC1302
+ * 29  May 2013  v1.0.12   Added FOC support for XMC1302
+ */
+#ifndef MOTORLIBS_H_
+#define MOTORLIBS_H_
+/*******************************************************************************
+**                      Include Files                                         **
+*******************************************************************************/
+#include <DAVE3.h>
+
+/**
+  * @ingroup MOTORLIBS_publicparam
+  * @{
+  */
+/*******************************************************************************
+**                      Global Macro Definitions                              **
+*******************************************************************************/
+<% String AppBaseuri = "app/motorlibs/"; %>
+<% int Is44Device = -1; %>
+<% int Is42Device = -1; %>
+<% int Is45Device = -1; %>
+<% int Is13Device = -1; %>
+<% Is45Device = ((app.getSoftwareId().substring(0,2).compareTo("45")==0)?1:0); %>
+<% Is44Device = ((app.getSoftwareId().substring(0,2).compareTo("44")==0)?1:0); %>
+<% Is42Device = ((app.getSoftwareId().substring(0,2).compareTo("42")==0)?1:0); %>
+<% Is13Device = ((app.getSoftwareId().substring(0,2).compareTo("13")==0)?1:0); %>    
+/*Limit1 is the higher limit and Limit2 is the lower limit and Buffer is the value which need to compare*/
+#define MIN_MAX_LIMIT(Buffer,Limit1,Limit2) ((Buffer) > (Limit1)) ? (Limit1) : (((Buffer) < (Limit2))? (Limit2): (Buffer))
+
+/*******************************************************************************
+ *                                ENUMERATIONS                                **
+ ******************************************************************************/
+<%if(Is13Device == 1){%>
+typedef enum
+{
+  /**
+   * This clears last X Result for a New Calculation
+   */
+  MOTORLIBS_CLEAR_KEEPX = 0x00U,
+  /**
+   * This keeps last X Result as Initial Data for a New Calculation
+   */
+  MOTORLIBS_SET_KEEPX = 0x20U
+} MOTORLIBS_STATC_KEEPX;
+/**
+ * This enumerates control to Keep or Clear the last Y result as initial data
+ * for next calculation
+ */
+typedef enum
+{
+  /**
+   * This clears last Y Result for a New Calculation
+   */
+  MOTORLIBS_CLEAR_KEEPY = 0x00U,
+  /**
+   * This keeps last Y Result as Initial Data for a New Calculation
+   */
+  MOTORLIBS_SET_KEEPY = 0x40U
+} MOTORLIBS_STATC_KEEPY;
+
+/**
+ * This enumerates control to Keep or Clear the last Z result as initial data
+ * for next calculation
+ */
+typedef enum
+{
+  /**
+   * This clears last Z Result for a New Calculation
+   */
+  MOTORLIBS_CLEAR_KEEPZ = 0x00U,
+  /**
+   * This keeps last Z Result as Initial Data for a New Calculation
+   */
+  MOTORLIBS_SET_KEEPZ = 0x80U
+} MOTORLIBS_STATC_KEEPZ;
+/**
+ * This enumerates different modes for CORDIC operating modes
+ */
+typedef enum
+{
+  /**
+   * This sets CORDIC to Linear Operating Mode
+   */
+  MOTORLIBS_LINEAR_MODE = 0x0U,
+  /**
+   * This sets CORDIC to Circular Operating Mode
+   */
+  MOTORLIBS_CIRCULAR_MODE = 0x2U,
+  /**
+   * This sets CORDIC to Hyperbolic Operating Mode
+   */
+  MOTORLIBS_HYPERBOLIC_MODE = 0x6U
+} MOTORLIBS_CON_MODE;
+
+/**
+ * This enumerates CORDIC Rotation Vectoring Selection
+ */
+typedef enum
+{
+  /**
+   * This sets CORDIC to Vectoring Mode
+   */
+  MOTORLIBS_VECTORING_MODE = 0x0U,
+  /**
+   * This sets CORDIC to Rotation Mode
+   */
+  MOTORLIBS_ROTATION_MODE = 0x8U
+} MOTORLIBS_CON_ROTVEC;
+
+/**
+ * This enumerates different modes for starting CORDIC operation
+ */
+typedef enum
+{
+  /**
+   * Auto start of calculation after write access to X parameter data register
+   */
+  MOTORLIBS_CORDIC_AUTO_START = 0x00U,
+  /**
+   * Start calculation only after bit ST is set
+   */
+  MOTORLIBS_CORDIC_ST_START = 0x10U
+} MOTORLIBS_CON_STMODE;
+
+/**
+ * This enumerates 'X result register' data format in circular vectoring mode.
+ */
+typedef enum
+{
+  /**
+   * This sets X result data format to Signed (twos complement), when read
+   */
+  MOTORLIBS_SIGNED_X_RESULT = 0x00U,
+  /**
+   * This sets X result data format to Unsigned, when read
+   */
+  MOTORLIBS_UNSIGNED_X_RESULT = 0x20U
+}MOTORLIBS_CON_XUSIGN;
+
+/**
+ * This enumerates magnitude prescaler value for calculated value of X & Y
+ */
+typedef enum
+{
+  /**
+   * After the last iteration of calculation the X & Y values are divided by 1
+   */
+  MOTORLIBS_MPS_DIVBY1 = 0x00U,
+  /**
+   * After the last iteration of calculation the X & Y values are divided by 2
+   */
+  MOTORLIBS_MPS_DIVBY2 = 0x40U,
+  /**
+   * After the last iteration of calculation the X & Y values are divided by 4
+   */
+  MOTORLIBS_MPS_DIVBY4 = 0x80U
+}MOTORLIBS_CON_MPS;
+
+<%}%>
+
+/*******************************************************************************
+ *                             STRUCTURES                                     **
+ ******************************************************************************/
+/**
+ * This structure holds the values of PI parameters.
+ */
+typedef struct MOTORLIBS_PIHandleType
+{
+  /**
+   * This is the Kp value
+   */
+  uint16_t  Kp;  
+ /**
+  * This is the Ki value
+  */
+  uint16_t  Ki; 
+ /**
+  * This is the buffer
+  */
+  int32_t  Ibuf; 
+  /**
+   * Maximum limit for buffer
+   */
+  const int32_t  Yimax;    
+  /**
+   * Minimum limit for buffer
+   */
+  const int32_t  Yimin; 
+  /**
+   * Maximum limit for PI controller output
+   */
+  const int16_t  Ymax;     
+  /**
+   * Minimum limit for PI controller output
+   */
+  const int16_t  Ymin; 
+  /**
+   * This is the required output value for PI controller
+   */  
+  int16_t PiOutVal;
+  
+} MOTORLIBS_PIHandleType;
+ 
+/**
+ * This structure holds the values of PT1 filter parameters.
+ */
+typedef struct MOTORLIBS_PT1HandleType
+{
+  /**
+   * Filter constant 
+   */
+  int32_t  Z1;
+  /**
+   * Filter constant 
+   */
+  int32_t  Z2;
+  /**
+   * Maximum limit of PT1 buffer
+   */
+  const int32_t  Ymax;
+  /**
+   * Minimum limit of PT1 buffer
+   */
+  const int32_t  Ymin;
+  /**
+   * This is the integral buffer of pt1 filter
+   */
+  int32_t  PT1buf;
+  /**
+   * This is PT1 filter output.
+   */
+  int32_t  PT1OutVal;
+  
+} MOTORLIBS_PT1HandleType;
+ 
+/**
+ * @}
+ */
+/**
+ * @ingroup MOTORLIBS_apidoc
+ * @{
+ */
+/*******************************************************************************
+ **FUNCTION PROTOTYPES                                                        **
+*******************************************************************************/
+/**
+  * @brief This function is the implementation of PI controller. 
+  * PI Output = kp*error + Ki * integral of error
+  * @param[in] HandlePtr Pointer to MOTORLIBS_PIHandleType
+  * @param[in] RefValue int32_t which is reference value for PI controller
+  * @param[in] ActValue int32_t which is actual value for PI controller
+  * 
+  * @return   void <BR>
+  *         
+  *         
+  * <b>Reentrancy:  Yes</b><BR>
+  * 
+  * <b>Sync/Async:  Synchronous</b><BR>
+  */
+void MOTORLIBS_PIController
+(
+    MOTORLIBS_PIHandleType* HandlePtr,
+    int32_t RefValue,
+    int32_t ActValue
+);
+
+/**
+  * @brief This function is the implementation of PT1 filter. 
+  * @param[in] HandlePtr PT1 Handle of the MOTORLIBS App
+  * @param[in] ActValue int32_t which is actual value for PT1 filter
+  * 
+  * @return  void <BR>
+  *         
+  *         
+  * <b>Reentrancy:  Yes</b><BR>
+  * 
+  * <b>Sync/Async:  Synchronous</b><BR>
+  */
+void MOTORLIBS_PT1Controller
+(
+   MOTORLIBS_PT1HandleType* HandlePtr,
+   int32_t ActValue
+);
+<%if(Is13Device == 1){%>
+/**
+  * @brief This function is the implementation of PT12 filter. 
+  * @param[in] HandlePtr PT1 Handle of the MOTORLIBS App
+  * @param[in] ActValue int32_t which is actual value for PT1 filter
+  * 
+  * @return  void <BR>
+  *         
+  *         
+  * <b>Reentrancy:  Yes</b><BR>
+  * 
+  * <b>Sync/Async:  Synchronous</b><BR>
+  */
+void MOTORLIBS_PT12Controller
+(
+   MOTORLIBS_PT1HandleType* HandlePtr,
+   int32_t ActValue
+);
+
+/**
+  * @brief This function is the implementation of clark transform. 
+  * @param[in] Phase_A  int32_t
+  * @param[in] Phase_B  int32_t
+  * @param[in] Ialpha pointer to int32_t.
+  * 
+  * @return  int32_t <BR>
+  *         
+  *         
+  * <b>Reentrancy:  Yes</b><BR>
+  * 
+  * <b>Sync/Async:  Synchronous</b><BR>
+  */
+int32_t MOTORLIBS_ClarkTransform(int32_t Phase_A, int32_t Phase_B, int32_t *Ialpha );
+/**
+  * @brief This function is the implementation of park transform. 
+  * @param[in] Ialpha  int32_t
+  * @param[in] Ibeta  int32_t
+  * @param[in] Angle int16_t
+  * @param[in] Iq pointer to int32_t.
+  * 
+  * @return  int32_t <BR>
+  *         
+  *         
+  * <b>Reentrancy:  Yes</b><BR>
+  * 
+  * <b>Sync/Async:  Synchronous</b><BR>
+  */
+int32_t MOTORLIBS_ParkTransform(int32_t Ialpha,int32_t Ibeta,int16_t Angle,int32_t *Iq);
+
+/**
+  * @brief This function is the implementation of inverse park transform. 
+  * @param[in] Id  int32_t
+  * @param[in] Iq  int32_t
+  * @param[in] Angle int16_t
+  * @param[in] Ibeta pointer to int32_t.
+  * 
+  * @return  int32_t <BR>
+  *         
+  *         
+  * <b>Reentrancy:  Yes</b><BR>
+  * 
+  * <b>Sync/Async:  Synchronous</b><BR>
+  */
+
+int32_t MOTORLIBS_IParkTransform(int32_t Id,int32_t Iq,int16_t Angle,int32_t *Ibeta);
+
+/**
+  * @brief This function is the implementation cartesian to polar transform. 
+  * @param[in] x  int32_t
+  * @param[in] y  int32_t
+  * @param[in] Angle pointer to int16_t.
+  * 
+  * @return  uint32_t <BR>
+  *         
+  *         
+  * <b>Reentrancy:  Yes</b><BR>
+  * 
+  * <b>Sync/Async:  Synchronous</b><BR>
+  */
+uint32_t MOTORLIBS_Car2Pol(int32_t x,int32_t y, int16_t *Angle);
+/**
+  * @brief This function is the implementation polar to cartesian transform. 
+  * @param[in] Angle  int16_t
+  * @param[in] Amplitude  uint32_t
+  * @param[in] X pointer to int32_t holding the x co-ordinate value.
+  * 
+  * @return  int32_t <BR>
+  *         
+  *         
+  * <b>Reentrancy:  Yes</b><BR>
+  * 
+  * <b>Sync/Async:  Synchronous</b><BR>
+  */
+int32_t MOTORLIBS_Pol2Car(int16_t Angle,uint32_t Amplitude, int32_t *X);
+<%}%>
+/**
+ * @}
+ */
+#endif /* MOTORLIBS_H_ */
+
+
+
+

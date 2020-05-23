@@ -1,0 +1,177 @@
+<%@ jet package="CodeGenerator" class="fatfs002h_template"
+imports="com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+
+/* CODE_BLOCK_BEGIN[FATFS002.h]*/
+/******************************************************************************
+ *
+ * Copyright (C) 2011 Infineon Technologies AG. All rights reserved.
+ *
+ * Infineon Technologies AG (Infineon) is supplying this software for use with 
+ * Infineon's microcontrollers. 
+ * This file can be freely distributed within development
+ * tools that are supporting such microcontrollers. 
+ *
+ * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+ * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+ * INFINEON SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR
+ * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+ *
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon XMC4000 Series                                         **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR : App Developer                                                     **
+**                                                                            **
+** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+**                                                                            **
+** MODIFICATION DATE : Oct 1, 2012                                            **
+**                                                                            **
+*******************************************************************************/
+
+/*******************************************************************************
+**                       Author(s) Identity                                   **
+********************************************************************************
+**                                                                            **
+** Initials    Name                                                           **
+** ---------------------------------------------------------------------------**
+** SK          App Developer                                                  **
+*******************************************************************************/
+ 
+<% String AppBaseuri = "app/fatfs002/"; %>
+<% int appInst = 0; %>
+<% int RTOS = app.getIntegerValue(AppBaseuri + appInst + "/fatfs002_fs_reentrant");
+   String  Module_Name = "FATFS002";
+   String  Sub_Module = "FATFS005";
+%>
+
+<% 
+  if (RTOS == 1)
+  {
+    Module_Name = "FATFS003";
+    Sub_Module  = "FATFS005";
+  }
+  else
+  {
+    Module_Name = "FATFS002";
+    Sub_Module  = "FATFS004";
+  }
+%>
+
+#ifndef <%= Module_Name%>_H_
+#define <%= Module_Name%>_H_
+
+/**
+ * @file  <%= Module_Name%>.h
+ *
+ * @App Version FATFS002 <<%=app.getAppVersion(AppBaseuri) %>>
+ *
+ * @brief This file contains public data structures,enums and function
+ *        prototypes for Fat file system App.
+ *
+ * 22 March 2012  v1.0.0    Initial version
+ * 3 Aug 2012     v1.0.10   Cosmetic Changes.
+ * 1 Oct 2012     v1.0.12   Max Logical Drives changed to 4.
+ */
+/*******************************************************************************
+**                      INCLUDE FILES                                         **
+*******************************************************************************/
+
+#include "../../src/<%= Module_Name%>/Src/ff.h"
+#include "../../Inc/<%= Sub_Module%>/integer.h"
+#include "../../Inc/<%= Sub_Module%>/diskio.h"
+#include "ffconf.h"
+
+
+/**
+ * @ingroup <%=Module_Name%>_publicparam
+ * @{
+ */
+/*******************************************************************************
+**                      Global Type Definitions                               **
+*******************************************************************************/ 
+ /**
+  * Maximum Logical partitions created using the Multi-partition feature
+  */
+ #define <%= Module_Name%>_MAX_LOGICAL_DRIVES                                 4
+
+
+/*******************************************************************************
+**                      ENUMERATIONS                                          **
+*******************************************************************************/
+
+/**
+ * This enumerates the FAT file system error codes
+ */
+typedef enum <%= Module_Name%>_ErrorCodeType
+{
+/**
+ * Mutex creation failed
+ */
+  <%= Module_Name%>_MUTEX_CREATE_FAILED = 1,
+/**
+ * Mutex release failed
+ */  
+  <%= Module_Name%>_MUTEX_RELEASE_FAILED
+} <%= Module_Name%>_ErrorCodeType;
+
+
+#if _FS_REENTRANT
+/**
+ * This enumerates the Mutex Availability Status. 
+ */
+typedef enum <%= Module_Name%>_MutexStatusType
+{
+  /**
+   * Mutex is available to use.
+   */
+  <%= Module_Name%>_FREE = 0,
+ /**
+  * Mutex is busy.
+  */
+  <%= Module_Name%>_BUSY 
+} <%= Module_Name%>_MutexStatusType;
+
+
+
+/*******************************************************************************
+**                      STRUCTURES                                          **
+*******************************************************************************/
+/**
+ * This structure contains the Mutex Information like Mutex Id and the status of
+ * corresponding Mutrex whether it is free or busy.
+ */
+typedef struct <%= Module_Name%>_MutexInfoType
+{
+  /** Stores Mutex ID **/
+  osMutexId MutexId;
+  /** Status of the Mutex whether it is free or acquired. **/
+  <%= Module_Name%>_MutexStatusType MutexStatus;
+} <%= Module_Name%>_MutexInfoType;
+
+#endif
+/**
+ * @}
+ */
+/**
+ * @ingroup <%= Module_Name%>_apidoc
+ * @{
+ */
+/*******************************************************************************
+**                       FUNCTION PROTOTYPES                                  **
+*******************************************************************************/
+/**
+ * @brief This function initializes the FAT File System App.
+ * @return void <BR>
+ * <b>Reentrant: No </b><BR>
+ * <b>Sync/Async: Synchronous</b>
+ */
+void <%= Module_Name%>_Init(void);
+/**
+ * @}
+ */
+#endif /* <%= Module_Name%>_H_ */

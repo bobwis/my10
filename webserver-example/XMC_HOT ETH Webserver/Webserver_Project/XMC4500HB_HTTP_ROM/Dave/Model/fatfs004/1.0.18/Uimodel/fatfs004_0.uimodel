@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="DefaultPage" displayName="DefaultPage" className="IfxGroupBox" controlId="1321128801251">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/fatfs004/0/fatfs004_sdmmc_msg" displayName="Text Box " labelRequired="false" className="StringType" constraint="if(CM.getParamValue(&quot;app/FATFS004/0/fatfs004_devices_available/0&quot;) == &quot;1&quot;)&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(false);&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;  CM.setEnable(false);&#xD;&#xA;}" paramName="app/fatfs004/0/fatfs004_sdmmc_msg:Text Box " controlId="1326460848795">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group69" displayName="Select Block Devices" className="IfxGroupBox" controlId="1330683870749">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/fatfs004/0/fatfs004_devices_available" displayName="Select SDMMC Block Device" readonly="true" className="EnumerationType" paramName="app/fatfs004/0/fatfs004_devices_available:Select SDMMC Block Device" controlId="1342084182064">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/fatfs004/0/fatfs004_usbdevice_available" displayName="Select USB Block Device" className="EnumerationType" paramName="app/fatfs004/0/fatfs004_usbdevice_available:Select USB Block Device" controlId="1342084194860">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

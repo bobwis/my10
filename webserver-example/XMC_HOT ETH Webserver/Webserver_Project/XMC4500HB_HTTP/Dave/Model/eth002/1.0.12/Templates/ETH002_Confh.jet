@@ -1,0 +1,83 @@
+<%@ jet package="CodeGenerator" class="eth002_confh_template"
+imports="java.util.* com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+
+/*CODE_BLOCK_BEGIN[ETH002_Conf.h]*/
+ /******************************************************************************
+ *
+ * Copyright (C) 2011 Infineon Technologies AG. All rights reserved.
+ *
+ * Infineon Technologies AG (Infineon) is supplying this software for use with 
+ * Infineon's microcontrollers.  
+ * This file can be freely distributed within development tools that are 
+ * supporting such microcontrollers. 
+ *
+ * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+ * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+ * INFINEON SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, 
+ * OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+ *
+********************************************************************************
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon XMC4000 Series                                         **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR : DAVE App Developer                                                **
+**                                                                            **
+** MAY BE CHANGED BY USER [Yes/No]: Yes                                       **
+**                                                                            **
+** MODIFICATION DATE : July 27, 2012                                          **
+**                                                                            **
+*******************************************************************************/
+/*******************************************************************************
+**                       Author(s) Identity                                   **
+********************************************************************************
+**                                                                            **
+** Initials     Name                                                          **
+** ---------------------------------------------------------------------------**
+** RS           DAVE App Developer                                            **
+********************************************************************************
+<% String AppBaseuri1 = "app/eth002/";%>
+ * @file   ETH002_Conf.h
+ *
+ * @App Version ETH002 <<%=app.getAppVersion(AppBaseuri1) %>>
+ *
+ * @brief  Configuration file generated based on UI settings 
+ *         of ETH002 App
+ *
+ */ 
+ #ifndef ETH002_H_
+ #define ETH002_H_
+
+<% String AppBaseuri = "app/eth002/0";%>
+ <% int AutoNego = app.getIntegerValue(AppBaseuri + "/eth002_auto_negotiation/0" ); %> 
+ /** For enabling Auto Negotiation */
+ #define AUTO_NEGO <%=AutoNego%> 
+ <% if (AutoNego == 0) { %>
+ <% int HalfDuplex = app.getIntegerValue(AppBaseuri + "/eth002_halffullduplex/" + 0); %>   
+ <% if (HalfDuplex == 1){ %>     
+ /** For enabling Half Duplex */
+ #define HALF_DUPLEX
+<%}%>
+ <% if (HalfDuplex == 0){ %>     
+ /** For enabling FULL Duplex */
+ #define FULL_DUPLEX
+<%}%>
+ <% int Speed100 = app.getIntegerValue(AppBaseuri + "/eth002_linkspeed/" + 1);%>    
+ <%if (Speed100 == 1) { %>  
+ /** For selecting 100 Mbps  */  
+ #define SPEED_100
+<%}%>
+ <%if (Speed100 == 0) { %>  
+ /** For selecting 10 Mbps  */  
+ #define SPEED_10
+<%}%>
+<%} %> 
+
+ #endif /* ETH002_H_ */ 
+/*CODE_BLOCK_END*/
+

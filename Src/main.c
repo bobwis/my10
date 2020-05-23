@@ -1897,17 +1897,10 @@ void calcagc()
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void const * argument)
 {
-                 
-  /* init code for USB_DEVICE */
-  MX_USB_DEVICE_Init();
-
-  /* MX_LWIP_Init() is generated within mbedtls_net_init() function in net_cockets.c file */
-  /* Up to user to call mbedtls_net_init() function in MBEDTLS initialization step */
-
-  /* Up to user define the empty MX_MBEDTLS_Init() function located in mbedtls.c file */
-
-  /* init code for FATFS */
-  MX_FATFS_Init();
+    
+    
+    
+    
 
   /* USER CODE BEGIN 5 */
 	{
@@ -1929,7 +1922,7 @@ void StartDefaultTask(void const * argument)
 		statuspkt.uid = MY_UID;		// 16 bits
 		statuspkt.majorversion = MAJORVERSION;
 		statuspkt.minorversion = MINORVERSION;
-		statuspkt.udpcount = 0;
+		statuspkt.udppknum = 0;
 		statuspkt.sysuptime = 0;
 		statuspkt.netuptime = 0;
 		statuspkt.gpsuptime = 0;
@@ -2014,6 +2007,10 @@ void StartDefaultTask(void const * argument)
 			httpclient(stmuid);
 			osDelay(5000);
 //			stats_display() ; // this needs stats in LwIP enabling to do anything
+			if (i++ > 10) {
+				printf("************* ABORTED **************\n");
+				rebootme();
+			}
 		}
 
 		osDelay(1000);
@@ -2090,6 +2087,25 @@ void StarLPTask(void const * argument)
 //		tcp_tmr();
 		reqtimer++;
 		tenmstimer++;
+
+		if (ledhang)	{	// trigger led
+			ledhang--;
+#ifdef SPLAT1
+			HAL_GPIO_WritePin(GPIOD, LED_D5_Pin, GPIO_PIN_SET);		// Splat D5 led on
+		} else {
+			HAL_GPIO_WritePin(GPIOD, LED_D5_Pin, GPIO_PIN_RESET);	 // Splat D5 led off
+		}
+#else
+		HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_SET);		// onboard red led on
+	} else {
+		HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_RESET);	 // onboard red led off
+	}
+#endif
+
+	globaladcnoise = meanwindiff;
+	if (globaladcnoise == 0)
+		globaladcnoise = statuspkt.adcbase;		// dont allow zero peaks
+
 
 		if (statuspkt.trigcount > (360 + trigs)) { // spamming: 3600 packets sent in 2 Sec (out of approx 7.2K packets)
 			jabber = 200;		// 2 seconds pause

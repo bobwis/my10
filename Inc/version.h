@@ -12,7 +12,7 @@
 #define MINORVERSION 7
 
 // TESTING Speeds up the frequency of status packets
-#if		1
+#if		0
 #define TESTING
 #endif
 

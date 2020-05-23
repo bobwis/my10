@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Page66" displayName="Result Configurations" className="IfxGroupBox" controlId="1343373279180">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group17" displayName="Result Configurations" className="IfxGroupBox" controlId="1343373288293">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcch001/0/adcch001_erwwaitforread" displayName="Wait for Read Mode" className="EnumerationType" constraint="if((CM.getParamValue(&quot;app/adcch001/0/adcch001_erwcomparator/0&quot;) == &quot;1&quot;) ) &#xD;&#xA;{&#xD;&#xA;&#x9;CM.setVisible(true); &#xD;&#xA;&#x9;CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;else {&#xD;&#xA;      CM.setVisible(true); &#xD;&#xA;      CM.setEnable(true); &#xD;&#xA;}&#xD;&#xA;" paramName="app/adcch001/0/adcch001_erwwaitforread:Wait for Read Mode" controlId="1343373306210">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcch001/0/adcch001_erwresultpos" displayName="Result Position" className="EnumerationType" constraint="if((CM.getParamValue(&quot;app/adcch001/0/adcch001_erwcomparator/0&quot;) == &quot;1&quot;) ) &#xD;&#xA;{&#xD;&#xA;&#x9;CM.setVisible(true); &#xD;&#xA;&#x9;CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;else {&#xD;&#xA;      CM.setVisible(true); &#xD;&#xA;      CM.setEnable(true); &#xD;&#xA;}&#xD;&#xA;" paramName="app/adcch001/0/adcch001_erwresultpos:Result Position" controlId="1343373309739">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group0" displayName="Result Data Modification" className="IfxGroupBox" controlId="1343373328416">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcch001/0/adcch001_erwdatamodf" displayName="Data Modification" className="EnumerationType" constraint="if((CM.getParamValue(&quot;app/adcch001/0/adcch001_erwcomparator/0&quot;) == &quot;1&quot;) ) &#xD;&#xA;{&#xD;&#xA;&#x9;CM.setVisible(true); &#xD;&#xA;&#x9;CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;else {&#xD;&#xA;      CM.setVisible(true); &#xD;&#xA;      CM.setEnable(true); &#xD;&#xA;}&#xD;&#xA;" paramName="app/adcch001/0/adcch001_erwdatamodf:Data Modification" controlId="1344593944486">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcch001/0/adcch001_erwenableboundaryflag" displayName="Boundary Flag" className="EnumerationType" constraint="if((CM.getParamValue(&quot;app/adcch001/0/adcch001_erwdatamodf/0&quot;) == &quot;1&quot;)  ||&#xD;&#xA;(CM.getParamValue(&quot;app/adcch001/0/adcch001_erwdatamodf/1&quot;) == &quot;1&quot;) ||&#xD;&#xA;(CM.getParamValue(&quot;app/adcch001/0/adcch001_erwdatamodf/2&quot;) == &quot;1&quot;)||&#xD;&#xA;(CM.getParamValue(&quot;app/adcch001/0/adcch001_erwdatamodf/3&quot;) == &quot;1&quot;)||&#xD;&#xA;(CM.getParamValue(&quot;app/adcch001/0/adcch001_erwdatamodf/4&quot;) == &quot;1&quot;)) &#xD;&#xA;{&#xD;&#xA;&#x9;CM.setVisible(true); &#xD;&#xA;&#x9;CM.setEnable(true); &#xD;&#xA;}&#xD;&#xA;else {&#xD;&#xA;      CM.setVisible(true); &#xD;&#xA;      CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;" paramName="app/adcch001/0/adcch001_erwenableboundaryflag:Boundary Flag" controlId="1344417957853">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group79" displayName="FIFO" className="IfxGroupBox" controlId="1343373364422">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcch001/0/adcch001_erwfifo" displayName="Result FIFO" className="EnumerationType" constraint="if((CM.getParamValue(&quot;app/adcch001/0/adcch001_erwcomparator/0&quot;) == &quot;1&quot;) ) &#xD;&#xA;{&#xD;&#xA;&#x9;CM.setVisible(true); &#xD;&#xA;&#x9;CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;else {&#xD;&#xA;      CM.setVisible(true); &#xD;&#xA;      CM.setEnable(true); &#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;" paramName="app/adcch001/0/adcch001_erwfifo:Result FIFO" controlId="1343373374150">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcch001/0/adcch001_irwfifono" displayName="Number of FIFO registers" className="IntegerType" constraint="if(CM.getParamValue(&quot;app/adcch001/0/adcch001_erwfifo/0&quot;) == &quot;0&quot;) &#xD;&#xA;{&#xD;&#xA;&#x9;CM.setVisible(true); &#xD;&#xA;&#x9;CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;else {&#xD;&#xA;      CM.setVisible(true); &#xD;&#xA;      CM.setEnable(true); &#xD;&#xA;}" paramName="app/adcch001/0/adcch001_irwfifono:Number of FIFO registers" controlId="1343373376390">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group31" displayName="Comparator" className="IfxGroupBox" controlId="1344593660716">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcch001/0/adcch001_erwcomparator" displayName="Fast Compare Mode" className="EnumerationType" constraint="if((CM.getParamValue(&quot;app/adcch001/0/adcch001_erwfifo/0&quot;) == &quot;1&quot;) ) &#xD;&#xA;{&#xD;&#xA;&#x9;CM.setVisible(true); &#xD;&#xA;&#x9;CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;else {&#xD;&#xA;      CM.setVisible(true); &#xD;&#xA;      CM.setEnable(true); &#xD;&#xA;}&#xD;&#xA;" paramName="app/adcch001/0/adcch001_erwcomparator:Fast Compare Mode" controlId="1344593674491">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcch001/0/adcch001_irwcompvalue" displayName="Result Compare Value" className="IntegerType" constraint="if(CM.getParamValue(&quot;app/adcch001/0/adcch001_erwcomparator/0&quot;) == &quot;0&quot;) &#xD;&#xA;{&#xD;&#xA;&#x9;CM.setVisible(true); &#xD;&#xA;&#x9;CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;else {&#xD;&#xA;      CM.setVisible(true); &#xD;&#xA;      CM.setEnable(true); &#xD;&#xA;}&#xD;&#xA;" paramName="app/adcch001/0/adcch001_irwcompvalue:Result Compare Value" controlId="1344593700464">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+  </controls>
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="DefaultPage" displayName="Advanced Channel Configurations" className="IfxGroupBox" controlId="1343306048002">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group26" displayName="Channel Configurations" className="IfxGroupBox" controlId="1343306060047">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcch001/0/adcch001_erwprioch" displayName="Priority Channel" className="EnumerationType" paramName="app/adcch001/0/adcch001_erwprioch:Priority Channel" controlId="1343306070223">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcch001/0/adcch001_erwalias" displayName="Alias Feature" className="EnumerationType" paramName="app/adcch001/0/adcch001_erwalias:Alias Feature" controlId="1343306073629">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcch001/0/adcch001_erwmuxcontrol" displayName="External MUX Control" className="EnumerationType" paramName="app/adcch001/0/adcch001_erwmuxcontrol:External MUX Control" controlId="1343306091797">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcch001/0/adcch001_erwrefinput" displayName="Reference Input" className="EnumerationType" paramName="app/adcch001/0/adcch001_erwrefinput:Reference Input" controlId="1343306084078">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcch001/0/adcch001_erwinputclass" displayName="Input Class Select" className="EnumerationType" paramName="app/adcch001/0/adcch001_erwinputclass:Input Class Select" controlId="1343306080502">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcch001/0/adcch001_erwchevtmode" displayName="Channel Event Mode" className="EnumerationType" paramName="app/adcch001/0/adcch001_erwchevtmode:Channel Event Mode" controlId="1344417135115">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcch001/0/adcch001_erwlbselect" displayName="Lower Boundary Select" className="EnumerationType" constraint="if((CM.getParamValue(&quot;app/adcch001/0/adcch001_erwcomparator/0&quot;) == &quot;1&quot;) ) &#xD;&#xA;{&#xD;&#xA;&#x9;CM.setVisible(true); &#xD;&#xA;&#x9;CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;else {&#xD;&#xA;      CM.setVisible(true); &#xD;&#xA;      CM.setEnable(true); &#xD;&#xA;}" paramName="app/adcch001/0/adcch001_erwlbselect:Lower Boundary Select" controlId="1344236803735">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcch001/0/adcch001_erwubselect" displayName="Upper Boundary Select" className="EnumerationType" constraint="if((CM.getParamValue(&quot;app/adcch001/0/adcch001_erwcomparator/0&quot;) == &quot;1&quot;) ) &#xD;&#xA;{&#xD;&#xA;&#x9;CM.setVisible(true); &#xD;&#xA;&#x9;CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;else {&#xD;&#xA;      CM.setVisible(true); &#xD;&#xA;      CM.setEnable(true); &#xD;&#xA;}" paramName="app/adcch001/0/adcch001_erwubselect:Upper Boundary Select" controlId="1343373260609">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Page87" displayName="Interrupts" className="IfxGroupBox" controlId="1344572378609">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group13" displayName="Interrupt" className="IfxGroupBox" controlId="1344572389472">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcch001/0/adcch001_erwenableresevt" displayName="Result Event" className="EnumerationType" constraint="if((CM.getParamValue(&quot;app/adcch001/0/adcch001_erwcomparator/0&quot;) == &quot;1&quot;) ) &#xD;&#xA;{&#xD;&#xA;&#x9;CM.setVisible(true); &#xD;&#xA;&#x9;CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;else {&#xD;&#xA;      CM.setVisible(true); &#xD;&#xA;      CM.setEnable(true); &#xD;&#xA;}&#xD;&#xA;" paramName="app/adcch001/0/adcch001_erwenableresevt:Result Event" controlId="1344417178646">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcch001/0/adcch001_erwenablechannelevt" displayName="Channel Event" readonly="true" className="EnumerationType" constraint="" paramName="app/adcch001/0/adcch001_erwenablechannelevt:Channel Event" controlId="1344572541698">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

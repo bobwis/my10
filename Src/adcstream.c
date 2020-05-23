@@ -35,6 +35,8 @@ uint16_t trigthresh = TRIG_THRES;		// dynamic trigger offset
 uint8_t adcbatchid = 0;	// adc sequence number of a batch of 1..n consecutive triggered buffers
 uint8_t sendendstatus = 0; 	// flag to send end of capture status
 int jabber = 0;			// timeout for spamming trigger
+uint32_t ledhang = 0;
+int16_t meanwindiff = 0;	// sliding mean of window differences
 
 /* Stores the handle of the task that will be notified when the
  transmission is complete. */
@@ -298,20 +300,18 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc)// adc conversion done
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)	// adc conversion done (DMA complete)
 {
 	register uint32_t timestamp;
-	register int32_t i;
+	register int16_t i;
 	register uint8_t j;
 	adcbuffer *buf;
 	adc16buffer *adcbuf16;
 	static uint32_t adcbgbaseacc = 0;		// avg adc level per buffer
 	static uint32_t samplecnt = 0;
-	static uint32_t ledhang = 0;
 	static uint8_t adcbufnum = 0;		// adc sequence number
 	int32_t thiswindiff = 0;
-	uint16_t thissamp = 0;
+	register uint16_t thissamp = 0;
 	static int32_t windiff[WINSIZE] = { 0 };		// past window differences from the window mean
 	static uint16_t lastsamp[WINSIZE] = { 0 };		// last sample saved to calc global mean
 	static int16_t winmean = 0;	// sliding window mean
-	static int16_t meanwindiff = 0;	// sliding mean of window differences
 	static int32_t wdacc = 0;	// window difference accumulator
 	static int32_t wmeanacc = 0;	// window mean accumulator
 	volatile static uint16_t lastmeanwindiff = 0;
@@ -334,7 +334,8 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)	// adc conversion done (D
 
 	if (sigsend) {		// oops overrun
 		statuspkt.adcudpover++;		// debug adc overrun udp
-		sigsend = 0;		// cancel it anyway
+		sigsend = 0;		// cancel previous signal
+   return;
 	}
 
 	for (i = 0; i < (ADCBUFSIZE / 2); i++) {		// scan the buffer content
@@ -355,7 +356,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)	// adc conversion done (D
 		meanwindiff = wdacc >> (WINSHIFT); // sliding mean of window differences
 		windiff[j] = meanwindiff;	// store latest window mean of differences
 
-		trigthresh = (logampmode > 0) ? 37 : 10;
+		trigthresh = (logampmode > 0) ? 37 : 10;	// SPLAT Logamp in operation?
 		if (abs(meanwindiff) > (abs(lastmeanwindiff) + trigthresh)) { // if new mean diff > last mean diff +1
 				sigsend = 1;	// trigger greater than running mean
 			}
@@ -369,7 +370,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)	// adc conversion done (D
 			if (sigprev == 0)		// no trigger last time, so this is a new event
 				adcbatchid++;		// start a new adc batch number
 			sigprev = 1;	// remember this trigger for next packet
-			ledhang = 1000;
+			ledhang = 100;		// 100 x 10ms in Idle proc
 			statuspkt.trigcount++;	//  no of triggered packets detected
 
 		} else {			// no trigger
@@ -382,22 +383,8 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)	// adc conversion done (D
 #endif
 		}
 
-		if (ledhang) {		// this could be moved to the low priority process
-			ledhang--;
-#ifdef SPLAT1
-			HAL_GPIO_WritePin(GPIOD, LED_D5_Pin, GPIO_PIN_SET);		// Splat D5 led on
-		} else {
-			HAL_GPIO_WritePin(GPIOD, LED_D5_Pin, GPIO_PIN_RESET);	 // Splat D5 led off
-		}
-#else
-		HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_SET);		// onboard red led on
-	} else {
-		HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_RESET);	 // onboard red led off
-	}
-#endif
-		globaladcnoise = meanwindiff;
-		if (globaladcnoise == 0)
-			globaladcnoise = statuspkt.adcbase;		// dont allow zero peaks
+
+
 #if 0	// moved to status send
 		statuspkt.adctrigoff = TRIG_THRES + (abs(globaladcnoise - statuspkt.adcbase));
 

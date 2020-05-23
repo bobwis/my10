@@ -53,7 +53,7 @@ const uint16_t spicmdchan[] = { 0x4100 };	// set chan reg 0
 uint16_t pgagain = 0x4001;  // initial gain set
 
 // dual mux
-uint8_t muxdat[] = { 1 };		// sw1A (AMPout -> ADC)
+uint8_t muxdat[] = { 0x81 };		// sw1A (AMPout -> ADC) sw2D (DAC->Spker)
 uint32_t logampmode = 0;	// log amp mode flag
 
 //////////////////////////////////////////////
@@ -111,10 +111,15 @@ void setpgagain(int gain)
 	HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_RESET);	// select the PGA
 	osDelay(5);
 	pgagain = 0x4000 | (gain & 0x07);
-	HAL_SPI_Transmit(&hspi2, &pgagain, 1, 1000);	// select gain
+	if (HAL_SPI_Transmit(&hspi2, &pgagain, 1, 1000) != HAL_OK) {	// select gain
+		printf("setpgagain: SPI Error\n");
+	}
 	osDelay(5);
+//printf("PGA Gain set to %d\n",pgagain & 7);
 	HAL_GPIO_WritePin(GPIOG, CS_PGA_Pin, GPIO_PIN_SET);	// deselect the PGA
 }
+
+
 
 //////////////////////////////////////////////
 //
@@ -304,7 +309,7 @@ void getpressure3115(void)
 //				printf("[0x%02x] ", data[0]);
 			}  // end for
 
-			pressure = dataout[0] << 10 | dataout[1] << 2 | (dataout[2] & 0xC0) >> 6;
+			pressure = (dataout[0] << 10) | (dataout[1] << 2) | ((dataout[2] &0xC0) >> 6); // | (dataout[2] & 0xF0) >> 4;
 			pressfrac = ((dataout[2] & 0x30) >> 4) * 25;
 //			printf("\npressure = %d.%d  ", pressure, pressfrac);
 			temperature = dataout[3];
@@ -316,6 +321,7 @@ void getpressure3115(void)
 			osDelay(50);
 		}
 	} // while 1
+	statuspkt.temppress = (dataout[0] << 12) | (dataout[1] << 4) | ((dataout[2] & 0xF0) >> 4) |	(dataout[3] << (24)) | ((dataout[4] & 0xF0) << 16);
 }
 
 

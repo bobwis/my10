@@ -75,7 +75,7 @@ void httpd_cgi_handler(const char *uri, int count, char **http_cgi_params,
 			} else {
 				muxdat[0] = muxdat[0] | (1 << (j - 1));
 			}
-			logampmode = muxdat[0] & 2;
+			logampmode = muxdat[0] & 2;		// lin/logamp output mux
 			printf("setting outmux to 0x%02x\n", muxdat[0]);
 			if (HAL_I2C_Master_Transmit(&hi2c1, 0x44 << 1, &muxdat[0], 1, 1000) != HAL_OK) {// RF dual MUX
 				printf("I2C HAL returned error 1\n\r");

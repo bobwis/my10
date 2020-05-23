@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -226,7 +226,7 @@ static void low_level_init(struct netif *netif)
   MACAddr[5] = 0x02;
   heth.Init.MACAddr = &MACAddr[0];
   heth.Init.RxMode = ETH_RXINTERRUPT_MODE;
-  heth.Init.ChecksumMode = ETH_CHECKSUM_BY_HARDWARE;
+  heth.Init.ChecksumMode = ETH_CHECKSUM_BY_SOFTWARE;
   heth.Init.MediaInterface = ETH_MEDIA_INTERFACE_RMII;
 
   /* USER CODE BEGIN MACADDRESS */
@@ -264,7 +264,7 @@ static void low_level_init(struct netif *netif)
   netif->hwaddr[5] =  heth.Init.MACAddr[5];
   
   /* maximum transfer unit */
-  netif->mtu = 1500;
+  netif->mtu = 576;
   
   /* Accept broadcast address and ARP traffic */
   /* don't set NETIF_FLAG_ETHARP if this device is not an ethernet one */
