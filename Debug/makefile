@@ -52,7 +52,7 @@ all: my10.elf
 my10.elf: $(OBJS) $(USER_OBJS) ../STM32F767ZITx_FLASH.ld
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU GCC Linker'
-	arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32F767ZITx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "my10.elf" @"objects.list" $(USER_OBJS) $(LIBS) -lm
+	arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F767ZITx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "my10.elf" @"objects.list" $(USER_OBJS) $(LIBS) -lm
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build
@@ -64,7 +64,8 @@ clean:
 
 post-build:
 	-@echo 'Generating hex and Printing size information:'
-	arm-none-eabi-objcopy -O ihex "my10.elf" "my10.hex"
+	arm-none-eabi-objcopy -O binary "my10.elf"   "my10.bin"
+	arm-none-eabi-objcopy -O ihex "my10.elf"   "my10.hex"
 	arm-none-eabi-size "my10.elf"
 	-@echo ' '
 

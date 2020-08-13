@@ -134,6 +134,7 @@ int dnslookup(char *name, struct ip4_addr *ip)
 	int i, err = 0;
 
 	printf("DNS Resolving %s ", name);
+//	osDelay(500);
 	ip_ready = 0;
 	err = dns_gethostbyname(name, ip, dnsfound, 0);
 
@@ -249,7 +250,7 @@ void startudp(uint32_t ip)
 	statuspkt.telltale1 = 0xDEC0EDFE; //  0xFEEDC0DE marker at the end of each status packet
 
 	netup = 1; // this is incomplete - it should be set by the phys layer also
-	printf("Starting UDP Stream loop\n");
+	printf("Starting UDP Streaming\n");
 
 	while (1) {
 //			for(;;) osDelay(1000);

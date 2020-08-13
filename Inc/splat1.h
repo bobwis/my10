@@ -30,4 +30,6 @@ extern uint32_t pressure, pressfrac, temperature, tempfrac;
 extern uint16_t pgagain;
 extern uint16_t agc;
 
+extern int psensor;		// pressure sensor type
+
 #endif /* SPLAT1_H_ */

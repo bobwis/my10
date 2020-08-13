@@ -12,6 +12,7 @@
 #define MINORVERSION 7
 
 // TESTING Speeds up the frequency of status packets
+// and uses different target IP addresses
 #if		0
 #define TESTING
 #endif
@@ -24,18 +25,14 @@
 #ifdef TESTING
 #define MY_UID 1055	// 16 bits  "serial number" of the lightning detector
 #else
-#define MY_UID 1001	// 16 bits  "serial number" of the lightning detector
+#define MY_UID 1002	// 16 bits  "serial number" of the lightning detector
 #endif
 
 #ifdef SPLAT1
 // Pressures sensor type fitted
-#if 0
-#define MPL115A2
-#endif
-
-#if 1
-#define MPL3115A2
-#endif
+#define MPL115A2	2
+#define MPL3115A2  1
+#define PNONE 0
 
 #endif	/* SPLAT1 */
 #endif /* VERSION_H_ */

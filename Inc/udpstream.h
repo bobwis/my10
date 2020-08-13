@@ -15,7 +15,7 @@ void startudp(uint32_t ip);
 #ifdef TESTING
 #define SERVER_DESTINATION "lightning.local"
 #else
-#define SERVER_DESTINATION "lightningudp.vk4ya.space"
+#define SERVER_DESTINATION "lightningudp.vk4ya.com"
 #endif
 
 #define UDP_PORT_NO 5000

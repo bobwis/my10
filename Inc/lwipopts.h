@@ -35,18 +35,20 @@
 #define LWIP_PLATFORM_DIAG(x) do {printf x;} while(0)
 
 #if 1
-#define LWIP_DEBUG 0
-#define LWIP_STATS 0
+#define LWIP_DEBUG 1
+#define LWIP_STATS 1
 #define LWIP_DBG_TRACE
 
 
 #define LWIP_DBG_TYPES_ON 0x78U
 //#define UDP_DEBUG LWIP_DBG_ON	// trace udp
+#define MEM_DEBUG LWIP_DBG_ON	// trace udp
+#define MEMP_DEBUG LWIP_DBG_ON	// trace udp
+
+#endif
 
 #include <stdio.h>
 #include <stdlib.h>
-
-
 
 
 /* USER CODE END 0 */
@@ -84,7 +86,7 @@
 /*----- Default Value for MEMP_SANITY_CHECK: 0 ---*/
 #define MEMP_SANITY_CHECK 1
 /*----- Default Value for LWIP_ALLOW_MEM_FREE_FROM_OTHER_CONTEXT: 0 ---*/
-#define LWIP_ALLOW_MEM_FREE_FROM_OTHER_CONTEXT 1
+#define LWIP_ALLOW_MEM_FREE_FROM_OTHER_CONTEXT 0
 /*----- Default Value for MEMP_NUM_PBUF: 16 ---*/
 #define MEMP_NUM_PBUF 24
 /*----- Default Value for MEMP_NUM_RAW_PCB: 4 ---*/
@@ -179,6 +181,18 @@
 #define LWIP_DBG_TYPES_ON LWIP_DBG_OFF
 /*-----------------------------------------------------------------------------*/
 /* USER CODE BEGIN 1 */
+ // zzz bob
+#define LWIP_DEBUG 1
+#define LWIP_STATS 1
+#define LWIP_DBG_TRACE
+#define LWIP_DBG_TYPES_ON 0x78U
+
+#define LWIP_DBG_MIN_LEVEL LWIP_DBG_LEVEL_ALL
+
+//#define UDP_DEBUG LWIP_DBG_ON	// trace udp
+#define MEM_DEBUG LWIP_DBG_ON	// trace udp
+#define MEMP_DEBUG LWIP_DBG_ON	// trace udp
+
 #define MEMP_SANITY_CHECK 1
 
 #define LINK_STATS                      0
@@ -189,10 +203,10 @@
 #define IGMP_STATS                      0
 #define UDP_STATS                       0
 #define TCP_STATS                       0
-#define MEM_STATS                       0
-#define MEMP_STATS                      0
+#define MEM_STATS                       1
+#define MEMP_STATS                      1
 #define SYS_STATS                       0
-#define LWIP_STATS_DISPLAY              0
+#define LWIP_STATS_DISPLAY              1
 #define IP6_STATS                       0
 #define ICMP6_STATS                     0
 #define IP6_FRAG_STATS                  0
@@ -204,7 +218,7 @@
 
 #ifdef __cplusplus
 }
-#endif
+
 #endif /*__LWIPOPTS__H__ */
 
 /************************* (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

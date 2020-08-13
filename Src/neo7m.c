@@ -40,7 +40,7 @@ struct tm now;		// gps time updated every second
 time_t epochtime;	// gps time updated every second
 time_t last_trig_time = 0;	// last trigger time (to one second)
 
-
+unsigned int gpsgood = 0;	// GPS comms status
 static const unsigned char UBXGPS_HEADER[] = { 0xB5, 0x62, 0x01, 0x07 };
 
 unsigned char PACKETstore[92];  //TODO, whats the max size of packet?
@@ -447,6 +447,7 @@ int IsPacketReady(unsigned char c) {
 				p = 0;
 				UbxGpsv.carriagePosition = p;
 				if (isGoodChecksum()) {
+					gpsgood = 1;
 					return true;
 				}
 			}
@@ -519,7 +520,7 @@ void setupneo() {
 		printf("NEO: Changing receiving frequency to 1 Sec...\n\r");
 
 	changeFrequency();
-//	rx();		// debugging
+	//rx();		// debugging
 
 	// Disabling unnecessary channels like SBAS or QZSS
 		printf("NEO: Disabling unnecessary channels...\r\n");
@@ -578,7 +579,7 @@ HAL_UART_ErrorCallback(UART_HandleTypeDef *huart) {
 	HAL_StatusTypeDef stat;
 	uint8_t ch;
 
-	printf("UART_Err Callback %0lx\n", huart->ErrorCode);
+	printf("GPS UART_Err Callback %0lx\n", huart->ErrorCode);
 #if 0
 	//stat = HAL_UART_Receive_IT(&huart6, rxdatabuf, 1);		// restart rx
 	stat = HAL_UART_Receive_DMA(&huart6, rxdatabuf, 1)

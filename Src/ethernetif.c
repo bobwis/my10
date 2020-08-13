@@ -37,7 +37,7 @@
 /* The time to block waiting for input. */
 #define TIME_WAITING_FOR_INPUT ( portMAX_DELAY )
 /* Stack size of the interface thread */
-#define INTERFACE_THREAD_STACK_SIZE ( 350 )
+#define INTERFACE_THREAD_STACK_SIZE ( 512 )
 /* Network interface name */
 #define IFNAME0 's'
 #define IFNAME1 't'
@@ -264,7 +264,7 @@ static void low_level_init(struct netif *netif)
   netif->hwaddr[5] =  heth.Init.MACAddr[5];
   
   /* maximum transfer unit */
-  netif->mtu = 576;
+  netif->mtu = 576;  // 1500
   
   /* Accept broadcast address and ARP traffic */
   /* don't set NETIF_FLAG_ETHARP if this device is not an ethernet one */

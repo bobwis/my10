@@ -153,7 +153,7 @@ extern "C" {
 #endif
 
 #ifndef INCLUDE_uxTaskGetStackHighWaterMark
-	#define INCLUDE_uxTaskGetStackHighWaterMark 0
+	#define INCLUDE_uxTaskGetStackHighWaterMark 1
 #endif
 
 #ifndef INCLUDE_eTaskGetState
@@ -375,7 +375,7 @@ extern "C" {
 #endif
 
 #ifndef configRECORD_STACK_HIGH_ADDRESS
-	#define configRECORD_STACK_HIGH_ADDRESS 0
+	#define configRECORD_STACK_HIGH_ADDRESS 1
 #endif
 
 #ifndef configINCLUDE_FREERTOS_TASK_C_ADDITIONS_H
@@ -689,7 +689,7 @@ extern "C" {
 #endif
 
 #ifndef configGENERATE_RUN_TIME_STATS
-	#define configGENERATE_RUN_TIME_STATS 0
+	#define configGENERATE_RUN_TIME_STATS 1
 #endif
 
 #if ( configGENERATE_RUN_TIME_STATS == 1 )
@@ -864,8 +864,9 @@ extern "C" {
 
 /* Definitions to allow backward compatibility with FreeRTOS versions prior to
 V8 if desired. */
+#define configENABLE_BACKWARD_COMPATIBILITY 0
 #ifndef configENABLE_BACKWARD_COMPATIBILITY
-	#define configENABLE_BACKWARD_COMPATIBILITY 1
+	#define configENABLE_BACKWARD_COMPATIBILITY 0
 #endif
 
 #ifndef configPRINTF

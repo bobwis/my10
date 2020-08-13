@@ -108,6 +108,10 @@ extern uint8_t muxdat[];
 extern uint32_t ledhang;
 extern int16_t meanwindiff;	// sliding mean of window differences
 
+extern struct netif gnetif;	// LWIP network interface status struc
+
+extern unsigned int gpsgood;	// GPS comms status
+
 #endif /* NEO7M_H_ */
 
 

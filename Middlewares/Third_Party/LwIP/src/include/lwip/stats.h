@@ -49,7 +49,7 @@ extern "C" {
 #if LWIP_STATS
 
 #ifndef LWIP_STATS_LARGE
-#define LWIP_STATS_LARGE 0
+#define LWIP_STATS_LARGE 1
 #endif
 
 #if LWIP_STATS_LARGE

@@ -288,7 +288,7 @@ void httpclient(char Page[64])
 	static char *Postvars = NULL;
 
 	if (remoteip.addr == 0) {
-		err = dnslookup("lightning.vk4ya.space", &remoteip);
+		err = dnslookup("lightning.vk4ya.com", &remoteip);
 
 		if (err != ERR_OK)
 			rebootme();
